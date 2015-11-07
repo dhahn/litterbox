@@ -3,15 +3,36 @@
 // ================================
 
 header {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
 	height: rem(50px);
-	z-index: z('header');
 	margin: rem(30px);
-	color: #fff;
-	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+	color: #bbb;
+
+	.static_pages-index & {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: z('header');
+		color: #fff;
+		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+
+		.home-link {
+			text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+			&:hover {
+				background-color: transparent;
+			}
+		}
+
+		a,
+		.pure-menu-link {
+			color: #fff;
+
+			&:hover {
+				background-color: rgba(255, 255, 255, 0.1);
+				color: #eee;
+			}
+		}
+	}
 
 	h1 {
 		float: left;
@@ -24,19 +45,16 @@ header {
 		text-align: right;
 	}
 
-	a,
-	.pure-menu-link {
-		color: #fff;
-
-		&:hover {
-			background-color: rgba(255, 255, 255, 0.1);
-			color: #eee;
-		}
-	}
-
 	.home-link {
 		display: inline-block;
 		padding: rem(10px);
 		font-size: 125%;
+		text-shadow: none;
+		color: #1CB841;
+
+		&:hover {
+			background-color: #eee;
+		}
+
 	}
 }
