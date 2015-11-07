@@ -2,6 +2,7 @@ class LitterBox < ActiveRecord::Base
   attr_accessor :distance
   belongs_to :user
   has_many :transactions
+  has_many :unavailabilities
 
   validates :user_id, presence: true, uniqueness: true
 
