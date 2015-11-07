@@ -8,59 +8,65 @@
 		<title><%= @page_title.try(:html_safe) || "Hairbnb" %></title>
 		<%= csrf_meta_tags %>
 		<link type="text/css" rel="stylesheet" href="/assets/css/pure-min.css">
+		<link type="text/css" rel="stylesheet" href="/assets/css/animate.css">
 		<link type="text/css" rel="stylesheet" href="/assets/css/style.css" media="screen">
 		<link href="/favicon.ico" rel="shortcut icon">
 	</head>
 
 	<body class="<%= "#{controller_name}-#{action_name}" %>">
-		<header>
-			<h1><a class="home-link" href="/">Hairbnb</a></h1>
+		<div class="page-content">
+			<header>
+				<h1><a class="home-link" href="/">Hairbnb</a></h1>
 
-			<div class="pure-menu pure-menu-horizontal">
-				<ul class="pure-menu-list">
-					<% if current_user.blank? %>
-						<li class="pure-menu-item">
-							<%= link_to 'Sign Up', new_user_registration_path, class: 'pure-menu-link' %>
-						</li>
-						<li class="pure-menu-item">
-							<%= link_to 'Sign In', new_user_session_path, class: 'pure-menu-link' %>
-						</li>
-						<li class="pure-menu-item">
-							<%= link_to 'Sign In as Guest', '#', class: 'pure-menu-link' %>
-						</li>
-					<% else %>
-						<li class="pure-menu-item">
-							<%= link_to 'Become a Crazy Cat Lady', litter_box_link_path(current_user), class: 'pure-menu-link' %>
-						</li>
-						<li class="pure-menu-item">
-							<%= form_tag(destroy_user_session_path, method: :delete) do %>
-								<%= submit_tag 'Sign Out', class: 'pure-menu-link' %>
-							<% end %>
-						</li>
-					<% end %>
-				</ul>
-			</div>
-		</header>
-
-		<%= render template: 'devise/sessions/new' %>
-
-		<%= yield %>
-
-		<footer>
-			<div class="container">
 				<div class="pure-menu pure-menu-horizontal">
 					<ul class="pure-menu-list">
-						<li class="pure-menu-item"><a href="#" class="pure-menu-link">FAQ</a></li>
-						<li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact Us</a></li>
-						<li class="pure-menu-item"><a href="#" class="pure-menu-link">Search</a></li>
+						<% if current_user.blank? %>
+							<li class="pure-menu-item">
+								<%= link_to 'Sign Up', new_user_registration_path, class: 'pure-menu-link sign-up' %>
+							</li>
+							<li class="pure-menu-item">
+								<%= link_to 'Sign In', new_user_session_path, class: 'pure-menu-link sign-in' %>
+							</li>
+							<li class="pure-menu-item">
+								<%= link_to 'Sign In as Guest', '#', class: 'pure-menu-link' %>
+							</li>
+						<% else %>
+							<li class="pure-menu-item">
+								<%= link_to 'Become a Crazy Cat Lady', litter_box_link_path(current_user), class: 'pure-menu-link' %>
+							</li>
+							<li class="pure-menu-item">
+								<%= form_tag(destroy_user_session_path, method: :delete) do %>
+									<%= submit_tag 'Sign Out', class: 'pure-menu-link' %>
+								<% end %>
+							</li>
+						<% end %>
 					</ul>
 				</div>
+			</header>
 
-				<div>
-					&copy; yer mum
+			<%= yield %>
+
+			<footer>
+				<div class="container">
+					<div class="pure-menu pure-menu-horizontal">
+						<ul class="pure-menu-list">
+							<li class="pure-menu-item"><a href="#" class="pure-menu-link">FAQ</a></li>
+							<li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact Us</a></li>
+							<li class="pure-menu-item"><a href="#" class="pure-menu-link">Search</a></li>
+						</ul>
+					</div>
+
+					<div>
+						&copy; yer mum
+					</div>
 				</div>
-			</div>
-		</footer>
+			</footer>
+		</div>
+
+		<div class="sidebar-container">
+			<%= render template: 'devise/sessions/new' %>
+			<%= render template: 'devise/registrations/new' %>
+		</div>
 
 		<script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>

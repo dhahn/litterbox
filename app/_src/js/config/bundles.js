@@ -11,7 +11,8 @@ module.exports = [
     entries: [
       './views/search-show',
       './views/static_pages-index',
-      './modules/datepicker'
+      './modules/datepicker',
+      './modules/sidebar'
     ]
   },
   // {
