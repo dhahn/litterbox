@@ -1,5 +1,5 @@
 <section>
-	<%= render "partials/search_bar" %>
+	<%= render partial: "partials/search_bar", locals: { search: @search } %>
 	<input type="hidden" name="search_lat" value="<%= @search_lat %>">
 	<input type="hidden" name="search_lng" value="<%= @search_lng %>">
 	<div id="map" style="width: 500px; height:500px;"></div>
