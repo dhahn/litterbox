@@ -22,7 +22,7 @@ class Transaction < ActiveRecord::Base
 
   def no_overlap_per_litter_box
     if litter_box && overlaps?
-      errors.add(:litter_box, 'Litter Box already booked during given time')
+      errors.add(:litter_box, 'Box already booked during given time')
     end
   end
 end
