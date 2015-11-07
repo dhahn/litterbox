@@ -24,8 +24,7 @@ var geocodeSearch = function (address, callback) {
 };
 module.exports = geocodeSearch;
 },{}],4:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
