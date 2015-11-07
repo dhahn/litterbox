@@ -1,0 +1,13 @@
+.sidebar{
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  background: #2980b9;
+  width: 30%;
+  & form {
+    padding: rem(40px);
+    & input {
+
+    }
+  }
+}

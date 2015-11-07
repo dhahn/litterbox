@@ -14,11 +14,14 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-gem 'omniauth-twitter', '1.2.1'
-#omniauth github
-gem 'omniauth-github', '1.1.2'
-#dotenv
-gem 'dotenv', '2.0.2'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-instagram'
+gem 'twitter'
+gem 'instagram'
+gem 'omniauth-google-oauth2'
+gem 'google-api-client', require: 'google/api_client'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -40,6 +43,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 3.5.2'
 
 group :development, :test do
+  gem 'dotenv', '2.0.2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end

@@ -11,10 +11,59 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107161255) do
+ActiveRecord::Schema.define(version: 20151107175650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cats", force: :cascade do |t|
+    t.integer  "user_id"
+    t.text     "description"
+    t.string   "name"
+    t.string   "breed"
+    t.string   "gender",                limit: 1
+    t.string   "spayed_slash_neutered", limit: 1
+    t.boolean  "clawed"
+    t.string   "color"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "cats", ["user_id"], name: "index_cats_on_user_id", using: :btree
+
+  create_table "cats_ratings", id: false, force: :cascade do |t|
+    t.integer "cat_id",    null: false
+    t.integer "rating_id", null: false
+  end
+
+  add_index "cats_ratings", ["cat_id", "rating_id"], name: "index_cats_ratings_on_cat_id_and_rating_id", using: :btree
+  add_index "cats_ratings", ["rating_id", "cat_id"], name: "index_cats_ratings_on_rating_id_and_cat_id", using: :btree
+
+  create_table "cattributes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "upper_scale"
+    t.string   "lower_scale"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "identities", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "accesstoken"
+    t.string   "refreshtoken"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "email"
+    t.string   "nickname"
+    t.string   "image"
+    t.string   "phone"
+    t.string   "urls"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "identities", ["user_id"], name: "index_identities_on_user_id", using: :btree
 
   create_table "litter_boxes", force: :cascade do |t|
     t.integer  "user_id"
@@ -37,16 +86,22 @@ ActiveRecord::Schema.define(version: 20151107161255) do
   add_index "litter_boxes", ["user_id"], name: "index_litter_boxes_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
-    t.integer  "rater_id"
-    t.integer  "ratee_id"
+    t.integer  "user_id"
     t.text     "comment"
     t.integer  "paws"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "ratings", ["ratee_id"], name: "index_ratings_on_ratee_id", using: :btree
-  add_index "ratings", ["rater_id"], name: "index_ratings_on_rater_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
+
+  create_table "ratings_users", id: false, force: :cascade do |t|
+    t.integer "user_id",   null: false
+    t.integer "rating_id", null: false
+  end
+
+  add_index "ratings_users", ["rating_id", "user_id"], name: "index_ratings_users_on_rating_id_and_user_id", using: :btree
+  add_index "ratings_users", ["user_id", "rating_id"], name: "index_ratings_users_on_user_id_and_rating_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                            default: "", null: false
@@ -72,7 +127,8 @@ ActiveRecord::Schema.define(version: 20151107161255) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "cats", "users"
+  add_foreign_key "identities", "users"
   add_foreign_key "litter_boxes", "users"
-  add_foreign_key "ratings", "users", column: "ratee_id"
-  add_foreign_key "ratings", "users", column: "rater_id"
+  add_foreign_key "ratings", "users"
 end
