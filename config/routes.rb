@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   root 'static_pages#index'
   get 'auth/:provider/callback', to: 'twitter_accounts#create'
   get 'auth/failure', to: redirect('/')
-  resources :cats
   resources :litter_boxes
 
   # Example of regular route:
