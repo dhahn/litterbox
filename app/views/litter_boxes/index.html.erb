@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Litter Boxes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Capacity</th>
+      <th>Description</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Address line 1</th>
+      <th>Address line 2</th>
+      <th>Zip</th>
+      <th>Number of adults</th>
+      <th>Number of children</th>
+      <th>Number of pets</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @litter_boxes.each do |litter_box| %>
+      <tr>
+        <td><%= litter_box.capacity %></td>
+        <td><%= litter_box.description %></td>
+        <td><%= litter_box.city %></td>
+        <td><%= litter_box.state %></td>
+        <td><%= litter_box.address_line_1 %></td>
+        <td><%= litter_box.address_line_2 %></td>
+        <td><%= litter_box.zip %></td>
+        <td><%= litter_box.number_of_adults %></td>
+        <td><%= litter_box.number_of_children %></td>
+        <td><%= litter_box.number_of_pets %></td>
+        <td><%= link_to 'Show', litter_box %></td>
+        <td><%= link_to 'Edit', edit_litter_box_path(litter_box) %></td>
+        <td><%= link_to 'Destroy', litter_box, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Litter box', new_litter_box_path %>
