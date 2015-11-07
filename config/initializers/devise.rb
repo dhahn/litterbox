@@ -231,7 +231,8 @@ Devise.setup do |config|
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
-
+  config.omniauth :twitter, ENV["TWITTER_CONSUMER_KEY"], ENV["TWITTER_CONSUMER_SECRET"]
+ config.secret_key = '12abe2ba822165f44fa1ab547425de2011f641354e81e3188f114f3956904257ee664e74f151a9c347a414299b03dcbd33f9e04d876b9f9469c164b031031905'
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
