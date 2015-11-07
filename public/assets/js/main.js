@@ -4325,11 +4325,7 @@ var geocodeSearch = function (address, callback) {
 	});
 };
 module.exports = geocodeSearch;
-<<<<<<< b6a86644701ea20d6dbd426a3c30e8b1e1316538
 },{}],7:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
-=======
-},{}],4:[function(require,module,exports){
 var waitFor = require('waitFor');
 
 waitFor('.sidebar-container', function() {
@@ -4376,10 +4372,9 @@ waitFor('.sidebar-container', function() {
 
 });
 
-},{"waitFor":1}],5:[function(require,module,exports){
+},{"waitFor":3}],8:[function(require,module,exports){
 module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
 /**/) {
->>>>>>> sidebarrrrr
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4394,11 +4389,7 @@ with (locals || {}) { (function(){
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
-<<<<<<< b6a86644701ea20d6dbd426a3c30e8b1e1316538
-},{}],8:[function(require,module,exports){
-=======
-},{}],6:[function(require,module,exports){
->>>>>>> sidebarrrrr
+},{}],9:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
 		geocode = require('../modules/geocode.js');
@@ -4519,11 +4510,7 @@ waitFor('body.searches-show', function() {
 
 	init();
 });
-<<<<<<< b6a86644701ea20d6dbd426a3c30e8b1e1316538
-},{"../modules/customMapStyles":4,"../modules/geocode.js":6,"../templates/searchResults.ejs":7,"waitFor":3}],9:[function(require,module,exports){
-=======
-},{"../modules/customMapStyles":2,"../modules/geocode.js":3,"../templates/searchResults.ejs":5,"waitFor":1}],7:[function(require,module,exports){
->>>>>>> sidebarrrrr
+},{"../modules/customMapStyles":4,"../modules/geocode.js":6,"../templates/searchResults.ejs":8,"waitFor":3}],10:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		geocode = require('../modules/geocode');
 
@@ -4548,8 +4535,4 @@ waitFor('body.static_pages-index', function() {
 
 	init();
 });
-<<<<<<< b6a86644701ea20d6dbd426a3c30e8b1e1316538
-},{"../modules/geocode":6,"waitFor":3}]},{},[8,9,5]);
-=======
-},{"../modules/geocode":3,"waitFor":1}]},{},[6,7,4]);
->>>>>>> sidebarrrrr
+},{"../modules/geocode":6,"waitFor":3}]},{},[9,10,5,7]);
