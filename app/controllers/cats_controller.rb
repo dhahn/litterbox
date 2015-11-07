@@ -14,7 +14,7 @@ class CatsController < ApplicationController
 
   # GET /cats/new
   def new
-    @cat = Cat.new
+    @cat = current_user.cats.new
   end
 
   # GET /cats/1/edit
@@ -24,7 +24,7 @@ class CatsController < ApplicationController
   # POST /cats
   # POST /cats.json
   def create
-    @cat = Cat.new(cat_params)
+    @cat = current_user.cats.new(cat_params)
 
     respond_to do |format|
       if @cat.save

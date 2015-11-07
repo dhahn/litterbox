@@ -25,6 +25,7 @@ class LitterBoxesController < ApplicationController
   # POST /litter_boxes.json
   def create
     @litter_box = LitterBox.new(litter_box_params)
+    @litter_box.user = current_user
 
     respond_to do |format|
       if @litter_box.save
@@ -69,6 +70,8 @@ class LitterBoxesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def litter_box_params
-      params.require(:litter_box).permit(:capacity, :description, :city, :state, :address_line_1, :address_line_2, :zip, :number_of_adults, :number_of_children, :number_of_pets)
+      params.require(:litter_box).permit(:capacity, :description, :city, :state,
+        :address_line_1, :address_line_2, :zip, :number_of_adults,
+        :number_of_children, :number_of_pets)
     end
 end
