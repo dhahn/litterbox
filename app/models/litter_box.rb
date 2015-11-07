@@ -6,6 +6,11 @@ class LitterBox < ActiveRecord::Base
 
   validates :user_id, presence: true, uniqueness: true
 
+  def self.available(start_time, end_time)
+    joins(:unavailabilities).merge(Unavailability.non_overlapping(start_time, end_time))
+      .joins(:transactions).merge(Transaction.non_overlapping(start_time, end_time))
+  end
+
   def self.within lat, lng, miles = 150
     lat_range = miles * 0.014492754
     lng_range = miles * 0.016666667
