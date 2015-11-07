@@ -6,6 +6,8 @@ waitFor('body.searches-show', function() {
 	var markers = [],
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
+			$startDateField = $searchForm.find('.start-date'),
+			$endDateField = $searchForm.find('.end-date'),
 			$searchResults = $('#search-results'),
 			regularMarker = '/assets/images/regular-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs');
@@ -45,21 +47,25 @@ waitFor('body.searches-show', function() {
 		if(!!location) {
 			geocode(location, function(results, status){
         map.fitBounds(results[0].geometry.viewport);
-				getLitterBoxes(map.getCenter().lat(), map.getCenter().lng());
+				getLitterBoxes({
+					lat: map.getCenter().lat(),
+					lng: map.getCenter().lng(),
+					start_date: $startDateField.val(),
+					end_date: $endDateField.val(),
+				});
 			})
 		} else {
 			alert('Enter a damn location.');
 		}
 	};
 
-	var getLitterBoxes = function(lat, lng) {
+	var getLitterBoxes = function(search_params) {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
 			url: '/search',
 			data: {
-				lat: lat,
-				lng: lng,
+				search: search_params,
 			}, success: function(litterboxes) {
 				showMarkers(litterboxes);
 

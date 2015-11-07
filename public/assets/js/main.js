@@ -4373,8 +4373,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":3}],8:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4385,7 +4384,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<ul>\n	');2; litterboxes.forEach(function(litterbox){ ; buf.push('\n		<li style="margin-bottom: 10px;">\n			', escape((4,  litterbox.address_line_1 )), '<br/>\n			');5; if(!!litterbox.address_line_2) { ; buf.push('\n				', escape((6,  litterbox.address_line_2 )), '<br/>\n			');7; } ; buf.push('\n			', escape((8,  litterbox.city )), ', ', escape((8,  litterbox.state )), ' ', escape((8,  litterbox.zip )), '<br/>\n			<a target="_blank" href="http://maps.google.com/?q=', escape((9,  litterbox.full_address )), '">\n				Directions (', escape((10,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');13; }) ; buf.push('\n</ul>'); })();
+ buf.push('<ul>\n	', escape((2,  litterboxes.length )), ' litter boxes found\n	');3; litterboxes.forEach(function(litterbox){ ; buf.push('\n		<li style="margin-bottom: 10px;">\n			', escape((5,  litterbox.address_line_1 )), '<br/>\n			');6; if(!!litterbox.address_line_2) { ; buf.push('\n				', escape((7,  litterbox.address_line_2 )), '<br/>\n			');8; } ; buf.push('\n			', escape((9,  litterbox.city )), ', ', escape((9,  litterbox.state )), ' ', escape((9,  litterbox.zip )), '<br/>\n			<a target="_blank" href="http://maps.google.com/?q=', escape((10,  litterbox.full_address )), '">\n				Directions (', escape((11,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');14; }) ; buf.push('\n</ul>'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
@@ -4398,6 +4397,8 @@ waitFor('body.searches-show', function() {
 	var markers = [],
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
+			$startDateField = $searchForm.find('.start-date'),
+			$endDateField = $searchForm.find('.end-date'),
 			$searchResults = $('#search-results'),
 			regularMarker = '/assets/images/regular-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs');
@@ -4437,21 +4438,25 @@ waitFor('body.searches-show', function() {
 		if(!!location) {
 			geocode(location, function(results, status){
         map.fitBounds(results[0].geometry.viewport);
-				getLitterBoxes(map.getCenter().lat(), map.getCenter().lng());
+				getLitterBoxes({
+					lat: map.getCenter().lat(),
+					lng: map.getCenter().lng(),
+					start_date: $startDateField.val(),
+					end_date: $endDateField.val(),
+				});
 			})
 		} else {
 			alert('Enter a damn location.');
 		}
 	};
 
-	var getLitterBoxes = function(lat, lng) {
+	var getLitterBoxes = function(search_params) {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
 			url: '/search',
 			data: {
-				lat: lat,
-				lng: lng,
+				search: search_params,
 			}, success: function(litterboxes) {
 				showMarkers(litterboxes);
 

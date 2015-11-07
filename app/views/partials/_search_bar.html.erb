@@ -2,10 +2,10 @@
 	<form action="<%= search_show_path %>" method="GET" class="pure-form">
 		<input type="text" name="location" class="location" placeholder="Springfield, MO 65806" value="<%= search[:location] %>" />
 		<span class="date-wrapper">
-			<input type="text" name="start_date" placeholder="11/06/2015" value="<%= search[:start_date] %>" />
+			<input type="text" class="start-date" name="start_date" placeholder="11/06/2015" value="<%= search[:start_date] %>" />
 		</span>
 		<span class="date-wrapper">
-			<input type="text" name="end_date" placeholder="11/07/2015" value="<%= search[:end_date] %>"/>
+			<input type="text" class="end-date" name="end_date" placeholder="11/07/2015" value="<%= search[:end_date] %>"/>
 		</span>
 
 		<select name="number_of_cats">

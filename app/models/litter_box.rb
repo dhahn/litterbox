@@ -6,9 +6,18 @@ class LitterBox < ActiveRecord::Base
 
   validates :user_id, presence: true, uniqueness: true
 
+  def self.search(params)
+    available(convert_date(params[:start_date]), convert_date(params[:end_date]))
+      .within(params[:lat].to_f, params[:lng].to_f, 300)
+  end
+
   def self.available(start_time, end_time)
-    joins(:unavailabilities).merge(Unavailability.non_overlapping(start_time, end_time))
-      .joins(:transactions).merge(Transaction.non_overlapping(start_time, end_time))
+    where.not(id: unavailable(start_time, end_time))
+  end
+
+  def self.unavailable(start_time, end_time)
+    joins(:transactions).merge(Transaction.overlaps(start_time, end_time)) +
+    joins(:unavailabilities).merge(Unavailability.overlaps(start_time, end_time))
   end
 
   def self.within lat, lng, miles = 150
@@ -38,6 +47,10 @@ class LitterBox < ActiveRecord::Base
   end
 
   private
+    def self.convert_date(date_string)
+      DateTime.strptime(date_string, '%m/%d/%Y') unless date_string.blank?
+    end
+
     #totes ripped this from someone smarter than me
     def haversine_distance(lat1, long1)
       lat2 = self.latitude
