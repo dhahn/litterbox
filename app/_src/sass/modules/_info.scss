@@ -1,0 +1,31 @@
+// ================================
+// Info
+// ================================
+
+
+.sec-info {
+	.left {
+		padding: rem(40px);
+		background-color: #eee;
+	}
+
+	.right {
+		padding: rem(20px);
+		background-image: url(http://lorempixel.com/500/200/cats/);
+		background-size: cover;
+	}
+
+	h2 {
+		@extend %hsize-medium;
+		margin-bottom: rem(20px);
+	}
+
+	.cta {
+		margin-top: rem(20px);
+		text-align: center;
+
+		.pure-button {
+			font-size: 125%;
+		}
+	}
+}

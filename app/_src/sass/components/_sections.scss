@@ -1,16 +1,12 @@
 // ================================
-// Footer
+// Sections
 // ================================
 
-footer {
-	margin: rem(50px 20px);
+section {
+	padding: rem(50px 0);
 
-	.container {
+	&.centered {
 		margin: 0 auto;
 		max-width: $max-width-medium;
-	}
-
-	.pure-menu {
-		margin-bottom: 20px;
 	}
 }
