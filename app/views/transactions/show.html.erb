@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @transaction.user %>
+</p>
+
+<p>
+  <strong>Litter box:</strong>
+  <%= @transaction.litter_box %>
+</p>
+
+<p>
+  <strong>Check in:</strong>
+  <%= @transaction.check_in %>
+</p>
+
+<p>
+  <strong>Check out:</strong>
+  <%= @transaction.check_out %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @transaction.price %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

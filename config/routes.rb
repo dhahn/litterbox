@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transactions
   root 'static_pages#index'
   get 'static_pages/index'
   get 'static_pages/faq', to: 'static_pages#faq', as: 'FAQ'
