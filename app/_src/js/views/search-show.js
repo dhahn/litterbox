@@ -1,5 +1,6 @@
 var waitFor = require('waitFor'),
-		customMapStyles = require('../modules/customMapStyles');
+		customMapStyles = require('../modules/customMapStyles'),
+		geocode = require('../modules/geocode.js');
 
 waitFor('body.searches-show', function() {
 	var markers = [],
@@ -34,26 +35,31 @@ waitFor('body.searches-show', function() {
 			e.preventDefault();
 			searchLocations();
 		});
+
+		google.maps.event.removeListener(idleListener);
 	},
 
 	searchLocations = function() {
 		var location = $locationField.val();
 
 		if(!!location) {
-			getLitterBoxes();
+			geocode(location, function(results, status){
+        map.fitBounds(results[0].geometry.viewport);
+				getLitterBoxes(map.getCenter().lat(), map.getCenter().lng());
+			})
 		} else {
 			alert('Enter a damn location.');
 		}
 	},
 
-	getLitterBoxes = function() {
+	getLitterBoxes = function(lat, lng) {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
 			url: '/search',
 			data: {
-				lat: map.getCenter().lat(),
-				lng: map.getCenter().lng(),
+				lat: lat,
+				lng: lng,
 			}, success: function(litterboxes) {
 				showMarkers(litterboxes);
 

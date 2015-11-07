@@ -10,10 +10,10 @@ class SearchesController < ApplicationController
 
 	def create
 		respond_to do |format|
+			format.json { render :json => LitterBox.within(params[:lat].to_f, params[:lng].to_f, 100) }
 			format.html do
 				redirect_to search_show_path(params[:search])
 			end
-			format.json { render :json => LitterBox.all }
 		end
 	end
 end
