@@ -5,7 +5,11 @@
 
 .sec-hero {
 	padding: 0;
-	background-color: #fafafa;
+	background-color: #bbb;
+	background-image: url(http://lorempixel.com/900/400/cats/);
+	background-size: cover;
+	background-position: 50% 50%;
+	color: #fff;
 	text-align: center;
 
 	.headline {
