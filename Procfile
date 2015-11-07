@@ -1,2 +1,2 @@
-web: rails server -e development
+localweb: rails server -e development
 gulp: gulp watch
