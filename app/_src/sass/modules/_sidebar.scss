@@ -23,7 +23,7 @@
 }
 
 .page-content {
-  transition: filter 0.2s ease-in-out;
+  transition: filter 1s ease-in-out;
 
   body.sidebar-open & {
     filter: blur(5px);
@@ -35,7 +35,10 @@
   padding: rem(100px 60px);
   background-color: #2980b9;
   color: #fff;
-  text-align: center;
+
+  &.animated {
+    box-shadow: rem(3px 0px 20px) rgba(0, 0, 0, 0.5);
+  }
 
   fieldset {
     margin-bottom: rem(10px);
