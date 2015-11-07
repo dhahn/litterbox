@@ -51,6 +51,10 @@
     <%= f.label :number_of_pets %><br>
     <%= f.number_field :number_of_pets %>
   </div>
+  <%= f.fields_for(:unavailabilities) do |builder| %>
+    <%= render 'unavailability_fields', f: builder %>
+  <% end %>
+  <%= link_to_add_fields 'Add Unavailability', f, :unavailabilities %>
   <div class="actions">
     <%= f.submit %>
   </div>

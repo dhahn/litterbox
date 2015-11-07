@@ -1,0 +1,18 @@
+<fieldset>
+  <div class="field">
+    <%= f.label :start_time %>
+    <span class="date-wrapper">
+      <%= f.text_field :start_time %>
+    </span>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_time %>
+    <span class="date-wrapper">
+      <%= f.text_field :end_time %>
+    </span>
+  </div>
+
+  <%= f.hidden_field :_destroy %>
+  <%= link_to 'remove', '#', class: 'remove_fields' %>
+</fieldset>
