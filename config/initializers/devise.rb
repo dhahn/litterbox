@@ -233,6 +233,7 @@ Devise.setup do |config|
   config.sign_out_via = :delete
   config.secret_key = '12abe2ba822165f44fa1ab547425de2011f641354e81e3188f114f3956904257ee664e74f151a9c347a414299b03dcbd33f9e04d876b9f9469c164b031031905'
   config.omniauth :twitter, ENV['TWITTER_KEY'], ENV['TWITTER_SECRET']
+  config.omniauth :github, ENV["GITHUB_KEY"], ENV["GITHUB_SECRET"]
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
