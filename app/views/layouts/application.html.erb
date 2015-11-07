@@ -18,15 +18,21 @@
 
 			<div class="pure-menu pure-menu-horizontal">
 				<ul class="pure-menu-list">
-					<li class="pure-menu-item">
-						<%= link_to 'Sign Up', new_user_registration_path, class: 'pure-menu-link' %>
-					</li>
-					<li class="pure-menu-item">
-						<%= link_to 'Sign In', new_user_session_path, class: 'pure-menu-link' %>
-					</li>
-					<li class="pure-menu-item">
-						<%= link_to 'Sign In as Guest', '#', class: 'pure-menu-link' %>
-					</li>
+					<% if current_user.blank? %>
+						<li class="pure-menu-item">
+							<%= link_to 'Sign Up', new_user_registration_path, class: 'pure-menu-link' %>
+						</li>
+						<li class="pure-menu-item">
+							<%= link_to 'Sign In', new_user_session_path, class: 'pure-menu-link' %>
+						</li>
+						<li class="pure-menu-item">
+							<%= link_to 'Sign In as Guest', '#', class: 'pure-menu-link' %>
+						</li>
+					<% else %>
+						<li class="pure-menu-item">
+							<%= link_to 'Become a Crazy Cat Lady', litter_box_link_path(current_user), class: 'pure-menu-link' %>
+						</li>
+					<% end %>
 				</ul>
 			</div>
 		</header>
