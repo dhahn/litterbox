@@ -1,14 +1,13 @@
 Rails.application.routes.draw do
   get 'static_pages/index'
 
-  devise_for :users, :controllers => { registrations: 'registrations' }
+  devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "omniauth_callbacks" }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
-  get 'auth/:provider/callback', to: 'twitter_accounts#create'
-  get 'auth/failure', to: redirect('/')
+
   resources :litter_boxes
 
   # Example of regular route:
