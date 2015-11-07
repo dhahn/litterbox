@@ -10,6 +10,10 @@ class Transaction < ActiveRecord::Base
     where "((check_in <= ?) and (check_out >= ?))", check_out, check_in
   end
 
+  def self.non_overlapping(check_in, check_out)
+    where.not(id: overlaps(check_in, check_out))
+  end
+
   private
 
   def overlaps?
