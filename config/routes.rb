@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   resources :litter_boxes
+  get '/search', to: 'searches#show', as: 'search_show'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

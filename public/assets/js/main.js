@@ -13,9 +13,38 @@ module.exports = function(selector, callback) {
   }
 };
 },{}],2:[function(require,module,exports){
-var waitFor = require('waitFor');
+// These are used for the custom map on the locations page
+var customMapStyles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#6195a0"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#e6f3d6"},{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#f4d2c5"},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"color":"#4e4e4e"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#f4f4f4"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#787878"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#eaf6f8"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#eaf6f8"}]}]
+module.exports = customMapStyles;
+},{}],3:[function(require,module,exports){
+var waitFor = require('waitFor'),
+		customMapStyles = require('../modules/customMapStyles');
 
-waitFor('body', function() {
-  console.log('Sample Module');
+waitFor('body.searches-show', function() {
+	var initMap = function() {
+		var mapOptions = {
+			zoom: 4,
+			center: new google.maps.LatLng(39.50, -98.35),
+			mapTypeControl: false,
+			disableDefaultUI: true,
+			mapTypeId: google.maps.MapTypeId.ROADMAP,
+		};
+
+
+		map = new google.maps.Map($('#map')[0], mapOptions);
+
+		// set up custom styled map
+		styledMap = new google.maps.StyledMapType(customMapStyles, {name: 'Hairbnb Map'});
+		map.mapTypes.set('map_style', styledMap);
+		map.setMapTypeId('map_style');
+
+		// idleListener = google.maps.event.addListener(map, 'idle', firstIdle);
+	},
+
+	init = function() {
+		initMap();
+	}
+
+	init();
 });
-},{"waitFor":1}]},{},[2]);
+},{"../modules/customMapStyles":2,"waitFor":1}]},{},[3]);
