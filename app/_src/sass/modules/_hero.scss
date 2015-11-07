@@ -19,6 +19,7 @@
 	h1 {
 		@extend %hsize-xlarge;
 		margin: rem(70px 0);
+		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
 	}
 
 	.faq-button {
