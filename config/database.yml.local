@@ -1,0 +1,16 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+
+development:
+  <<: *default
+  database: r15-team-9090_development
+
+test:
+  <<: *default
+  database: r15-team-9090_test
+
+production:
+  <<: *default
+  database: r15-team-9090_production
