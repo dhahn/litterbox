@@ -14,7 +14,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @transaction = Transaction.new
+    @transaction = current_user.transactions.new
   end
 
   # GET /transactions/1/edit
@@ -24,7 +24,7 @@ class TransactionsController < ApplicationController
   # POST /transactions
   # POST /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = current_user.transactions.new(transaction_params)
 
     respond_to do |format|
       if @transaction.save

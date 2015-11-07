@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_one :litter_box
   has_many :cats
   has_many :identities
+  has_many :transactions
   # has_and_belongs_to_many :ratings
 
   def twitter
