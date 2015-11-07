@@ -1,5 +1,7 @@
 class LitterBox < ActiveRecord::Base
   belongs_to :user
+  has_many :transactions
+
   validates :user_id, presence: true, uniqueness: true
 
   def self.within lat, lng, miles = 150
