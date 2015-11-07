@@ -39,8 +39,6 @@ waitFor('body.searches-show', function() {
 	searchLocations = function() {
 		var location = $locationField.val();
 
-		console.log($locationField);
-
 		if(!!location) {
 			getLitterBoxes();
 		} else {

@@ -1,3 +1,4 @@
+<% @search = @search || {} %>
 <div class="search-bar">
 	<form action="<%= search_show_path %>" method="GET" class="pure-form">
 		<input type="text" name="location" class="location" placeholder="Springfield, MO 65806" value="<%= @search[:location] %>" />
