@@ -13,6 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
+gem 'dotenv-rails', :require => 'dotenv/rails-now'
 # gem 'therubyracer', platforms: :ruby
 gem 'omniauth'
 gem 'omniauth-twitter'
@@ -43,7 +44,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise', '~> 3.5.2'
 
 group :development, :test do
-  gem 'dotenv', '2.0.2'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 end

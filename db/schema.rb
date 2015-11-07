@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107175650) do
+ActiveRecord::Schema.define(version: 20151107222910) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,14 +86,14 @@ ActiveRecord::Schema.define(version: 20151107175650) do
   add_index "litter_boxes", ["user_id"], name: "index_litter_boxes_on_user_id", using: :btree
 
   create_table "ratings", force: :cascade do |t|
-    t.integer  "cattribute_id"
+    t.integer  "user_id"
     t.text     "comment"
     t.integer  "paws"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  add_index "ratings", ["cattribute_id"], name: "index_ratings_on_cattribute_id", using: :btree
+  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id", using: :btree
 
   create_table "ratings_users", id: false, force: :cascade do |t|
     t.integer "user_id",   null: false
@@ -135,6 +135,10 @@ ActiveRecord::Schema.define(version: 20151107175650) do
     t.string   "primary_phone"
     t.string   "secondary_phone"
     t.string   "gender",                 limit: 1
+    t.boolean  "guest"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "username"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -143,7 +147,7 @@ ActiveRecord::Schema.define(version: 20151107175650) do
   add_foreign_key "cats", "users"
   add_foreign_key "identities", "users"
   add_foreign_key "litter_boxes", "users"
-  add_foreign_key "ratings", "cattributes"
+  add_foreign_key "ratings", "users"
   add_foreign_key "transactions", "litter_boxes"
   add_foreign_key "transactions", "users"
 end
