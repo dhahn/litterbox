@@ -1,0 +1,12 @@
+<ul>
+	<% litterboxes.forEach(function(litterbox){ %>
+		<li style="margin-bottom: 10px;">
+				<%= litterbox.address_line_1 %><br/>
+				<% if(!!litterbox.address_line_2) { %>
+					<%= litterbox.address_line_2 %><br/>
+				<% } %>
+				<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %>
+		</li>
+		</li>
+	<% }) %>
+</ul>

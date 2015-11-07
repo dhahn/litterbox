@@ -10,6 +10,7 @@ module.exports = [
     outputName: 'main.js',
     entries: [
       './views/search-show',
+      './views/static_pages-index'
     ]
   },
   // {

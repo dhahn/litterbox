@@ -1,7 +1,7 @@
-<script type="text/javascript" src="https://maps.google.com/maps/api/js"></script>
-
 <section>
 	<%= render "partials/search_bar" %>
-	<div id="search-results"></div>
+	<input type="hidden" name="search_lat" value="<%= @search_lat %>">
+	<input type="hidden" name="search_lng" value="<%= @search_lng %>">
 	<div id="map" style="width: 500px; height:500px;"></div>
+	<div id="search-results"></div>
 </section>

@@ -29,7 +29,7 @@ lon = -93.289870
 		number_of_adults: (1..3),
 		number_of_children: (0..3),
 		number_of_pets: (0..3),
-		latitude: lat += 0.1,
-		longitude: lon += 0.1
+		latitude: lat += rand(-2.0..2.0),
+		longitude: lon += rand(-2.0..2.0)
 	)
 end
