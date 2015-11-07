@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar new-registration">
   <h2>Sign up</h2>
 
   <%= form_for(resource, as: resource_name, :html => {:class => "pure-form"}, url: registration_path(resource_name)) do |f| %>
@@ -12,7 +12,7 @@
     <fieldset>
       <%= f.label :password, class: "stacked" %>
       <% if @minimum_password_length %>
-	<em>(<%= @minimum_password_length %> characters minimum)</em>
+	      <em>(<%= @minimum_password_length %> characters minimum)</em>
       <% end %>
       <%= f.password_field :password, autocomplete: "off" %>
     </fieldset>

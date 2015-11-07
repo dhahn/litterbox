@@ -10,7 +10,9 @@ module.exports = [
     outputName: 'main.js',
     entries: [
       './views/search-show',
-      './views/static_pages-index'
+      './views/static_pages-index',
+      './modules/datepicker',
+      './modules/sidebar'
     ]
   },
   // {

@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/railsrumble/r15-team-35",
   "browser": {
-    "waitFor": "./app/_src/js/lib/waitFor.js"
+    "waitFor": "./app/_src/js/lib/waitFor.js",
+    "moment" : "./app/_src/js/lib/moment.js"
   },
   "browserify-shim": {
     "jquery": "global:$"

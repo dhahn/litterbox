@@ -116,6 +116,16 @@ ActiveRecord::Schema.define(version: 20151107222910) do
   add_index "transactions", ["litter_box_id"], name: "index_transactions_on_litter_box_id", using: :btree
   add_index "transactions", ["user_id"], name: "index_transactions_on_user_id", using: :btree
 
+  create_table "unavailabilities", force: :cascade do |t|
+    t.integer  "litter_box_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "unavailabilities", ["litter_box_id"], name: "index_unavailabilities_on_litter_box_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                            default: "", null: false
     t.string   "encrypted_password",               default: "", null: false
@@ -150,4 +160,5 @@ ActiveRecord::Schema.define(version: 20151107222910) do
   add_foreign_key "ratings", "users"
   add_foreign_key "transactions", "litter_boxes"
   add_foreign_key "transactions", "users"
+  add_foreign_key "unavailabilities", "litter_boxes"
 end

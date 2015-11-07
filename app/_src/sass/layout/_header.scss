@@ -6,15 +6,16 @@ header {
 	height: rem(50px);
 	margin: rem(30px);
 	color: #bbb;
+	animation-delay: 1s;
 
-	.static_pages-index & {
-		position: absolute;
+	.static_pages-index &,
+	.registrations-new &,
+	.sessions-new & {
+		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		z-index: z('header');
-		color: #fff;
-		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
 
 		.home-link {
 			text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
@@ -22,16 +23,28 @@ header {
 				background-color: transparent;
 			}
 		}
+	}
+
+	.static_pages-index & {
+		color: #fff;
+		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
 
 		a,
 		.pure-menu-link {
 			color: #fff;
+			text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
 
 			&:hover {
 				background-color: rgba(255, 255, 255, 0.1);
 				color: #eee;
 			}
 		}
+	}
+
+	button.pure-menu-link,
+	input.pure-menu-link {
+		@extend %naked-button;
+		padding: 0.5em 1em;
 	}
 
 	h1 {

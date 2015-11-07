@@ -7,10 +7,10 @@ waitFor('body.searches-show', function() {
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
 			$searchResults = $('#search-results'),
-			regularMarker = "/assets/images/regular-marker.png";
+			regularMarker = '/assets/images/regular-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs');
 
-	initMap = function() {
+	var initMap = function() {
 		var mapOptions = {
 			zoom: 4,
 			center: new google.maps.LatLng(39.50, -98.35),
@@ -26,9 +26,9 @@ waitFor('body.searches-show', function() {
 		map.setMapTypeId('map_style');
 
 		idleListener = google.maps.event.addListener(map, 'idle', initSearch);
-	},
+	};
 
-	initSearch = function() {
+	var initSearch = function() {
 		searchLocations();
 
 		$searchForm.submit(function(e){
@@ -37,9 +37,9 @@ waitFor('body.searches-show', function() {
 		});
 
 		google.maps.event.removeListener(idleListener);
-	},
+	};
 
-	searchLocations = function() {
+	var searchLocations = function() {
 		var location = $locationField.val();
 
 		if(!!location) {
@@ -50,9 +50,9 @@ waitFor('body.searches-show', function() {
 		} else {
 			alert('Enter a damn location.');
 		}
-	},
+	};
 
-	getLitterBoxes = function(lat, lng) {
+	var getLitterBoxes = function(lat, lng) {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json',
@@ -68,17 +68,17 @@ waitFor('body.searches-show', function() {
 				);
 			}}
 		);
-	},
+	};
 
-	showMarkers = function(litterboxes) {
+	var showMarkers = function(litterboxes) {
     deleteMarkers();
     litterboxes.forEach(function(litterbox){
     	addMarker(litterbox);
     });
-	},
+	};
 
 	// Adds a marker to the map and push to the array.
-	addMarker = function(litterbox) {
+	var addMarker = function(litterbox) {
 		icon = regularMarker;
 
 		var marker = new google.maps.Marker({
@@ -92,27 +92,27 @@ waitFor('body.searches-show', function() {
 
 		marker.set('litterbox', litterbox);
 		markers.push(marker);
-	}
+	};
 
 	// Deletes all markers in the array by removing references to them.
-	deleteMarkers = function() {
+	var deleteMarkers = function() {
 		clearMarkers();
 		markers = [];
-	},
+	};
 
 	// Removes the markers from the map, but keeps them in the array.
-	clearMarkers = function() {
+	var clearMarkers = function() {
 		setMapOnAll(null);
-	},
+	};
 
 	// Sets the map on all markers in the array.
-	setMapOnAll = function(map) {
+	var setMapOnAll = function(map) {
 		for (var i = 0; i < markers.length; i++) {
 			markers[i].setMap(map);
 		}
-	},
+	};
 
-	init = function() {
+	var init = function() {
 		initMap();
 	};
 

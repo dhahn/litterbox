@@ -5,11 +5,14 @@ waitFor('body.static_pages-index', function() {
 	var $searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location');
 
-	init = function() {
+	var init = function() {
 		initSearch();
-	},
 
-	initSearch = function() {
+		$('header').addClass('animated fadeInDown');
+		$('.sec-hero .headline').addClass('animated fadeIn');
+	};
+
+	var initSearch = function() {
 		$searchForm.submit(function(e){
 			var location = $locationField.val();
 
@@ -18,7 +21,7 @@ waitFor('body.static_pages-index', function() {
 				alert('Enter a damn location.');
 			}
 		});
-	},
+	};
 
 	init();
 });
