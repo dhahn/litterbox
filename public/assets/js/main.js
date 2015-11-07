@@ -4296,13 +4296,36 @@ module.exports = function(selector, callback) {
 var customMapStyles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#6195a0"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#e6f3d6"},{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#f4d2c5"},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"color":"#4e4e4e"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#f4f4f4"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#787878"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#eaf6f8"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#eaf6f8"}]}]
 module.exports = customMapStyles;
 },{}],5:[function(require,module,exports){
+var waitFor = require('waitFor'),
+		Pikaday = require('../lib/pikaday.js');
+
+waitFor('.date-wrapper', function() {
+	var initDatePicker = function() {
+		$('.date-wrapper').each(function( index ) {
+			$input = $(this).find('input');
+			var pickerStart = new Pikaday({
+				field: $input[0],
+				format: 'MM/DD/YYYY',
+				position: 'bottom right',
+				firstDay: 0
+			});
+		});
+	};
+
+	var init = function() {
+		initDatePicker();
+	};
+
+	init();
+});
+},{"../lib/pikaday.js":2,"waitFor":3}],6:[function(require,module,exports){
 var geocodeSearch = function (address, callback) {
 	new google.maps.Geocoder().geocode({'address': address}, function(results, status) {
 		callback(results, status);
 	});
 };
 module.exports = geocodeSearch;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
@@ -4318,11 +4341,10 @@ with (locals || {}) { (function(){
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
-		geocode = require('../modules/geocode.js'),
-		Pikaday = require('../lib/pikaday.js');
+		geocode = require('../modules/geocode.js');
 
 waitFor('body.searches-show', function() {
 	var markers = [],
@@ -4348,19 +4370,6 @@ waitFor('body.searches-show', function() {
 		map.setMapTypeId('map_style');
 
 		idleListener = google.maps.event.addListener(map, 'idle', initSearch);
-	};
-
-	var initDatePicker = function() {
-		$(".date-wrapper").each(function( index ) {
-			$input = $(this).find('input');
-			console.log($input);
-			var pickerStart = new Pikaday({
-				field: $input[0],
-				format: 'MM/DD/YYYY',
-				position: 'bottom right',
-				firstDay: 0
-			});
-		});
 	};
 
 	var initSearch = function() {
@@ -4449,12 +4458,11 @@ waitFor('body.searches-show', function() {
 
 	var init = function() {
 		initMap();
-		initDatePicker();
 	};
 
 	init();
 });
-},{"../lib/pikaday.js":2,"../modules/customMapStyles":4,"../modules/geocode.js":5,"../templates/searchResults.ejs":6,"waitFor":3}],8:[function(require,module,exports){
+},{"../modules/customMapStyles":4,"../modules/geocode.js":6,"../templates/searchResults.ejs":7,"waitFor":3}],9:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		geocode = require('../modules/geocode');
 
@@ -4479,4 +4487,4 @@ waitFor('body.static_pages-index', function() {
 
 	init();
 });
-},{"../modules/geocode":5,"waitFor":3}]},{},[7,8]);
+},{"../modules/geocode":6,"waitFor":3}]},{},[8,9,5]);

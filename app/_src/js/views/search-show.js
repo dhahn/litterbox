@@ -1,7 +1,6 @@
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
-		geocode = require('../modules/geocode.js'),
-		Pikaday = require('../lib/pikaday.js');
+		geocode = require('../modules/geocode.js');
 
 waitFor('body.searches-show', function() {
 	var markers = [],
@@ -27,19 +26,6 @@ waitFor('body.searches-show', function() {
 		map.setMapTypeId('map_style');
 
 		idleListener = google.maps.event.addListener(map, 'idle', initSearch);
-	};
-
-	var initDatePicker = function() {
-		$(".date-wrapper").each(function( index ) {
-			$input = $(this).find('input');
-			console.log($input);
-			var pickerStart = new Pikaday({
-				field: $input[0],
-				format: 'MM/DD/YYYY',
-				position: 'bottom right',
-				firstDay: 0
-			});
-		});
 	};
 
 	var initSearch = function() {
@@ -128,7 +114,6 @@ waitFor('body.searches-show', function() {
 
 	var init = function() {
 		initMap();
-		initDatePicker();
 	};
 
 	init();
