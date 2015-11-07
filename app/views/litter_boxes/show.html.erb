@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Capacity:</strong>
+  <%= @litter_box.capacity %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @litter_box.description %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @litter_box.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @litter_box.state %>
+</p>
+
+<p>
+  <strong>Address line 1:</strong>
+  <%= @litter_box.address_line_1 %>
+</p>
+
+<p>
+  <strong>Address line 2:</strong>
+  <%= @litter_box.address_line_2 %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @litter_box.zip %>
+</p>
+
+<p>
+  <strong>Number of adults:</strong>
+  <%= @litter_box.number_of_adults %>
+</p>
+
+<p>
+  <strong>Number of children:</strong>
+  <%= @litter_box.number_of_children %>
+</p>
+
+<p>
+  <strong>Number of pets:</strong>
+  <%= @litter_box.number_of_pets %>
+</p>
+
+<%= link_to 'Edit', edit_litter_box_path(@litter_box) %> |
+<%= link_to 'Back', litter_boxes_path %>

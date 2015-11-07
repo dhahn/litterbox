@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'static_pages#index'
 
   resources :cats
+  resources :litter_boxes
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
