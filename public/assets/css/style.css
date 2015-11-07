@@ -346,14 +346,14 @@ header {
     .static_pages-index header .home-link {
       text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5); }
       .static_pages-index header .home-link:hover {
-	background-color: transparent; }
+        background-color: transparent; }
     .static_pages-index header a,
     .static_pages-index header .pure-menu-link {
       color: #fff; }
       .static_pages-index header a:hover,
       .static_pages-index header .pure-menu-link:hover {
-	background-color: rgba(255, 255, 255, 0.1);
-	color: #eee; }
+        background-color: rgba(255, 255, 255, 0.1);
+        color: #eee; }
   header h1 {
     float: left;
     width: 50%; }

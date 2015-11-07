@@ -36,7 +36,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<ul>\n	');2; litterboxes.forEach(function(litterbox){ ; buf.push('\n		<li style="margin-bottom: 10px;">\n				', escape((4,  litterbox.address_line_1 )), '<br/>\n				');5; if(!!litterbox.address_line_2) { ; buf.push('\n					', escape((6,  litterbox.address_line_2 )), '<br/>\n				');7; } ; buf.push('\n				', escape((8,  litterbox.city )), ', ', escape((8,  litterbox.state )), ' ', escape((8,  litterbox.zip )), '\n		</li>\n		</li>\n	');11; }) ; buf.push('\n</ul>'); })();
+ buf.push('<ul>\n	');2; litterboxes.forEach(function(litterbox){ ; buf.push('\n		<li style="margin-bottom: 10px;">\n			', escape((4,  litterbox.address_line_1 )), '<br/>\n			');5; if(!!litterbox.address_line_2) { ; buf.push('\n				', escape((6,  litterbox.address_line_2 )), '<br/>\n			');7; } ; buf.push('\n			', escape((8,  litterbox.city )), ', ', escape((8,  litterbox.state )), ' ', escape((8,  litterbox.zip )), '<br/>\n			<a target="_blank" href="http://maps.google.com/?q=', escape((9,  litterbox.full_address )), '">\n				Directions (', escape((10,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');13; }) ; buf.push('\n</ul>'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())

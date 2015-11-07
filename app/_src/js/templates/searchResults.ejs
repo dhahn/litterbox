@@ -1,12 +1,14 @@
 <ul>
 	<% litterboxes.forEach(function(litterbox){ %>
 		<li style="margin-bottom: 10px;">
-				<%= litterbox.address_line_1 %><br/>
-				<% if(!!litterbox.address_line_2) { %>
-					<%= litterbox.address_line_2 %><br/>
-				<% } %>
-				<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %>
-		</li>
+			<%= litterbox.address_line_1 %><br/>
+			<% if(!!litterbox.address_line_2) { %>
+				<%= litterbox.address_line_2 %><br/>
+			<% } %>
+			<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %><br/>
+			<a target="_blank" href="http://maps.google.com/?q=<%= litterbox.full_address %>">
+				Directions (<%= litterbox.distance.toFixed(2) %> miles)
+			</a>
 		</li>
 	<% }) %>
 </ul>
