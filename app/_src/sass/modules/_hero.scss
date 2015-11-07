@@ -1,0 +1,44 @@
+// ================================
+// Hero
+// ================================
+
+
+.sec-hero {
+	background-color: #fafafa;
+	text-align: center;
+
+	.headline {
+		padding: rem(70px 0);
+	}
+
+	h1 {
+		@extend %hsize-xlarge;
+		margin: rem(70px 0);
+	}
+
+	.faq-button {
+		font-size: 125%;
+
+		&:hover {
+			color: #fff;
+		}
+	}
+
+	.search-bar {
+		padding: rem(20px 0);
+		background-color: rgba(0, 0, 0, 0.25);
+
+		.location {
+			width: 30%;
+		}
+
+		input,
+		select {
+			width: 10%;
+		}
+
+		button {
+			width: 15%;
+		}
+	}
+}

@@ -23,7 +23,7 @@ html {
 body {
 	background: #fff;
 	color: #2C3E50;
-	@include setfont(default);
+	font-family: $font-regular;
 	font-size: $body-font-size;
 	@include font-smoothing;
 }
@@ -78,12 +78,4 @@ dd {
 
 li {
 	line-height: 1;
-}
-
-// --------------------------------
-// Extend WYSIWYG Styles
-// --------------------------------
-
-.wysiwyg {
-	@extend %wysiwyg;
 }

@@ -7,12 +7,31 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title><%= @page_title.try(:html_safe) || "Hairbnb" %></title>
 		<%= csrf_meta_tags %>
+		<link type="text/css" rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
 		<link type="text/css" rel="stylesheet" href="/assets/css/style.css" media="screen">
 		<link href="/favicon.ico" rel="shortcut icon">
 	</head>
 
 	<body>
+		<header>
+			<h1><a href="/">Hairbnb</a></h1>
+
+			<div class="pure-menu pure-menu-horizontal">
+				<ul class="pure-menu-list">
+					<li class="pure-menu-item"><a href="#" class="pure-menu-link">Sign Up</a></li>
+					<li class="pure-menu-item"><a href="#" class="pure-menu-link">Sign In</a></li>
+					<li class="pure-menu-item"><a href="#" class="pure-menu-link">Sign In as Guest</a></li>
+				</ul>
+			</div>
+		</header>
+
 		<%= yield %>
+
+		<footer>
+			<a href="/faq">FAQ</a>
+			&copy; yer mum
+		</footer>
+
 		<script type="text/javascript" src="/assets/js/main.js"></script>
 	</body>
 </html>

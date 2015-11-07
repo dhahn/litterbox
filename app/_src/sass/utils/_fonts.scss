@@ -6,14 +6,7 @@
 // @font-face & @import
 // --------------------------------
 
-// @font-face {
-// 	font-family: 'ClarendonBT-Roman';
-// 	src:url('assets/fonts/font-folder-name/font-file.eot');
-// 	src:url('assets/fonts/font-folder-name/font-file.eot?#iefix') format('embedded-opentype'),
-// 		url('assets/fonts/font-folder-name/font-file.woff') format('woff'),
-// 		url('assets/fonts/font-folder-name/font-file.ttf') format('truetype');
-// 	font-weight: 400;
-// }
+@import url(https://fonts.googleapis.com/css?family=Muli);
 
 
 // --------------------------------
@@ -21,7 +14,7 @@
 // --------------------------------
 
 // Variables best utilized for font services without family grouping.
-$font-regular: 'Regular Font Family Name', sans-serif;
+$font-regular: 'Muli', sans-serif;
 $font-light: 'Light Font Family Name', sans-serif;
 $font-bold: 'Bold Font Family Name', sans-serif;
 
