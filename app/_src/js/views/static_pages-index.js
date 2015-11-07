@@ -7,6 +7,9 @@ waitFor('body.static_pages-index', function() {
 
 	var init = function() {
 		initSearch();
+
+		$('header').addClass('animated fadeInDown');
+		$('.sec-hero .headline').addClass('animated fadeIn');
 	};
 
 	var initSearch = function() {
