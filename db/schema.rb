@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151107031552) do
+ActiveRecord::Schema.define(version: 20151107032049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,24 @@ ActiveRecord::Schema.define(version: 20151107031552) do
   end
 
   add_index "cats", ["user_id"], name: "index_cats_on_user_id", using: :btree
+
+  create_table "litter_boxes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "capacity"
+    t.text     "description"
+    t.string   "city"
+    t.string   "state"
+    t.string   "address_line_1"
+    t.string   "address_line_2"
+    t.string   "zip"
+    t.integer  "number_of_adults"
+    t.integer  "number_of_children"
+    t.integer  "number_of_pets"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "litter_boxes", ["user_id"], name: "index_litter_boxes_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                            default: "", null: false
@@ -56,4 +74,5 @@ ActiveRecord::Schema.define(version: 20151107031552) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "cats", "users"
+  add_foreign_key "litter_boxes", "users"
 end
