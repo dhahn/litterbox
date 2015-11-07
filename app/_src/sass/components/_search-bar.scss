@@ -1,0 +1,22 @@
+// ================================
+// Search bar
+// ================================
+
+.search-bar {
+	padding: rem(20px 0);
+	background-color: rgba(0, 0, 0, 0.25);
+	color: #333;
+
+	.location {
+		width: 30%;
+	}
+
+	input,
+	select {
+		width: 10%;
+	}
+
+	button {
+		width: 15%;
+	}
+}
