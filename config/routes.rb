@@ -7,7 +7,8 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'static_pages#index'
-
+  get 'auth/:provider/callback', to: 'twitter_accounts#create'
+  get 'auth/failure', to: redirect('/')
   resources :cats
   resources :litter_boxes
 
