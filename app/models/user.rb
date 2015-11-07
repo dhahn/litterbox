@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
 
   has_one :litter_box
   has_many :cats
+  has_and_belongs_to_many :ratings
 end
