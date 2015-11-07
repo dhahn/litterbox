@@ -54,6 +54,11 @@ h6 {
 	line-height: 1;
 }
 
+h2 {
+	@extend %type-large;
+	margin-bottom: rem(20px);
+}
+
 
 // --------------------------------
 // Text Components

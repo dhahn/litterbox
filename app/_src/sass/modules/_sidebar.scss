@@ -1,5 +1,42 @@
 .sidebar {
   width: 30%;
-  background: #2980b9;
-  padding: rem(100px 40px 40px 40px);
+  padding: rem(100px 60px);
+  background-color: #2980b9;
+  color: #fff;
+  text-align: center;
+
+  fieldset {
+    margin-bottom: rem(10px);
+  }
+
+  label.stacked {
+    display: block;
+    margin-bottom: rem(10px);
+  }
+
+  .pure-button {
+    background-color: #1CB841;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    color: #333;
+  }
+
+  .pure-form {
+    margin-bottom: rem(40px);
+  }
+
+  .login-links {
+    a {
+      display: block;
+      margin-bottom: rem(10px);
+      color: #fff;
+
+      &:hover {
+	color: #1cb841;
+      }
+    }
+  }
 }
