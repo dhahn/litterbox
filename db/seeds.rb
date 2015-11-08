@@ -4,7 +4,7 @@
 lat = 37.205340
 lon = -93.289870
 
-4000.times do |i|
+400.times do |i|
 	user = User.create(
 		email: "test#{i}@example.com",
 		password: 'password',
@@ -21,6 +21,7 @@ lon = -93.289870
 	litter_box = LitterBox.create(
 		user_id: user.id,
 		capacity: rand(1..5),
+		name: "Book Me Right Meow!!",
 		description: "test description",
 		city: "Springfield",
 		state: "MO",

@@ -5,8 +5,7 @@
 <ul class="results-list">
 	<% litterboxes.forEach(function(litterbox) { %>
 		<li class="single-result">
-			<%= litterbox.address_line_1 %><br/> <!-- FIXME: make this the name -->
-			<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %><br/>
+			<%= litterbox.name %><br />
 			<a target="_blank" href="http://maps.google.com/?q=<%= litterbox.full_address %>">
 				Directions (<%= litterbox.distance.toFixed(2) %> miles)
 			</a>
