@@ -1,0 +1,54 @@
+// ================================
+// Search
+// ================================
+
+body.searches-show footer {
+	display: none;
+}
+
+.sec-search {
+	position: absolute;
+	top: rem(110px);
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 0;
+	background-color: #eee;
+
+	.map-view {
+		float: left;
+		width: 70%;
+		height: calc(100% - 78px);
+		border-right: 5px solid rgba(0, 0, 0, 0.1);
+	}
+
+	.results {
+		float: left;
+		width: 30%;
+	}
+
+	.filters {
+		background-color: setcolor(white);
+		padding: rem(20px);
+	}
+
+	#search-results {
+		padding: rem(20px);
+	}
+
+	.login-helper {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		padding: rem(30px 20px);
+		text-align: center;
+		z-index: z('overlay');
+		background-color: rgba(255, 255, 255, 0.75);
+		border-top: 5px solid rgba(0, 0, 0, 0.1);
+
+		.pure-menu-list {
+			margin-left: rem(30px);
+		}
+	}
+}
