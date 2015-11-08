@@ -49,6 +49,7 @@ class LitterBox < ActiveRecord::Base
     hash = super(*args)
     hash.merge!(distance: distance)
     hash.merge!(full_address: full_address)
+    hash.merge!(photo_url: photo.url)
   end
 
   private
