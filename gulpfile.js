@@ -11,7 +11,8 @@ config.scaffold = {
   },
   assets: {
     root: 'public/assets',
-    styles: 'css'
+    styles: 'css',
+    symbols: '../../../fonts/symbols/'
   }
 };
 
