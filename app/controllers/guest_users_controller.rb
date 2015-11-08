@@ -13,7 +13,6 @@ class GuestUsersController < ApplicationController
         primary_phone: "1231231234",
         secondary_phone: "1231231234",
         gender: ['m', 'f'].sample,
-        username: "test_username#{i}"
       )
       sign_in(User, user) 
       redirect_to root_path

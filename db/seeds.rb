@@ -14,8 +14,7 @@ lon = -93.289870
 		age: rand(18..35),
 		primary_phone: "1231231234",
 		secondary_phone: "1231231234",
-		gender: ['m', 'f'].sample,
-		username: "test_username#{i}"
+		gender: ['m', 'f'].sample
 	)
 
 	litter_box = LitterBox.create(
