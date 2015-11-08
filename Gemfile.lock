@@ -101,6 +101,9 @@ GEM
       signet (~> 0.6)
     gravtastic (3.2.6)
     hashie (3.4.3)
+    httparty (0.13.7)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     instagram (1.1.6)
       faraday (>= 0.7, < 0.10)
@@ -266,6 +269,7 @@ DEPENDENCIES
   foreman
   google-api-client
   gravtastic
+  httparty
   instagram
   jbuilder (~> 2.0)
   jquery-rails

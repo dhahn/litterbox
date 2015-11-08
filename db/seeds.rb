@@ -1,6 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
+require 'net/http'
 # lat = 37.205340
 # lon = -93.289870
 digits = (1..9).to_a
@@ -17,7 +18,9 @@ past_date_range = (Date.today - 400..Date.today - 1).to_a
 	kitty = KittyNames.kitty
 	pw = SecureRandom.hex
 	price = rand(30.0..150.0).round(2)
-
+	response = HTTParty.get('https://randomuser.me/api/')
+	picture = JSON.parse(response.body)['results'][0]['user']['picture']['thumbnail']
+	
 	user = User.create(
 		email: kitty.email.sub(/@/, "#{i}@"),
 		password: pw,
@@ -25,6 +28,7 @@ past_date_range = (Date.today - 400..Date.today - 1).to_a
 		first_name: kitty.first_name,
 		last_name: kitty.last_name,
 		age: rand(18..35),
+		gravatar: picture,
 		primary_phone: digits.sample(10).join,
 		secondary_phone: digits.sample(10).join,
 		gender: kitty.gender.to_s[0] || ['m', 'f'].sample
