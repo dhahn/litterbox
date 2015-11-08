@@ -4,7 +4,7 @@
 
 header {
 	height: rem(50px);
-	margin: rem(30px);
+	margin: rem(10px);
 	color: setcolor(gray, light);
 	animation-delay: 1s;
 
@@ -26,6 +26,7 @@ header {
 	}
 
 	.static_pages-index & {
+		margin: rem(30px);
 		color: setcolor(white);
 		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
 
@@ -39,6 +40,10 @@ header {
 				color: #eee;
 			}
 		}
+	}
+
+	.pure-menu {
+		padding-top: rem(10px);
 	}
 
 	button.pure-menu-link,
