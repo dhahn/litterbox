@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   post '/search', to: 'searches#create', as: 'search_create'
 
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "omniauth_callbacks"}
-  resources :litter_boxes, except: [:destroy]
+  resources :litter_boxes, except: [:destroy, :index]
   resources :unavailabilities, only: [:index], defaults: { format: 'json' }
 end
