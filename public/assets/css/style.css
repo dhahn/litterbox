@@ -823,7 +823,7 @@ body.searches-show footer {
     .sec-search .single-result .s-paw {
       color: #999; }
       .sec-search .single-result .s-paw.active {
-	color: #1cb841; }
+        color: #1cb841; }
   .sec-search .login-helper {
     position: absolute;
     left: 0;
