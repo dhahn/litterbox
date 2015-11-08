@@ -4330,8 +4330,8 @@ var initDatePicker = function(input) {
 module.exports = initDatePicker;
 
 },{"../lib/pikaday.js":4}],8:[function(require,module,exports){
-var geocodeSearch = function (address, callback) {
-	new google.maps.Geocoder().geocode({'address': address}, function(results, status) {
+var geocodeSearch = function (params, callback) {
+	new google.maps.Geocoder().geocode(params, function(results, status) {
 		callback(results, status);
 	});
 };
@@ -4384,8 +4384,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4401,8 +4400,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4418,8 +4416,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{"./singleSearchResults.ejs":12}],12:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4708,7 +4705,7 @@ waitFor('body.searches-show', function() {
 
 		if(!!location) {
 			updateUrl();
-			geocode(location, function(results, status){
+			geocode({address: location}, function(results, status){
 				map.fitBounds(results[0].geometry.viewport);
 				getLitterBoxes({
 					lat: map.getCenter().lat(),
@@ -4719,6 +4716,29 @@ waitFor('body.searches-show', function() {
 				});
 			});
 		} else {
+			getGeolocation();
+		}
+	};
+
+	var getGeolocation = function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.log('helo there');
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+
+				geocode({location: pos}, function(results, status){
+					$locationField.val(results[0].formatted_address);
+					$searchForm.submit();
+			  });
+			}, function() {
+				//if we need to handle them saying no this is where it goes
+				$locationField.addClass('animated shake invalid');
+			});
+		} else {
+			// Browser doesn't support Geolocation
 			$locationField.addClass('animated shake invalid');
 		}
 	};
@@ -4889,9 +4909,31 @@ waitFor('body.static_pages-index', function() {
 
 			if(!location) {
 				e.preventDefault();
-				$locationField.addClass('animated shake invalid');
+				getGeolocation();
 			}
 		});
+	};
+
+	var getGeolocation = function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+
+				geocode({location: pos}, function(results, status){
+					$locationField.val(results[0].formatted_address);
+					$searchForm.submit();
+			  });
+			}, function() {
+				//if we need to handle them saying no this is where it goes
+				$locationField.addClass('animated shake invalid');
+			});
+		} else {
+			// Browser doesn't support Geolocation
+			$locationField.addClass('animated shake invalid');
+		}
 	};
 
 	init();

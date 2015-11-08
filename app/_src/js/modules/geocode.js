@@ -1,5 +1,5 @@
-var geocodeSearch = function (address, callback) {
-	new google.maps.Geocoder().geocode({'address': address}, function(results, status) {
+var geocodeSearch = function (params, callback) {
+	new google.maps.Geocoder().geocode(params, function(results, status) {
 		callback(results, status);
 	});
 };
