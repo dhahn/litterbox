@@ -7,6 +7,10 @@
 		<% litterbox = marker.litterbox %>
 		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">
 			<a href="<%= '/litter_boxes/' + litterbox.id %>">
+				<div class="price">
+					<%= litterbox.price %>
+				</div>
+
 				<div class="details">
 					<div class="name">
 						<%= litterbox.address_line_1 %> <!-- FIXME: make this the name -->
