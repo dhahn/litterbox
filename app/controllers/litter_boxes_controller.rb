@@ -24,7 +24,7 @@ class LitterBoxesController < ApplicationController
   # POST /litter_boxes
   # POST /litter_boxes.json
   def create
-    @litter_box = LitterBox.new(litter_box_params)
+    @litter_box = LitterBox.new(special_litter_box_params)
     @litter_box.user = current_user
 
     respond_to do |format|
@@ -42,7 +42,7 @@ class LitterBoxesController < ApplicationController
   # PATCH/PUT /litter_boxes/1.json
   def update
     respond_to do |format|
-      if @litter_box.update(litter_box_params)
+      if @litter_box.update(special_litter_box_params)
         format.html { redirect_to @litter_box, notice: 'Litter box was successfully updated.' }
         format.json { render :show, status: :ok, location: @litter_box }
       else
@@ -72,6 +72,21 @@ class LitterBoxesController < ApplicationController
     def litter_box_params
       params.require(:litter_box).permit(:price, :capacity, :description, :city, :state,
         :address_line_1, :address_line_2, :zip, :number_of_adults,
-        :number_of_children, :number_of_pets, :name)
+        :number_of_children, :number_of_pets, :name,
+        unavailabilities_attributes: [:id, :start_time, :end_time, :_destroy])
+    end
+
+    def special_litter_box_params
+      temp = litter_box_params
+      temp.fetch(:unavailabilities_attributes) { [] }.each do |_, hash|
+        if /\d{2}\/\d{2}\/\d{4}/ =~ hash[:start_time]
+          hash[:start_time] = Date.strptime(hash[:start_time], '%m/%d/%Y')
+        end
+
+        if /\d{2}\/\d{2}\/\d{4}/ =~ hash[:end_time]
+          hash[:end_time] = Date.strptime(hash[:end_time], '%m/%d/%Y')
+        end
+      end
+      temp
     end
 end

@@ -2,7 +2,7 @@ class LitterBox < ActiveRecord::Base
   attr_accessor :distance
   belongs_to :user
   has_many :transactions
-  has_many :unavailabilities
+  has_many :unavailabilities, inverse_of: :litter_box
   accepts_nested_attributes_for :unavailabilities, allow_destroy: true
 
   validates :user_id, presence: true, uniqueness: true
