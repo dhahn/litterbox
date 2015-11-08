@@ -59,10 +59,18 @@ past_date_range = (Date.today - 400..Date.today - 1).to_a
 			end_time: t + rand(1..4)
 		)
 	end
+end
+
+user_ids = User.pluck(:id)
+
+LitterBox.all.each do |litter_box|
+	price = litter_box.price
 
 	rand(0..30).times do |j|
+		user_id = user_ids.sample
+
 		transaction = Transaction.create(
-			user_id: rand(1...i),
+			user_id: user_id,
 			litter_box_id: litter_box.id,
 			check_in: t1 = date_range.sample,
 			check_out: t2 = t1 + rand(1..4),
@@ -70,7 +78,7 @@ past_date_range = (Date.today - 400..Date.today - 1).to_a
 		)
 
 		Rating.new(
-			user_id: rand(1...i),
+			user_id: user_id,
 			transaction_id: transaction.id,
 			comment: kitty_text.split('. ').sample(3).join('. '),
 			paws: [1,2,2,3,3,3,4,4,4,4,5,5].sample
