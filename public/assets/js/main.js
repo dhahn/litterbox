@@ -4396,7 +4396,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<ul>\n	', escape((2,  litterboxes.length )), ' litter boxes found\n	');3; litterboxes.forEach(function(litterbox){ ; buf.push('\n		<li style="margin-bottom: 10px;">\n			', escape((5,  litterbox.address_line_1 )), '<br/>\n			');6; if(!!litterbox.address_line_2) { ; buf.push('\n				', escape((7,  litterbox.address_line_2 )), '<br/>\n			');8; } ; buf.push('\n			', escape((9,  litterbox.city )), ', ', escape((9,  litterbox.state )), ' ', escape((9,  litterbox.zip )), '<br/>\n			<a target="_blank" href="http://maps.google.com/?q=', escape((10,  litterbox.full_address )), '">\n				Directions (', escape((11,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');14; }) ; buf.push('\n</ul>'); })();
+ buf.push('<ul>\n	<p>', escape((2,  litterboxes.length )), ' litter boxes found.</p>\n\n	');4; litterboxes.forEach(function(litterbox){ ; buf.push('\n		<li style="margin-bottom: 10px;">\n			', escape((6,  litterbox.address_line_1 )), '<br/>\n			');7; if(!!litterbox.address_line_2) { ; buf.push('\n				', escape((8,  litterbox.address_line_2 )), '<br/>\n			');9; } ; buf.push('\n			', escape((10,  litterbox.city )), ', ', escape((10,  litterbox.state )), ' ', escape((10,  litterbox.zip )), '<br/>\n			<a target="_blank" href="http://maps.google.com/?q=', escape((11,  litterbox.full_address )), '">\n				Directions (', escape((12,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');15; }) ; buf.push('\n</ul>'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
@@ -4445,6 +4445,7 @@ waitFor('body.searches-show', function() {
 			$locationField = $searchForm.find('.location'),
 			$startDateField = $searchForm.find('.start-date'),
 			$endDateField = $searchForm.find('.end-date'),
+			$capacityField = $searchForm.find('#number_of_cats'),
 			$searchResults = $('#search-results'),
 			regularMarker = '/assets/images/regular-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs');
@@ -4489,6 +4490,7 @@ waitFor('body.searches-show', function() {
 					lng: map.getCenter().lng(),
 					start_date: $startDateField.val(),
 					end_date: $endDateField.val(),
+					number_of_cats: $capacityField.val(),
 				});
 			})
 		} else {

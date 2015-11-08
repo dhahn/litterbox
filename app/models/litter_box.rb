@@ -8,8 +8,13 @@ class LitterBox < ActiveRecord::Base
   validates :user_id, presence: true, uniqueness: true
 
   def self.search(params)
-    available(convert_date(params[:start_date]), convert_date(params[:end_date]))
+    within_capacity(params[:number_of_cats])
+      .available(convert_date(params[:start_date]), convert_date(params[:end_date]))
       .within(params[:lat].to_f, params[:lng].to_f, 300)
+  end
+
+  def self.within_capacity(number_of_cats)
+    where('capacity >= ?', number_of_cats)
   end
 
   def self.available(start_time, end_time)

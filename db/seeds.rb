@@ -11,24 +11,25 @@ lon = -93.289870
 		password_confirmation: 'password',
 		first_name: "first name #{i}",
 		last_name: "last name #{i}",
-		age: (18..35),
+		age: rand(18..35),
 		primary_phone: "1231231234",
 		secondary_phone: "1231231234",
-		gender: ['m', 'f'].sample
+		gender: ['m', 'f'].sample,
+		username: "test_username#{i}"
 	)
 
 	litter_box = LitterBox.create(
 		user_id: user.id,
-		capacity: (1..5),
+		capacity: rand(1..5),
 		description: "test description",
 		city: "Springfield",
 		state: "MO",
 		address_line_1: "Some Place",
 		address_line_2: "Some Where",
 		zip: "65807",
-		number_of_adults: (1..3),
-		number_of_children: (0..3),
-		number_of_pets: (0..3),
+		number_of_adults: rand(1..3),
+		number_of_children: rand(0..3),
+		number_of_pets: rand(0..3),
 		latitude: lat += rand(-2.0..2.0),
 		longitude: lon += rand(-2.0..2.0)
 	)

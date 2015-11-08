@@ -6,6 +6,7 @@ class SearchesController < ApplicationController
 		@search[:location] = params[:location]
 		@search[:start_date] = params[:start_date]
 		@search[:end_date] = params[:end_date]
+		@search[:number_of_cats] = params[:number_of_cats]
 	end
 
 	def create
