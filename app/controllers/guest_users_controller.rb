@@ -15,6 +15,6 @@ class GuestUsersController < ApplicationController
         gender: ['m', 'f'].sample,
       )
       sign_in(User, user) 
-      redirect_to root_path
+      redirect_to search_show_path
     end
 end
