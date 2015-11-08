@@ -54,8 +54,12 @@
 	@if $symbol == "briefcase" {
 		content: '\E002';
 	}
+	@if $symbol == "paw" {
+		content: '\E003';
+	}
 }
 
 // Individual CSS styles for when you call by the class name in markup.
 .s-book:before { content: "\E001" }
 .s-briefcase:before { content: "\E002" }
+.s-paw:before { content: "\E003" }

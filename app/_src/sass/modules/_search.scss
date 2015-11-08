@@ -93,7 +93,7 @@ body.searches-show footer {
 			right: 0;
 			bottom: 0;
 			background-color: rgba(255, 255, 255, 0.8);
-			padding: rem(20px);
+			padding: rem(10px 20px);
 			color: setcolor(gray, dark);
 			line-height: 1.25;
 			font-size: 80%;
@@ -104,14 +104,20 @@ body.searches-show footer {
 			font-size: 125%;
 		}
 
-		.paw {
+		.rating {
+			padding-top: rem(5px);
+		}
+
+		.rating-count {
 			display: inline-block;
-			width: 10px;
-			height: 10px;
-			background-color: gray;
+			margin-left: rem(5px);
+		}
+
+		.s-paw {
+			color: setcolor(gray);
 
 			&.active {
-				background-color: red;
+				color: setcolor(green);
 			}
 		}
 	}
