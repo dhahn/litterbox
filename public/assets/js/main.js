@@ -4384,8 +4384,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
