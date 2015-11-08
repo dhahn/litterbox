@@ -17,11 +17,11 @@ class UnavailabilitiesController < ApplicationController
 
   def transaction_dates
     Transaction.where(unavail_params).where('check_out >= ?', Date.today)
-      .map(&:dates).reduce(:|).select { |d| d >= Date.today }
+      .map(&:dates).reduce([], :|).select { |d| d >= Date.today }
   end
 
   def unavailability_dates
     Unavailability.where(unavail_params).where('end_time >= ?', Date.today)
-      .map(&:dates).reduce(:|).select { |d| d >= Date.today }
+      .map(&:dates).reduce([], :|).select { |d| d >= Date.today }
   end
 end
