@@ -8,8 +8,8 @@
 			<input type="text" class="end-date" name="end_date" placeholder="11/07/2015" value="<%= search[:end_date] %>"/>
 		</span>
 
-		<% cat_options = [['1 cat', 1], ['2 cats', 2], ['3 cats', 3], ['4 cats', 4], ['5 cats', 5]] %>
-		<%= select_tag(:number_of_cats, options_for_select(cat_options, search[:number_of_cats].to_i)) %>
+		<% radius_options = [['10 miles', 10], ['25 miles', 25], ['50 miles', 50], ['100 miles', 100]] %>
+		<%= select_tag(:radius, options_for_select(radius_options, search[:radius].to_i)) %>
 
 		<button class="pure-button pure-button-primary">Find a litter box</button>
 	</form>

@@ -8,7 +8,7 @@ waitFor('body.searches-show', function() {
 			$locationField = $searchForm.find('.location'),
 			$startDateField = $searchForm.find('.start-date'),
 			$endDateField = $searchForm.find('.end-date'),
-			$capacityField = $searchForm.find('#number_of_cats'),
+			$radiusField = $searchForm.find('#radius'),
 			$searchResults = $('#search-results'),
 			regularMarker = '/assets/images/regular-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs');
@@ -53,7 +53,7 @@ waitFor('body.searches-show', function() {
 					lng: map.getCenter().lng(),
 					start_date: $startDateField.val(),
 					end_date: $endDateField.val(),
-					number_of_cats: $capacityField.val(),
+					radius: $radiusField.val(),
 				});
 			})
 		} else {
