@@ -4448,6 +4448,7 @@ waitFor('body.searches-show', function() {
 			$endDateField = $searchForm.find('.end-date'),
 			$radiusField = $searchForm.find('#radius'),
 			$searchResults = $('#search-results'),
+			$searchResultsContainer = $('.sec-search .results'),
 			$filterForm = $('#filters'),
 			$numberOfCatsField = $filterForm.find('#number_of_cats'),
 			$kidFriendlyField = $filterForm.find('#kid_friendly'),
@@ -4541,6 +4542,7 @@ waitFor('body.searches-show', function() {
 		$searchResults.html(
 			searchResultsTemplate({ markers: markers })
 		);
+		$searchResultsContainer.animate({ scrollTop: 0 });
 	};
 
 	var showMarkers = function(litterboxes) {
