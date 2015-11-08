@@ -3,10 +3,9 @@
 // ================================
 
 header {
-	height: rem(50px);
-	margin: rem(10px);
 	color: setcolor(gray, light);
 	animation-delay: 1s;
+
 
 	.static_pages-index &,
 	.registrations-new &,
@@ -26,9 +25,15 @@ header {
 	}
 
 	.static_pages-index & {
-		margin: rem(30px);
+		padding: rem(30px);
 		color: setcolor(white);
 		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+		transition: all 0.25s ease-in-out;
+
+		&.opaque {
+			background-color: setcolor(green);
+			padding: rem(10px 30px);
+		}
 
 		a,
 		.pure-menu-link {

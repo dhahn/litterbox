@@ -3,7 +3,12 @@ var waitFor = require('waitFor'),
 
 waitFor('body.static_pages-index', function() {
 	var $searchForm = $('.search-bar form'),
-			$locationField = $searchForm.find('.location');
+			$locationField = $searchForm.find('.location'),
+			$hero = $('.sec-hero'),
+			$body = $('body'),
+			$header = $('header'),
+			heroHeight,
+			scrolledPastHero = false;
 
 	var init = function() {
 		initSearch();
@@ -13,6 +18,32 @@ waitFor('body.static_pages-index', function() {
 		$locationField.on('focus', function () {
 			$locationField.removeClass('animated shake invalid');
 		});
+
+		heroHeight = $hero.height() - 78;
+		$(document).on('scroll', scrollListen);
+	};
+
+	var scrollListen = function () {
+		var scrollTop = $body.scrollTop(),
+			heroOffset = 0;
+
+		if (scrollTop < heroHeight) {
+			// Do some basic parallax
+			heroOffset = 25 + ((scrollTop / heroHeight) * 20);
+			$hero.css('background-position', '50% ' + heroOffset + '%');
+
+			if (scrolledPastHero)
+				$header.removeClass('opaque');
+
+			scrolledPastHero = false;
+			return;
+		} else {
+			if (scrolledPastHero)
+				return;
+
+			scrolledPastHero = true;
+			$header.addClass('opaque');
+		}
 	};
 
 	var initSearch = function() {
