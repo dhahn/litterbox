@@ -1,4 +1,10 @@
 class LitterBox < ActiveRecord::Base
+  STOCK_PHOTOS = [
+    'http://img-cdn1.iha.co.nz/2209300015704/Guest-house-bed-and-breakfast-San-pedro-Cedar-Cats_15.jpeg',
+    'https://upload.wikimedia.org/wikipedia/commons/e/e6/Nekokaigi,_a_cat_cafe_in_Kyoto_-_March_16,_2010.jpg',
+    'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Socks_the_Cat_Explores.jpg/1024px-Socks_the_Cat_Explores.jpg'
+  ]
+
   attr_accessor :distance
   belongs_to :user
   has_many :transactions
@@ -11,7 +17,7 @@ class LitterBox < ActiveRecord::Base
   validates :latitude, presence: true
   validates :capacity, :presence => true, :numericality => {:greater_than => 0}
 
-  has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :photo, default_url: lambda { |av| STOCK_PHOTOS[av.instance.id % STOCK_PHOTOS.length] }
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
   validates_attachment :photo, size: { in: 0..500.kilobytes }
 
