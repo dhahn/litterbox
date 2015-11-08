@@ -6,6 +6,28 @@ body.litter_boxes-show {
 	.page-content {
 		padding-top: rem(500px);
 	}
+
+	h1 {
+		margin-bottom: rem(20px);
+		font-size: rem(20px);
+	}
+
+	h2 {
+		font-size: rem(16px);
+	}
+
+	.rating {
+		display: inline-block;
+
+		.s-paw.active {
+			color: setcolor(green);
+		}
+
+		.rating-count {
+			display: inline-block;
+			margin-left: rem(5px);
+		}
+	}
 }
 
 .litterbox-header {
@@ -22,7 +44,20 @@ body.litter_boxes-show {
 	background-color: #eee;
 
 	.details {
-		border: 3px solid blue;
+		background-color: setcolor(white);
+
+		.centered {
+			padding: rem(30px 0);
+		}
+
+		h1 {
+			margin-bottom: rem(20px);
+		}
+
+		.location {
+			display: inline-block;
+			margin-right: rem(20px);
+		}
 	}
 }
 
@@ -41,11 +76,53 @@ body.litter_boxes-show {
 	}
 
 	.statistics {
-		border: 3px solid red;
+		h1 {
+			margin-bottom: rem(20px);
+		}
+
+		.some-stat {
+			@include cf;
+			margin-bottom: rem(10px);
+			padding: rem(20px 0);
+			border-bottom: 1px solid #ccc;
+
+			&:last-child {
+				border-bottom: none;
+			}
+		}
+
+		label {
+			float: left;
+			width: 30%;
+			font-size: rem(14px);
+			color: setcolor(gray);
+		}
+
+		p {
+			float: left;
+			width: 70%;
+		}
 	}
 
 	.book-right-meow {
 		padding: rem(20px);
 		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+}
+
+.review-container {
+	background-color: setcolor(white);
+
+	.headline {
+		@include cf;
+	}
+
+	h1 {
+		float: left;
+		margin-right: rem(20px);
+	}
+
+	.review {
+		margin-bottom: rem(20px);
 	}
 }

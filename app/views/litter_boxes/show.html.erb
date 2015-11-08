@@ -2,78 +2,112 @@
 
 <div class="litterbox-view-container">
 	<div class="details">
-		<h1><%= @litter_box.name %></h1>
-		<p>
-			<strong>City:</strong>
-			<%= @litter_box.city %>
-		</p>
-
-		<p>
-			<strong>State:</strong>
-			<%= @litter_box.state %>
-		</p>
-
-		<p>
-			<strong>Zip:</strong>
-			<%= @litter_box.zip %>
-		</p>
+		<section class="centered">
+			<h1>asdfsdf<%= @litter_box.name %></h1>
+			<div class="location">
+				<%= @litter_box.city %>, <%= @litter_box.state %> <%= @litter_box.zip %>
+			</div>
+			<div class="rating">
+				<span class="symbol s-paw active"></span>
+				<span class="symbol s-paw active"></span>
+				<span class="symbol s-paw"></span>
+				<span class="symbol s-paw"></span>
+				<span class="symbol s-paw"></span>
+				<span class="rating-count">(5 ratings)</span>
+			</div>
+		</section>
 	</div>
 
 	<section class="sec-litterbox-view centered">
 		<div class="left">
 
 			<div class="statistics">
-				<p>
-					<strong>Capacity:</strong>
+				<h1>About <%= @litter_box.name %></h1>
+
+				<div class="some-stat">
+					<label>Capacity:</label>
 					<%= @litter_box.capacity %>
-				</p>
+				</div>
 
-				<p>
-					<strong>Description:</strong>
-					<%= @litter_box.description %>
-				</p>
+				<div class="some-stat">
+					<label>Description:</label>
+					<p>
+						<%= @litter_box.description %>
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>
 
-				<p>
-					<strong>Price:</strong>
+				<div class="some-stat">
+					<label>Price:</label>
 					<%= @litter_box.price %>
-				</p>
+				</div>
 
-				<p>
-					<strong>Number of adults:</strong>
+				<div class="some-stat">
+					<label>Number of adults:</label>
 					<%= @litter_box.number_of_adults %>
-				</p>
+				</div>
 
-				<p>
-					<strong>Number of children:</strong>
+				<div class="some-stat">
+					<label>Number of children:</label>
 					<%= @litter_box.number_of_children %>
-				</p>
+				</div>
 
-				<p>
-					<strong>Number of pets:</strong>
+				<div class="some-stat">
+					<label>Number of pets:</label>
 					<%= @litter_box.number_of_pets %>
-				</p>
-
-				<% if !current_user.blank? && current_user.litter_box == @litter_box %>
-				  <%= link_to 'Edit', edit_litter_box_path(@litter_box) %> |
-				<% end %>
-				<%= link_to 'Back', litter_boxes_path %>
+				</div>
 			</div>
 		</div>
 
 		<div class="right">
 			<div class="book-right-meow">
-				<h1>book right meow</h1>
+				<% if !current_user.blank? && current_user.litter_box == @litter_box %>
+				  <%= link_to 'Edit', edit_litter_box_path(@litter_box) %> |
+				<% else %>
+					<h1>book right meow</h1>
+				<% end %>
 			</div>
 		</div>
 	</section>
 </div>
 
-<section class="sec-litterbox-reviews centered">
-	<h1>Ratings</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-	tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-	quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-	consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-	proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</section>
+<div class="review-container">
+	<section class="sec-litterbox-reviews centered">
+		<div class="headline">
+			<h1>Ratings</h1>
+			<div class="rating">
+				<span class="symbol s-paw active"></span>
+				<span class="symbol s-paw active"></span>
+				<span class="symbol s-paw"></span>
+				<span class="symbol s-paw"></span>
+				<span class="symbol s-paw"></span>
+				<span class="rating-count">(5 ratings)</span>
+			</div>
+		</div>
+
+		<div class="review">
+			<h2>Someone's rating</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+
+		<div class="review">
+			<h2>Someone's rating</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</div>
+	</section>
+</div>
