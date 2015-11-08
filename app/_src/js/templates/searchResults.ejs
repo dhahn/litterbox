@@ -1,11 +1,11 @@
 <div class="result-count">
-	<%= litterboxes.length %> litter boxes found.
+	<%= markers.length %> litter boxes found.
 </div>
 
 <ul class="results-list">
-	<% litterboxes.forEach(function(litterbox) { %>
+	<% markers.forEach(function(marker) { %>
+		<% litterbox = marker.litterbox %>
 		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">
-
 			<div class="details">
 				<div>
 					<%= litterbox.address_line_1 %> <!-- FIXME: make this the name -->
@@ -23,6 +23,6 @@
 					(5 ratings)
 				</div>
 			</div>
-		</li>
-	<% }) %>
+		<% }); %>
+	</li>
 </ul>

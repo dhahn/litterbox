@@ -4384,8 +4384,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4396,7 +4395,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<div class="result-count">\n	', escape((2,  litterboxes.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; litterboxes.forEach(function(litterbox) { ; buf.push('\n		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">\n\n			<div class="details">\n				<div>\n					', escape((11,  litterbox.address_line_1 )), ' <!-- FIXME: make this the name -->\n				</div>\n				<div>\n					', escape((14,  litterbox.city )), ', ', escape((14,  litterbox.state )), ' ', escape((14,  litterbox.zip )), '\n					(', escape((15,  litterbox.distance.toFixed(2) )), ' miles)\n				</div>\n				<div class="rating">\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw"></span>\n					<span class="paw"></span>\n					(5 ratings)\n				</div>\n			</div>\n		</li>\n	');27; }) ; buf.push('\n</ul>\n'); })();
+ buf.push('<div class="result-count">\n	', escape((2,  markers.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; markers.forEach(function(marker) { ; buf.push('\n		');7; litterbox = marker.litterbox ; buf.push('\n		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">\n			<div class="details">\n				<div>\n					', escape((11,  litterbox.address_line_1 )), ' <!-- FIXME: make this the name -->\n				</div>\n				<div>\n					', escape((14,  litterbox.city )), ', ', escape((14,  litterbox.state )), ' ', escape((14,  litterbox.zip )), '\n					(', escape((15,  litterbox.distance.toFixed(2) )), ' miles)\n				</div>\n				<div class="rating">\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw"></span>\n					<span class="paw"></span>\n					(5 ratings)\n				</div>\n			</div>\n		');26; }); ; buf.push('\n	</li>\n</ul>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
@@ -4441,12 +4440,16 @@ var waitFor = require('waitFor'),
 
 waitFor('body.searches-show', function() {
 	var markers = [],
+			returned_litterboxes = [],
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
 			$startDateField = $searchForm.find('.start-date'),
 			$endDateField = $searchForm.find('.end-date'),
 			$radiusField = $searchForm.find('#radius'),
 			$searchResults = $('#search-results'),
+			$filterForm = $('#filters'),
+			$numberOfCatsField = $filterForm.find('#number_of_cats'),
+			$kidFriendlyField = $filterForm.find('#kid_friendly'),
 			regularMarker = '/assets/images/regular-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs');
 
@@ -4468,18 +4471,37 @@ waitFor('body.searches-show', function() {
 		idleListener = google.maps.event.addListener(map, 'idle', initSearch);
 	};
 
+	var initFilter = function() {
+		$filterForm.find('input, select').change(function(){
+			displayMarkers(returned_litterboxes);
+		});
+	};
+
+	var filterLitterBox = function(litterbox) {
+		return filterNumberofCats(litterbox)
+			&& filterKidFriendly(litterbox);
+	};
+
+	var filterKidFriendly = function(litterbox) {
+		return !($kidFriendlyField.prop('checked') && litterbox.number_of_children > 0)
+	};
+
+	var filterNumberofCats = function(litterbox) {
+		return $numberOfCatsField.val() <= litterbox.capacity;
+	};
+
 	var initSearch = function() {
-		searchLocations();
+		searchLitterBoxes();
 
 		$searchForm.submit(function(e){
 			e.preventDefault();
-			searchLocations();
+			searchLitterBoxes();
 		});
 
 		google.maps.event.removeListener(idleListener);
 	};
 
-	var searchLocations = function() {
+	var searchLitterBoxes = function() {
 		var location = $locationField.val();
 
 		if(!!location) {
@@ -4506,19 +4528,26 @@ waitFor('body.searches-show', function() {
 			data: {
 				search: search_params,
 			}, success: function(litterboxes) {
-				showMarkers(litterboxes);
-
-				$searchResults.html(
-					searchResultsTemplate({ litterboxes: litterboxes })
-				);
+				displayMarkers(litterboxes);
 			}}
+		);
+	};
+
+	var displayMarkers = function(litterboxes) {
+		returned_litterboxes = litterboxes;
+		showMarkers(returned_litterboxes);
+
+		$searchResults.html(
+			searchResultsTemplate({ markers: markers })
 		);
 	};
 
 	var showMarkers = function(litterboxes) {
     deleteMarkers();
     litterboxes.forEach(function(litterbox){
-    	addMarker(litterbox);
+    	if(filterLitterBox(litterbox)) {
+	    	addMarker(litterbox);
+    	}
     });
 	};
 
@@ -4559,6 +4588,7 @@ waitFor('body.searches-show', function() {
 
 	var init = function() {
 		initMap();
+		initFilter();
 	};
 
 	init();

@@ -4,12 +4,16 @@ var waitFor = require('waitFor'),
 
 waitFor('body.searches-show', function() {
 	var markers = [],
+			returned_litterboxes = [],
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
 			$startDateField = $searchForm.find('.start-date'),
 			$endDateField = $searchForm.find('.end-date'),
 			$radiusField = $searchForm.find('#radius'),
 			$searchResults = $('#search-results'),
+			$filterForm = $('#filters'),
+			$numberOfCatsField = $filterForm.find('#number_of_cats'),
+			$kidFriendlyField = $filterForm.find('#kid_friendly'),
 			regularMarker = '/assets/images/regular-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs');
 
@@ -31,18 +35,37 @@ waitFor('body.searches-show', function() {
 		idleListener = google.maps.event.addListener(map, 'idle', initSearch);
 	};
 
+	var initFilter = function() {
+		$filterForm.find('input, select').change(function(){
+			displayMarkers(returned_litterboxes);
+		});
+	};
+
+	var filterLitterBox = function(litterbox) {
+		return filterNumberofCats(litterbox)
+			&& filterKidFriendly(litterbox);
+	};
+
+	var filterKidFriendly = function(litterbox) {
+		return !($kidFriendlyField.prop('checked') && litterbox.number_of_children > 0)
+	};
+
+	var filterNumberofCats = function(litterbox) {
+		return $numberOfCatsField.val() <= litterbox.capacity;
+	};
+
 	var initSearch = function() {
-		searchLocations();
+		searchLitterBoxes();
 
 		$searchForm.submit(function(e){
 			e.preventDefault();
-			searchLocations();
+			searchLitterBoxes();
 		});
 
 		google.maps.event.removeListener(idleListener);
 	};
 
-	var searchLocations = function() {
+	var searchLitterBoxes = function() {
 		var location = $locationField.val();
 
 		if(!!location) {
@@ -69,19 +92,26 @@ waitFor('body.searches-show', function() {
 			data: {
 				search: search_params,
 			}, success: function(litterboxes) {
-				showMarkers(litterboxes);
-
-				$searchResults.html(
-					searchResultsTemplate({ litterboxes: litterboxes })
-				);
+				displayMarkers(litterboxes);
 			}}
+		);
+	};
+
+	var displayMarkers = function(litterboxes) {
+		returned_litterboxes = litterboxes;
+		showMarkers(returned_litterboxes);
+
+		$searchResults.html(
+			searchResultsTemplate({ markers: markers })
 		);
 	};
 
 	var showMarkers = function(litterboxes) {
     deleteMarkers();
     litterboxes.forEach(function(litterbox){
-    	addMarker(litterbox);
+    	if(filterLitterBox(litterbox)) {
+	    	addMarker(litterbox);
+    	}
     });
 	};
 
@@ -122,6 +152,7 @@ waitFor('body.searches-show', function() {
 
 	var init = function() {
 		initMap();
+		initFilter();
 	};
 
 	init();
