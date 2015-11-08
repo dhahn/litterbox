@@ -11,6 +11,14 @@
 				<%= select_tag(:number_of_cats, options_for_select(number_of_cats_options, @filters[:number_of_cats].to_i)) %>
 
 				<%= check_box_tag 'kid_friendly', 'yes', @filters[:kid_friendly] %> Kid Friendly?
+
+				<div class="nstSlider" data-range_min="-10" data-range_max="500" data-cur_min="0" data-cur_max="500">
+					<div class="bar"></div>
+					<div class="leftGrip"></div>
+					<div class="rightGrip"></div>
+				</div>
+				<div class="leftLabel"></div>
+				<div class="rightLabel"></div>
 			</form>
 		</div>
 		<div id="search-results"></div>

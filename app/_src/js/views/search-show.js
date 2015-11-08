@@ -1,7 +1,8 @@
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
 		geocode = require('../modules/geocode.js'),
-		moment = require('moment');
+		moment = require('moment'),
+		nstSlider = require('../lib/jquery.nstSlider');
 
 waitFor('body.searches-show', function() {
 	var paginationPageAmount = 20,
@@ -23,7 +24,8 @@ waitFor('body.searches-show', function() {
 			selectedMarker = '/assets/images/selected-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs'),
 			singleSearchResults = require('../templates/singleSearchResults.ejs'),
-			infowindowSearchResults = require('../templates/infowindowSearchResults.ejs');
+			infowindowSearchResults = require('../templates/infowindowSearchResults.ejs'),
+			minPriceRange = 0, maxPriceRange = 500;
 
 	var initHover = function() {
 		$searchResults.on('mouseenter', '.single-result', function(){
@@ -39,6 +41,45 @@ waitFor('body.searches-show', function() {
 			markers.forEach(function(m){m.setIcon(regularMarker);});
 			// infowindow.close();
 		});
+	};
+
+	var initPriceSlider = function() {
+		slider = $('.nstSlider').nstSlider({
+			"crossable_handles": false,
+			"left_grip_selector": ".leftGrip",
+			"right_grip_selector": ".rightGrip",
+			"value_bar_selector": ".bar",
+			"value_changed_callback": function(cause, leftValue, rightValue) {
+				minPriceRange = leftValue;
+				maxPriceRange = rightValue;
+				$(this).parent().find('.leftLabel').text(leftValue);
+				$(this).parent().find('.rightLabel').text(rightValue);
+				displayMarkers(returned_litterboxes);
+			}
+		});
+	};
+
+	var updatePriceSlider = function(litterboxes) {
+
+		litterboxes.forEach(function(litterbox, i){
+			if(i == 0 ) {
+				minPrice = litterbox.price;
+				maxPrice = litterbox.price;
+			}
+
+			if(minPrice > litterbox.price){
+				minPrice = litterbox.price;
+			}
+
+			if(maxPrice < litterbox.price){
+				maxPrice = litterbox.price;
+			}
+		})
+
+		$('.nstSlider').nstSlider('set_range', minPrice, maxPrice).nstSlider('refresh');
+
+		minPriceRange = minPrice;
+		maxPriceRange = maxPrice;
 	};
 
 	var initMap = function() {
@@ -102,11 +143,16 @@ waitFor('body.searches-show', function() {
 
 	var filterLitterBox = function(litterbox) {
 		return filterNumberofCats(litterbox)
-			&& filterKidFriendly(litterbox);
+			&& filterKidFriendly(litterbox)
+			&& filterPriceRange(litterbox);
 	};
 
 	var filterKidFriendly = function(litterbox) {
 		return !($kidFriendlyField.prop('checked') && litterbox.number_of_children > 0)
+	};
+
+	var filterPriceRange = function(litterbox) {
+		return minPriceRange <= litterbox.price && maxPriceRange >= litterbox.price;
 	};
 
 	var filterNumberofCats = function(litterbox) {
@@ -184,6 +230,7 @@ waitFor('body.searches-show', function() {
 			data: {
 				search: search_params,
 			}, success: function(litterboxes) {
+				updatePriceSlider(litterboxes);
 				displayMarkers(litterboxes);
 			}}
 		);
@@ -260,6 +307,7 @@ waitFor('body.searches-show', function() {
 
 	var init = function() {
 		initMap();
+		initPriceSlider();
 		initFilter();
 		initUpdateEndDate();
 		initInfiniteScroll();
