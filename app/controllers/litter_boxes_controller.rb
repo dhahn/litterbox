@@ -15,11 +15,16 @@ class LitterBoxesController < ApplicationController
 
   # GET /litter_boxes/new
   def new
-    @litter_box = LitterBox.new
+    if current_user.litter_box.blank?
+      @litter_box = LitterBox.new
+    else
+      redirect_to(edit_litter_box(current_user.litter_box))
+    end
   end
 
   # GET /litter_boxes/1/edit
   def edit
+    redirect_to(:back) unless @litter_box.user == current_user
   end
 
   # POST /litter_boxes
@@ -42,6 +47,8 @@ class LitterBoxesController < ApplicationController
   # PATCH/PUT /litter_boxes/1
   # PATCH/PUT /litter_boxes/1.json
   def update
+    redirect_to(:back) unless @litter_box.user == current_user
+
     respond_to do |format|
       if @litter_box.update(special_litter_box_params)
         format.html { redirect_to @litter_box, notice: 'Litter box was successfully updated.' }

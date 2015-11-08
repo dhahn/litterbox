@@ -57,5 +57,7 @@
   <%= @litter_box.number_of_pets %>
 </p>
 
-<%= link_to 'Edit', edit_litter_box_path(@litter_box) %> |
+<% if current_user.litter_box == @litter_box %>
+  <%= link_to 'Edit', edit_litter_box_path(@litter_box) %> |
+<% end %>
 <%= link_to 'Back', litter_boxes_path %>
