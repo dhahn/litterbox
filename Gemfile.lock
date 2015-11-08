@@ -99,6 +99,7 @@ GEM
       memoist (~> 0.12)
       multi_json (~> 1.11)
       signet (~> 0.6)
+    gravtastic (3.2.6)
     hashie (3.4.3)
     i18n (0.7.0)
     instagram (1.1.6)
@@ -264,6 +265,7 @@ DEPENDENCIES
   dotenv-rails
   foreman
   google-api-client
+  gravtastic
   instagram
   jbuilder (~> 2.0)
   jquery-rails
