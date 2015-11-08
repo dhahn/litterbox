@@ -9,4 +9,5 @@ Rails.application.routes.draw do
 
   devise_for :users, :controllers => { registrations: 'registrations', omniauth_callbacks: "omniauth_callbacks"}
   resources :litter_boxes, except: [:destroy]
+  resources :unavailabilities, only: [:index], defaults: { format: 'json' }
 end

@@ -12,6 +12,10 @@ class Unavailability < ActiveRecord::Base
     where.not(id: overlaps(start_time, end_time))
   end
 
+  def dates
+    (start_time.to_date..end_time.to_date).to_a
+  end
+
   private
 
   def valid_time_range

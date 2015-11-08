@@ -15,6 +15,10 @@ class Transaction < ActiveRecord::Base
     where.not(id: overlaps(check_in, check_out))
   end
 
+  def dates
+    (check_in.to_date..check_out.to_date).to_a
+  end
+
   private
 
   def overlaps?
