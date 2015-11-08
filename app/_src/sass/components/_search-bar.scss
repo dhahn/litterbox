@@ -15,6 +15,11 @@
 	input,
 	select {
 		width: 10%;
+
+		&.invalid {
+			color: #b94a48;
+			border-color: #e9322d;
+		}
 	}
 
 	button {

@@ -4710,6 +4710,9 @@ waitFor('body.static_pages-index', function() {
 
 		$('header').addClass('animated fadeInDown');
 		$('.sec-hero .headline').addClass('animated fadeIn');
+		$locationField.on('focus', function () {
+			$locationField.removeClass('animated shake invalid');
+		});
 	};
 
 	var initSearch = function() {
@@ -4718,7 +4721,7 @@ waitFor('body.static_pages-index', function() {
 
 			if(!location) {
 				e.preventDefault();
-				alert('Enter a damn location.');
+				$locationField.addClass('animated shake invalid');
 			}
 		});
 	};
