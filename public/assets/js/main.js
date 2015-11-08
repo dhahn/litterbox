@@ -4515,9 +4515,12 @@ waitFor('body.searches-show', function() {
 			e.preventDefault();
 
 			paginationPage += 1
+			if((paginationPage * paginationPageAmount) >= markers.length) {
+				$('#load-more').hide();
+			}
 
-			returned_litterboxes.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(litterbox){
-				$('.results-list').append(singleSearchResults({ litterbox: litterbox }));
+			markers.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(marker){
+				$('.results-list').append(singleSearchResults({ litterbox: marker.litterbox }));
 			})
 		})
 	};
@@ -4579,17 +4582,19 @@ waitFor('body.searches-show', function() {
 	};
 
 	var displayMarkers = function(litterboxes) {
+		paginationPage = 1;
 		returned_litterboxes = litterboxes;
 		showMarkers(returned_litterboxes);
 
 		$searchResults.html(
-			searchResultsTemplate({ markers: markers, count: returned_litterboxes.length })
+			searchResultsTemplate({ markers: markers.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount), count: markers.length })
 		);
 		$searchResultsContainer.animate({ scrollTop: 0 });
 	};
 
 	var showMarkers = function(litterboxes) {
-    litterboxes.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(litterbox){
+		deleteMarkers();
+    litterboxes.forEach(function(litterbox){
     	if(filterLitterBox(litterbox)) {
 	    	addMarker(litterbox);
     	}
