@@ -1,0 +1,13 @@
+.alert-notice {
+    color: #ecf0f1;
+    font-size: 150%;
+    font-weight: bold;
+    border-radius:10px;
+    font-family:Tahoma,Geneva,Arial,sans-serif;
+    padding:26px 10px 30px 26px;
+    text-align: center;
+    z-index: 12;
+    background:#3498db url('images/success.png') no-repeat 10px 50%;
+    border:1px solid #a6ca8a;
+    animation-delay: 3s;
+}

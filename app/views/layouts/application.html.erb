@@ -17,7 +17,7 @@
 	<body class="<%= "#{controller_name}-#{action_name}" %> <%= flash.blank? ? '' : 'has-alerts' %>">
 		<div class="flash-messages">
 			<% flash.each do |key, value| %>
-				<div class="alert alert-<%= key %>"><%= value %></div>
+				<div class="animated fadeOutUp alert alert-<%= key %>"><%= value %></div>
 			<% end %>
 		</div>
 
