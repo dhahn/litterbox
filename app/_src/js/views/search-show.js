@@ -34,7 +34,7 @@ waitFor('body.searches-show', function() {
 		map = new google.maps.Map($('#map')[0], mapOptions);
 
 		// set up custom styled map
-		styledMap = new google.maps.StyledMapType(customMapStyles, {name: 'Hairbnb Map'});
+		styledMap = new google.maps.StyledMapType(customMapStyles, {name: 'Litterbox Map'});
 		map.mapTypes.set('map_style', styledMap);
 		map.setMapTypeId('map_style');
 
