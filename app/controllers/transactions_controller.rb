@@ -1,11 +1,6 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-
-  # GET /transactions
-  # GET /transactions.json
-  def index
-    @transactions = Transaction.all
-  end
+  before_action :authenticate_user!
 
   # GET /transactions/1
   # GET /transactions/1.json
@@ -48,16 +43,6 @@ class TransactionsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /transactions/1
-  # DELETE /transactions/1.json
-  def destroy
-    @transaction.destroy
-    respond_to do |format|
-      format.html { redirect_to transactions_url, notice: 'Transaction was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

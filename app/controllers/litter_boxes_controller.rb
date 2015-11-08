@@ -1,5 +1,6 @@
 class LitterBoxesController < ApplicationController
   before_action :set_litter_box, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # GET /litter_boxes
   # GET /litter_boxes.json
@@ -49,16 +50,6 @@ class LitterBoxesController < ApplicationController
         format.html { render :edit }
         format.json { render json: @litter_box.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /litter_boxes/1
-  # DELETE /litter_boxes/1.json
-  def destroy
-    @litter_box.destroy
-    respond_to do |format|
-      format.html { redirect_to litter_boxes_url, notice: 'Litter box was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
