@@ -54,10 +54,15 @@ body.searches-show footer {
 		background-position: 50% 50%;
 
 		.details {
-			background-color: rgba(200, 200, 200, 0.5);
+			background-color: rgba(255, 255, 255, 0.8);
 			padding: rem(20px);
-			color: setcolor(white);
+			color: setcolor(gray, dark);
 			line-height: 1.25;
+			font-size: 80%;
+		}
+
+		.name {
+			font-size: 125%;
 		}
 
 		.paw {

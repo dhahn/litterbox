@@ -4384,7 +4384,8 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
+/**/) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4395,7 +4396,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<div class="result-count">\n	', escape((2,  markers.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; markers.forEach(function(marker) { ; buf.push('\n		');7; litterbox = marker.litterbox ; buf.push('\n		<a href="', escape((8,  '/litter_boxes/' + litterbox.id )), '">Click here to check out the litterbox</a>\n		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">\n			<div class="details">\n				<div>\n					', escape((12,  litterbox.address_line_1 )), ' <!-- FIXME: make this the name -->\n				</div>\n				<div>\n					', escape((15,  litterbox.city )), ', ', escape((15,  litterbox.state )), ' ', escape((15,  litterbox.zip )), '\n					(', escape((16,  litterbox.distance.toFixed(2) )), ' miles)\n				</div>\n				<div class="rating">\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw"></span>\n					<span class="paw"></span>\n					(5 ratings)\n				</div>\n			</div>\n		');27; }); ; buf.push('\n	</li>\n</ul>\n'); })();
+ buf.push('<div class="result-count">\n	', escape((2,  markers.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; markers.forEach(function(marker) { ; buf.push('\n		');7; litterbox = marker.litterbox ; buf.push('\n		<a href="', escape((8,  '/litter_boxes/' + litterbox.id )), '">Click here to check out the litterbox</a>\n		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">\n			<div class="details">\n				<div class="name">\n					', escape((12,  litterbox.address_line_1 )), ' <!-- FIXME: make this the name -->\n				</div>\n				<div>\n					', escape((15,  litterbox.city )), ', ', escape((15,  litterbox.state )), ' ', escape((15,  litterbox.zip )), '\n					(', escape((16,  litterbox.distance.toFixed(2) )), ' miles)\n				</div>\n				<div class="rating">\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw"></span>\n					<span class="paw"></span>\n					(5 ratings)\n				</div>\n			</div>\n		');27; }); ; buf.push('\n	</li>\n</ul>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
