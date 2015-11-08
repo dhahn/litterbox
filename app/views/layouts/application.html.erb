@@ -14,7 +14,13 @@
 		<link href="/favicon.ico" rel="shortcut icon">
 	</head>
 
-	<body class="<%= "#{controller_name}-#{action_name}" %>">
+	<body class="<%= "#{controller_name}-#{action_name}" %> <%= flash.blank? ? '' : 'has-alerts' %>">
+		<div class="flash-messages">
+			<% flash.each do |key, value| %>
+				<div class="alert alert-<%= key %>"><%= value %></div>
+			<% end %>
+		</div>
+
 		<div class="page-content">
 			<header>
 				<h1><a class="home-link" href="/">Litterbox</a></h1>
