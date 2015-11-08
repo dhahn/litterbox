@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!
+  before_action :set_page_title
 
   # GET /transactions/1
   # GET /transactions/1.json
@@ -59,5 +60,9 @@ class TransactionsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
       params.require(:transaction).permit(:user_id, :litter_box_id, :check_in, :check_out, :price)
+    end
+
+    def set_page_title
+      @page_title = 'Litterbox - Transaction'
     end
 end

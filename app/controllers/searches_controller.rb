@@ -1,5 +1,6 @@
 class SearchesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
+  before_action :set_page_title
 
 	def show
 		@search = {}
@@ -19,4 +20,10 @@ class SearchesController < ApplicationController
 			end
 		end
 	end
+
+	private
+
+  def set_page_title
+    @page_title = 'Litterbox - Search'
+  end
 end

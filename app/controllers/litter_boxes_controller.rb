@@ -1,6 +1,7 @@
 class LitterBoxesController < ApplicationController
   before_action :set_litter_box, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :set_page_title
 
   # GET /litter_boxes
   # GET /litter_boxes.json
@@ -87,5 +88,9 @@ class LitterBoxesController < ApplicationController
         end
       end
       temp
+    end
+
+    def set_page_title
+      @page_title = 'Litterbox - Location'
     end
 end
