@@ -1,36 +1,13 @@
 <div class="result-count">
-	<%= markers.length %> litter boxes found.
+	<%= count %> litter boxes found.
 </div>
+
+<% singleSearchResults = require('./singleSearchResults.ejs') %>
 
 <ul class="results-list">
 	<% markers.forEach(function(marker) { %>
-		<% litterbox = marker.litterbox %>
-		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">
-			<a href="<%= '/litter_boxes/' + litterbox.id %>">
-				<div class="price">
-					<%= litterbox.price %>
-				</div>
-
-				<div class="details">
-					<div class="name">
-						<%= litterbox.address_line_1 %> <!-- FIXME: make this the name -->
-					</div>
-
-					<div>
-						<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %>
-						(<%= litterbox.distance.toFixed(2) %> miles)
-					</div>
-
-					<div class="rating">
-						<i class="symbol s-paw active"></i>
-						<i class="symbol s-paw active"></i>
-						<i class="symbol s-paw active"></i>
-						<i class="symbol s-paw"></i>
-						<i class="symbol s-paw"></i>
-						<span class="rating-count">(5 ratings)</span>
-					</div>
-				</div>
-			</a>
-		<% }); %>
-	</li>
+		<%- singleSearchResults({ litterbox: marker.litterbox }) %>
+	<% }); %>
 </ul>
+
+<button id="load-more">Load More Litterbox Details</button>

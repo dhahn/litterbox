@@ -4384,8 +4384,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4396,11 +4395,27 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<div class="result-count">\n	', escape((2,  markers.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; markers.forEach(function(marker) { ; buf.push('\n		');7; litterbox = marker.litterbox ; buf.push('\n		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">\n			<a href="', escape((9,  '/litter_boxes/' + litterbox.id )), '">\n				<div class="price">\n					', escape((11,  litterbox.price )), '\n				</div>\n\n				<div class="details">\n					<div class="name">\n						', escape((16,  litterbox.address_line_1 )), ' <!-- FIXME: make this the name -->\n					</div>\n\n					<div>\n						', escape((20,  litterbox.city )), ', ', escape((20,  litterbox.state )), ' ', escape((20,  litterbox.zip )), '\n						(', escape((21,  litterbox.distance.toFixed(2) )), ' miles)\n					</div>\n\n					<div class="rating">\n						<i class="symbol s-paw active"></i>\n						<i class="symbol s-paw active"></i>\n						<i class="symbol s-paw active"></i>\n						<i class="symbol s-paw"></i>\n						<i class="symbol s-paw"></i>\n						<span class="rating-count">(5 ratings)</span>\n					</div>\n				</div>\n			</a>\n		');34; }); ; buf.push('\n	</li>\n</ul>\n'); })();
+ buf.push('<div class="result-count">\n	', escape((2,  count )), ' litter boxes found.\n</div>\n\n');5; singleSearchResults = require('./singleSearchResults.ejs') ; buf.push('\n\n<ul class="results-list">\n	');8; markers.forEach(function(marker) { ; buf.push('\n		', (9,  singleSearchResults({ litterbox: marker.litterbox }) ), '\n	');10; }); ; buf.push('\n</ul>\n\n<button id="load-more">Load More Litterbox Details</button>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
-},{}],11:[function(require,module,exports){
+},{"./singleSearchResults.ejs":11}],11:[function(require,module,exports){
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
+escape = escape || function (html){
+  return String(html)
+    .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/'/g, '&#39;')
+    .replace(/"/g, '&quot;');
+};
+var buf = [];
+with (locals || {}) { (function(){ 
+ buf.push('<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">\n	<a href="', escape((2,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((4,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((9,  litterbox.address_line_1 )), ' <!-- FIXME: make this the name -->\n			</div>\n\n			<div>\n				', escape((13,  litterbox.city )), ', ', escape((13,  litterbox.state )), ' ', escape((13,  litterbox.zip )), '\n				(', escape((14,  litterbox.distance.toFixed(2) )), ' miles)\n			</div>\n\n			<div class="rating">\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw"></i>\n				<i class="symbol s-paw"></i>\n				<span class="rating-count">(5 ratings)</span>\n			</div>\n		</div>\n	</a>\n</li>\n'); })();
+} 
+return buf.join('');
+}; return function(l) { return t(l) }}())
+},{}],12:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		initDatePicker = require('../modules/datepicker');
 
@@ -4434,14 +4449,16 @@ waitFor('body.litter_boxes-new, body.litter_boxes-edit', function() {
 	init();
 });
 
-},{"../modules/datepicker":7,"waitFor":5}],12:[function(require,module,exports){
+},{"../modules/datepicker":7,"waitFor":5}],13:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
 		geocode = require('../modules/geocode.js'),
 		moment = require('moment');
 
 waitFor('body.searches-show', function() {
-	var markers = [],
+	var paginationPageAmount = 3,
+			paginationPage = 1,
+			markers = [],
 			returned_litterboxes = [],
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
@@ -4454,7 +4471,9 @@ waitFor('body.searches-show', function() {
 			$numberOfCatsField = $filterForm.find('#number_of_cats'),
 			$kidFriendlyField = $filterForm.find('#kid_friendly'),
 			regularMarker = '/assets/images/regular-marker.png',
-			searchResultsTemplate = require('../templates/searchResults.ejs');
+			searchResultsTemplate = require('../templates/searchResults.ejs'),
+			singleSearchResults = require('../templates/singleSearchResults.ejs');
+
 
 	var initMap = function() {
 		var mapOptions = {
@@ -4489,6 +4508,18 @@ waitFor('body.searches-show', function() {
 		$filterForm.find('input, select').change(function(){
 			displayMarkers(returned_litterboxes);
 		});
+	};
+
+	var initPagination = function() {
+		$searchResults.on('click tap touch', '#load-more', function(e){
+			e.preventDefault();
+
+			paginationPage += 1
+
+			returned_litterboxes.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(litterbox){
+				$('.results-list').append(singleSearchResults({ litterbox: litterbox }));
+			})
+		})
 	};
 
 	var filterLitterBox = function(litterbox) {
@@ -4552,14 +4583,13 @@ waitFor('body.searches-show', function() {
 		showMarkers(returned_litterboxes);
 
 		$searchResults.html(
-			searchResultsTemplate({ markers: markers })
+			searchResultsTemplate({ markers: markers, count: returned_litterboxes.length })
 		);
 		$searchResultsContainer.animate({ scrollTop: 0 });
 	};
 
 	var showMarkers = function(litterboxes) {
-    deleteMarkers();
-    litterboxes.forEach(function(litterbox){
+    litterboxes.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(litterbox){
     	if(filterLitterBox(litterbox)) {
 	    	addMarker(litterbox);
     	}
@@ -4605,11 +4635,12 @@ waitFor('body.searches-show', function() {
 		initMap();
 		initFilter();
 		initUpdateEndDate();
+		initPagination();
 	};
 
 	init();
 });
-},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"../templates/searchResults.ejs":10,"moment":3,"waitFor":5}],13:[function(require,module,exports){
+},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"../templates/searchResults.ejs":10,"../templates/singleSearchResults.ejs":11,"moment":3,"waitFor":5}],14:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		geocode = require('../modules/geocode');
 
@@ -4637,4 +4668,4 @@ waitFor('body.static_pages-index', function() {
 
 	init();
 });
-},{"../modules/geocode":8,"waitFor":5}]},{},[12,11,13,9,2,1]);
+},{"../modules/geocode":8,"waitFor":5}]},{},[13,12,14,9,2,1]);

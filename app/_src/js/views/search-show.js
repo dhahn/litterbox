@@ -4,7 +4,9 @@ var waitFor = require('waitFor'),
 		moment = require('moment');
 
 waitFor('body.searches-show', function() {
-	var markers = [],
+	var paginationPageAmount = 3,
+			paginationPage = 1,
+			markers = [],
 			returned_litterboxes = [],
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
@@ -17,7 +19,9 @@ waitFor('body.searches-show', function() {
 			$numberOfCatsField = $filterForm.find('#number_of_cats'),
 			$kidFriendlyField = $filterForm.find('#kid_friendly'),
 			regularMarker = '/assets/images/regular-marker.png',
-			searchResultsTemplate = require('../templates/searchResults.ejs');
+			searchResultsTemplate = require('../templates/searchResults.ejs'),
+			singleSearchResults = require('../templates/singleSearchResults.ejs');
+
 
 	var initMap = function() {
 		var mapOptions = {
@@ -52,6 +56,18 @@ waitFor('body.searches-show', function() {
 		$filterForm.find('input, select').change(function(){
 			displayMarkers(returned_litterboxes);
 		});
+	};
+
+	var initPagination = function() {
+		$searchResults.on('click tap touch', '#load-more', function(e){
+			e.preventDefault();
+
+			paginationPage += 1
+
+			returned_litterboxes.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(litterbox){
+				$('.results-list').append(singleSearchResults({ litterbox: litterbox }));
+			})
+		})
 	};
 
 	var filterLitterBox = function(litterbox) {
@@ -115,14 +131,13 @@ waitFor('body.searches-show', function() {
 		showMarkers(returned_litterboxes);
 
 		$searchResults.html(
-			searchResultsTemplate({ markers: markers })
+			searchResultsTemplate({ markers: markers, count: returned_litterboxes.length })
 		);
 		$searchResultsContainer.animate({ scrollTop: 0 });
 	};
 
 	var showMarkers = function(litterboxes) {
-    deleteMarkers();
-    litterboxes.forEach(function(litterbox){
+    litterboxes.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(litterbox){
     	if(filterLitterBox(litterbox)) {
 	    	addMarker(litterbox);
     	}
@@ -168,6 +183,7 @@ waitFor('body.searches-show', function() {
 		initMap();
 		initFilter();
 		initUpdateEndDate();
+		initPagination();
 	};
 
 	init();
