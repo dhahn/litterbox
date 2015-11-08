@@ -4689,8 +4689,9 @@ waitFor('body.searches-show', function() {
 		var location = $locationField.val();
 
 		if(!!location) {
+			updateUrl();
 			geocode(location, function(results, status){
-        		map.fitBounds(results[0].geometry.viewport);
+				map.fitBounds(results[0].geometry.viewport);
 				getLitterBoxes({
 					lat: map.getCenter().lat(),
 					lng: map.getCenter().lng(),
@@ -4702,6 +4703,15 @@ waitFor('body.searches-show', function() {
 		} else {
 			$locationField.addClass('animated shake invalid');
 		}
+	};
+
+	var updateUrl = function() {
+		url = "/search?location=" + encodeURIComponent($locationField.val())
+					+ "&start_date=" + encodeURIComponent($startDateField.val())
+					+ "&end_date=" + encodeURIComponent($endDateField.val())
+					+ "&radius=" + encodeURIComponent($radiusField.val());
+
+		history.pushState({}, '', url);
 	};
 
 	var getLitterBoxes = function(search_params) {
