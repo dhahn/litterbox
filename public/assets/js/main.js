@@ -4460,6 +4460,7 @@ var waitFor = require('waitFor'),
 waitFor('body.searches-show', function() {
 	var paginationPageAmount = 3,
 			paginationPage = 1,
+			infowindow,
 			markers = [],
 			returned_litterboxes = [],
 			$searchForm = $('.search-bar form'),
@@ -4486,6 +4487,10 @@ waitFor('body.searches-show', function() {
 			mapTypeId: google.maps.MapTypeId.ROADMAP,
 		};
 		map = new google.maps.Map($('#map')[0], mapOptions);
+
+		infowindow = new google.maps.InfoWindow({
+			content: "holding..."
+		})
 
 		// set up custom styled map
 		styledMap = new google.maps.StyledMapType(customMapStyles, {name: 'Litterbox Map'});
@@ -4614,6 +4619,11 @@ waitFor('body.searches-show', function() {
 			},
 			map: map,
 			icon: icon,
+		});
+
+		google.maps.event.addListener(marker, 'click', function () {
+			infowindow.setContent('hello world');
+			infowindow.open(map, this);
 		});
 
 		marker.set('litterbox', litterbox);
