@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
   has_many :transactions
   has_many :ratings
 
+  validates :email, presence: true
+
   def name
     first_name + " " + last_name
   end
