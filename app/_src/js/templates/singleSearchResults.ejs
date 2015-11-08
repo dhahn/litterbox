@@ -14,12 +14,14 @@
 			</div>
 
 			<div class="rating">
-				<i class="symbol s-paw active"></i>
-				<i class="symbol s-paw active"></i>
-				<i class="symbol s-paw active"></i>
-				<i class="symbol s-paw"></i>
-				<i class="symbol s-paw"></i>
-				<span class="rating-count">(5 ratings)</span>
+				<% for(i = 0; i < litterbox.average_rating; i++) { %>
+					<i class="symbol s-paw active"></i>
+				<% } %>
+
+				<% for(i = 0; i < 5 - litterbox.average_rating; i++) { %>
+					<i class="symbol s-paw"></i>
+				<% } %>
+				<span class="rating-count">(<%= litterbox.number_of_ratings %> ratings)</span>
 			</div>
 		</div>
 	</a>

@@ -6341,7 +6341,6 @@ module.exports = customMapStyles;
 var Pikaday = require('../lib/pikaday.js');
 
 var initDatePicker = function(input) {
-  console.log(input[0]);
 	new Pikaday({
 		field: input[0],
 		format: 'MM/DD/YYYY',
@@ -6407,8 +6406,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":6}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6424,8 +6422,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{}],12:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6441,8 +6438,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{"./singleSearchResults.ejs":13}],13:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6453,7 +6449,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<li class="single-result" data-litterbox-id="', escape((1,  litterbox.id )), '" style="background-image: url(', escape((1,  litterbox.photo_url )), ');">\n	<a href="', escape((2,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((4,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((9,  litterbox.name )), '\n			</div>\n\n			<div class="distance">\n				', escape((13,  litterbox.distance.toFixed(2) )), ' miles\n			</div>\n\n			<div class="rating">\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw"></i>\n				<i class="symbol s-paw"></i>\n				<span class="rating-count">(5 ratings)</span>\n			</div>\n		</div>\n	</a>\n</li>\n'); })();
+ buf.push('<li class="single-result" data-litterbox-id="', escape((1,  litterbox.id )), '" style="background-image: url(', escape((1,  litterbox.photo_url )), ');">\n	<a href="', escape((2,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((4,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((9,  litterbox.name )), '\n			</div>\n\n			<div class="distance">\n				', escape((13,  litterbox.distance.toFixed(2) )), ' miles\n			</div>\n\n			<div class="rating">\n				');17; for(i = 0; i < litterbox.average_rating; i++) { ; buf.push('\n					<i class="symbol s-paw active"></i>\n				');19; } ; buf.push('\n\n				');21; for(i = 0; i < 5 - litterbox.average_rating; i++) { ; buf.push('\n					<i class="symbol s-paw"></i>\n				');23; } ; buf.push('\n				<span class="rating-count">(', escape((24,  litterbox.number_of_ratings )), ' ratings)</span>\n			</div>\n		</div>\n	</a>\n</li>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
@@ -6628,6 +6624,8 @@ waitFor('body.searches-show', function() {
 	};
 
 	var updatePriceSlider = function(litterboxes) {
+		minPrice = 0;
+		maxPrice = 0;
 
 		litterboxes.forEach(function(litterbox, i){
 			if(i == 0 ) {
@@ -6761,7 +6759,6 @@ waitFor('body.searches-show', function() {
 	var getGeolocation = function() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
-				console.log('helo there');
 				var pos = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude

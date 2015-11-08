@@ -60,6 +60,8 @@ waitFor('body.searches-show', function() {
 	};
 
 	var updatePriceSlider = function(litterboxes) {
+		minPrice = 0;
+		maxPrice = 0;
 
 		litterboxes.forEach(function(litterbox, i){
 			if(i == 0 ) {
@@ -193,7 +195,6 @@ waitFor('body.searches-show', function() {
 	var getGeolocation = function() {
 		if (navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(function(position) {
-				console.log('helo there');
 				var pos = {
 					lat: position.coords.latitude,
 					lng: position.coords.longitude

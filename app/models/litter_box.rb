@@ -61,9 +61,13 @@ class LitterBox < ActiveRecord::Base
 
   def as_json(*args)
     hash = super(*args)
-    hash.merge!(distance: distance)
-    hash.merge!(full_address: full_address)
-    hash.merge!(photo_url: photo.url)
+    hash.merge!(
+      distance: distance,
+      full_address: full_address,
+      photo_url: photo.url,
+      average_rating: average_rating,
+      number_of_ratings: ratings.count
+    )
   end
 
   private

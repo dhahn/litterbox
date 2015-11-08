@@ -11,6 +11,7 @@ kitty_text = "Destroy couch. Thug cat cat snacks, chase the pig around the house
 state_array = %w(AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY)
 street_modifier_array = %w(Street Road Lane Avenue Boulevard)
 date_range = (Date.today + 1..Date.today + 45).to_a
+past_date_range = (Date.today - 400..Date.today - 1).to_a
 
 400.times do |i|
 	kitty = KittyNames.kitty
@@ -56,6 +57,23 @@ date_range = (Date.today + 1..Date.today + 45).to_a
 	end
 
 	rand(0..4).times do |j|
+		transaction = Transaction.create(
+			user_id: rand(1...i),
+			litter_box_id: litter_box.id,
+			check_in: t1 = date_range.sample,
+			check_out: t2 = t1 + rand(1..4),
+			price: price * (t2 - t1)
+		)
+
+		Rating.new(
+			user_id: rand(1...i),
+			transaction_id: transaction.id,
+			comment: kitty_text.split('. ').sample(3).join('. '),
+			paws: [1,2,2,3,3,3,4,4,4,4,5,5].sample
+		).save
+	end
+
+	rand(0..50).times do |j|
 		transaction = Transaction.create(
 			user_id: rand(1...i),
 			litter_box_id: litter_box.id,
