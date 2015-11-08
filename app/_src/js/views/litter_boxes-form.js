@@ -1,7 +1,7 @@
 var waitFor = require('waitFor'),
 		initDatePicker = require('../modules/datepicker');
 
-waitFor('body.litter_boxes-new, body.litter_boxes-edit', function() {
+waitFor('body.litter_boxes-new, body.litter_boxes-edit','body.transactions-new', function() {
 	var initAddFields = function() {
 		$('form').on('click', '.add_fields', function(event) {
 			var time = new Date().getTime();

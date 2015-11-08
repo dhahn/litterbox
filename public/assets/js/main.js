@@ -6341,6 +6341,7 @@ module.exports = customMapStyles;
 var Pikaday = require('../lib/pikaday.js');
 
 var initDatePicker = function(input) {
+  console.log(input[0]);
 	new Pikaday({
 		field: input[0],
 		format: 'MM/DD/YYYY',
@@ -6406,7 +6407,8 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":6}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
+/**/) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6422,7 +6424,8 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{}],12:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
+/**/) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6438,7 +6441,8 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{"./singleSearchResults.ejs":13}],13:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
+/**/) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6457,7 +6461,7 @@ return buf.join('');
 var waitFor = require('waitFor'),
 		initDatePicker = require('../modules/datepicker');
 
-waitFor('body.litter_boxes-new, body.litter_boxes-edit', function() {
+waitFor('body.litter_boxes-new, body.litter_boxes-edit','body.transactions-new', function() {
 	var initAddFields = function() {
 		$('form').on('click', '.add_fields', function(event) {
 			var time = new Date().getTime();
@@ -6984,4 +6988,13 @@ waitFor('body.static_pages-index', function() {
 
 	init();
 });
-},{"../modules/geocode":9,"waitFor":6}]},{},[16,14,17,15,10,2,1]);
+},{"../modules/geocode":9,"waitFor":6}],18:[function(require,module,exports){
+var waitFor = require('waitFor'),
+    initDatePicker = require('../modules/datepicker');
+
+waitFor('body.transactions-new', function() {
+  initDatePicker($("input#transaction_check_in"));
+  initDatePicker($("input#transaction_check_out"));
+});
+
+},{"../modules/datepicker":8,"waitFor":6}]},{},[16,14,17,15,18,10,2,1]);

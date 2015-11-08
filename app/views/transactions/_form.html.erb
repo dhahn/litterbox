@@ -1,4 +1,4 @@
-<%= form_for(@transaction) do |f| %>
+<%= form_for(@transaction, :html => {:class => 'pure-form'}) do |f| %>
   <% if @transaction.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
@@ -15,13 +15,13 @@
     <%= f.label :litter_box_id %><br>
     <%= f.text_field :litter_box_id %>
   </div>
-  <div class="field">
+  <div class="field .add_fields">
     <%= f.label :check_in %><br>
-    <%= f.datetime_select :check_in %>
+    <%= f.text_field :check_in, :html => { :class => "start_date date_fields", :name => "start_date"}%>
   </div>
-  <div class="field">
+  <div class=" .add_fields">
     <%= f.label :check_out %><br>
-    <%= f.datetime_select :check_out %>
+    <%= f.text_field :check_out, :html => { :class => "end_date date_fields", :name => "end_date"}%>
   </div>
   <div class="field">
     <%= f.label :price %><br>
