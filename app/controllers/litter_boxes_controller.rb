@@ -20,7 +20,7 @@ class LitterBoxesController < ApplicationController
     if current_user.litter_box.blank?
       @litter_box = LitterBox.new
     else
-      redirect_to(edit_litter_box(current_user.litter_box))
+      redirect_to(edit_litter_box_path(current_user.litter_box))
     end
   end
 
