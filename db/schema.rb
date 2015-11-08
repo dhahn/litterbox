@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108022136) do
+ActiveRecord::Schema.define(version: 20151108031600) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,11 +51,12 @@ ActiveRecord::Schema.define(version: 20151108022136) do
     t.integer  "number_of_adults"
     t.integer  "number_of_children"
     t.integer  "number_of_pets"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.float    "latitude"
     t.float    "longitude"
     t.string   "name"
+    t.integer  "price",              default: 99, null: false
   end
 
   add_index "litter_boxes", ["user_id"], name: "index_litter_boxes_on_user_id", using: :btree

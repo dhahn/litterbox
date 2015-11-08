@@ -32,6 +32,7 @@ lon = -93.289870
 		number_of_children: rand(0..3),
 		number_of_pets: rand(0..3),
 		latitude: lat + rand(-2.0..2.0),
-		longitude: lon + rand(-2.0..2.0)
+		longitude: lon + rand(-2.0..2.0),
+		price: rand(30..150)
 	)
 end
