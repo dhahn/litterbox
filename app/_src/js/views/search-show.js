@@ -4,7 +4,7 @@ var waitFor = require('waitFor'),
 		moment = require('moment');
 
 waitFor('body.searches-show', function() {
-	var paginationPageAmount = 3,
+	var paginationPageAmount = 20,
 			paginationPage = 1,
 			infowindow,
 			markers = [],
