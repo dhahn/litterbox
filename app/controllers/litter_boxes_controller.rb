@@ -72,6 +72,6 @@ class LitterBoxesController < ApplicationController
     def litter_box_params
       params.require(:litter_box).permit(:capacity, :description, :city, :state,
         :address_line_1, :address_line_2, :zip, :number_of_adults,
-        :number_of_children, :number_of_pets)
+        :number_of_children, :number_of_pets, :name)
     end
 end
