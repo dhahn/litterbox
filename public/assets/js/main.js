@@ -4589,19 +4589,25 @@ waitFor('body.searches-show', function() {
 		});
 	};
 
-	var initPagination = function() {
-		$searchResults.on('click tap touch', '#load-more', function(e){
-			e.preventDefault();
+	var initInfiniteScroll = function() {
+		flag = true;
+		$searchResultsContainer.scroll(function(){
+			if($searchResultsContainer.height() + $searchResultsContainer.scrollTop() - $searchResults.height() > 0) {
+				if(flag) {
+					flag = false;
+					paginationPage += 1
+					console.log('hello there');
 
-			paginationPage += 1
-			if((paginationPage * paginationPageAmount) >= markers.length) {
-				$('#load-more').hide();
+					markers.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(marker){
+						$('.results-list').append(singleSearchResults({ litterbox: marker.litterbox }));
+					})
+
+					if((paginationPage * paginationPageAmount) <= markers.length) {
+						flag = true;
+					}
+				}
 			}
-
-			markers.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(marker){
-				$('.results-list').append(singleSearchResults({ litterbox: marker.litterbox }));
-			})
-		})
+		});
 	};
 
 	var filterLitterBox = function(litterbox) {
@@ -4664,7 +4670,6 @@ waitFor('body.searches-show', function() {
 		paginationPage = 1;
 		returned_litterboxes = litterboxes;
 		showMarkers(returned_litterboxes);
-
 		$searchResults.html(
 			searchResultsTemplate({ markers: markers.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount), count: markers.length })
 		);
@@ -4732,7 +4737,7 @@ waitFor('body.searches-show', function() {
 		initMap();
 		initFilter();
 		initUpdateEndDate();
-		initPagination();
+		initInfiniteScroll();
 		$locationField.on('focus', function () {
 			$locationField.removeClass('animated shake invalid');
 		});
