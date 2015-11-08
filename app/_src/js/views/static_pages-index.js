@@ -59,9 +59,31 @@ waitFor('body.static_pages-index', function() {
 
 			if(!location) {
 				e.preventDefault();
-				$locationField.addClass('animated shake invalid');
+				getGeolocation();
 			}
 		});
+	};
+
+	var getGeolocation = function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+
+				geocode({location: pos}, function(results, status){
+					$locationField.val(results[0].formatted_address);
+					$searchForm.submit();
+			  });
+			}, function() {
+				//if we need to handle them saying no this is where it goes
+				$locationField.addClass('animated shake invalid');
+			});
+		} else {
+			// Browser doesn't support Geolocation
+			$locationField.addClass('animated shake invalid');
+		}
 	};
 
 	init();

@@ -4330,8 +4330,8 @@ var initDatePicker = function(input) {
 module.exports = initDatePicker;
 
 },{"../lib/pikaday.js":4}],8:[function(require,module,exports){
-var geocodeSearch = function (address, callback) {
-	new google.maps.Geocoder().geocode({'address': address}, function(results, status) {
+var geocodeSearch = function (params, callback) {
+	new google.maps.Geocoder().geocode(params, function(results, status) {
 		callback(results, status);
 	});
 };
@@ -4487,10 +4487,11 @@ waitFor('body.litter_boxes-new', function() {
   var $litterboxNumberAdults = $("#litter_box_numbers_of_adults");
   var $litterboxNumberChildren = $("#litter_box_numbers_of_children");
   var $litterboxNumberPets = $("#litter_box_numbers_of_pets");
-  var $latitude = $("#litter_box_latitude").val();
-  var $longitude = $("#litter_box_longitude").val();
-  var myLatLng = function(){ return { lat: $latitude.val(), lng: $longitude.val() }};
+  var $latitude = $("#litter_box_latitude");
+  var $longitude = $("#litter_box_longitude");
   var regularMarker = '/assets/images/regular-marker.png';
+  var myLatLng = function(){ return { lat: $latitude.val(), lng: $longitude.val() }};
+
   var map;
 
   var initMap = function() {
@@ -4510,18 +4511,17 @@ waitFor('body.litter_boxes-new', function() {
     map.setMapTypeId('map_style');
 
     var idleListener = google.maps.event.addListener(map, 'idle', function(){
-      if(!!locationValuesCache()){
-        geocode(locationValuesCache(), function(results, status){
+      if(!!testThing()){
+        geocode(testThing(), function(results, status){
           map.fitBounds(results[0].geometry.viewport);
         });
-        $latitude = map.getCenter().lat();
-        $longitude = map.getCenter().lng();
+
       }
         google.maps.event.removeListener(idleListener);
     });
   };
 
-  function locationValuesCache() {
+  function testThing() {
     return $litterboxAddressOne.val() +
       $litterboxAddressTwo.val() +
       $litterboxCity.val() +
@@ -4529,17 +4529,22 @@ waitFor('body.litter_boxes-new', function() {
       $litterboxZip.val();
   };
 
-  $('form input').change(function(){
-    geocode(locationValuesCache(), function(results, status) {
+  $('form .geo input').change(function(){
+    geocode({address: testThing()}, function(results, status) {
       map.fitBounds(results[0].geometry.viewport);
       icon = regularMarker;
-      marker = new google.maps.Marker({
+      marker = new google.maps.Marker({ 
         position: {lat: map.getCenter().lat(), lng: map.getCenter().lng()}, 
+        title: "Hello World!",
         map: map,
         icon: icon
       });
+
+      $latitude.val(map.getCenter().lat());
+      $longitude.val(map.getCenter().lng());
     });
   });
+
 
   var init = function() {
     initMap();
@@ -4554,7 +4559,7 @@ var waitFor = require('waitFor'),
 		moment = require('moment');
 
 waitFor('body.searches-show', function() {
-	var paginationPageAmount = 3,
+	var paginationPageAmount = 20,
 			paginationPage = 1,
 			infowindow,
 			markers = [],
@@ -4679,7 +4684,7 @@ waitFor('body.searches-show', function() {
 
 		if(!!location) {
 			updateUrl();
-			geocode(location, function(results, status){
+			geocode({address: location}, function(results, status){
 				map.fitBounds(results[0].geometry.viewport);
 				getLitterBoxes({
 					lat: map.getCenter().lat(),
@@ -4690,6 +4695,29 @@ waitFor('body.searches-show', function() {
 				});
 			});
 		} else {
+			getGeolocation();
+		}
+	};
+
+	var getGeolocation = function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.log('helo there');
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+
+				geocode({location: pos}, function(results, status){
+					$locationField.val(results[0].formatted_address);
+					$searchForm.submit();
+			  });
+			}, function() {
+				//if we need to handle them saying no this is where it goes
+				$locationField.addClass('animated shake invalid');
+			});
+		} else {
+			// Browser doesn't support Geolocation
 			$locationField.addClass('animated shake invalid');
 		}
 	};
@@ -4860,9 +4888,31 @@ waitFor('body.static_pages-index', function() {
 
 			if(!location) {
 				e.preventDefault();
-				$locationField.addClass('animated shake invalid');
+				getGeolocation();
 			}
 		});
+	};
+
+	var getGeolocation = function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+
+				geocode({location: pos}, function(results, status){
+					$locationField.val(results[0].formatted_address);
+					$searchForm.submit();
+			  });
+			}, function() {
+				//if we need to handle them saying no this is where it goes
+				$locationField.addClass('animated shake invalid');
+			});
+		} else {
+			// Browser doesn't support Geolocation
+			$locationField.addClass('animated shake invalid');
+		}
 	};
 
 	init();

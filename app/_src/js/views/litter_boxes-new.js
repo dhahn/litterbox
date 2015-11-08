@@ -16,10 +16,11 @@ waitFor('body.litter_boxes-new', function() {
   var $litterboxNumberAdults = $("#litter_box_numbers_of_adults");
   var $litterboxNumberChildren = $("#litter_box_numbers_of_children");
   var $litterboxNumberPets = $("#litter_box_numbers_of_pets");
-  var $latitude = $("#litter_box_latitude").val();
-  var $longitude = $("#litter_box_longitude").val();
-  var myLatLng = function(){ return { lat: $latitude.val(), lng: $longitude.val() }};
+  var $latitude = $("#litter_box_latitude");
+  var $longitude = $("#litter_box_longitude");
   var regularMarker = '/assets/images/regular-marker.png';
+  var myLatLng = function(){ return { lat: $latitude.val(), lng: $longitude.val() }};
+
   var map;
 
   var initMap = function() {
@@ -39,18 +40,17 @@ waitFor('body.litter_boxes-new', function() {
     map.setMapTypeId('map_style');
 
     var idleListener = google.maps.event.addListener(map, 'idle', function(){
-      if(!!locationValuesCache()){
-        geocode(locationValuesCache(), function(results, status){
+      if(!!testThing()){
+        geocode(testThing(), function(results, status){
           map.fitBounds(results[0].geometry.viewport);
         });
-        $latitude = map.getCenter().lat();
-        $longitude = map.getCenter().lng();
+
       }
         google.maps.event.removeListener(idleListener);
     });
   };
 
-  function locationValuesCache() {
+  function testThing() {
     return $litterboxAddressOne.val() +
       $litterboxAddressTwo.val() +
       $litterboxCity.val() +
@@ -58,17 +58,22 @@ waitFor('body.litter_boxes-new', function() {
       $litterboxZip.val();
   };
 
-  $('form input').change(function(){
-    geocode(locationValuesCache(), function(results, status) {
+  $('form .geo input').change(function(){
+    geocode({address: testThing()}, function(results, status) {
       map.fitBounds(results[0].geometry.viewport);
       icon = regularMarker;
-      marker = new google.maps.Marker({
+      marker = new google.maps.Marker({ 
         position: {lat: map.getCenter().lat(), lng: map.getCenter().lng()}, 
+        title: "Hello World!",
         map: map,
         icon: icon
       });
+
+      $latitude.val(map.getCenter().lat());
+      $longitude.val(map.getCenter().lng());
     });
   });
+
 
   var init = function() {
     initMap();

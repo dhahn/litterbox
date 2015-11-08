@@ -4,7 +4,7 @@ var waitFor = require('waitFor'),
 		moment = require('moment');
 
 waitFor('body.searches-show', function() {
-	var paginationPageAmount = 3,
+	var paginationPageAmount = 20,
 			paginationPage = 1,
 			infowindow,
 			markers = [],
@@ -129,7 +129,7 @@ waitFor('body.searches-show', function() {
 
 		if(!!location) {
 			updateUrl();
-			geocode(location, function(results, status){
+			geocode({address: location}, function(results, status){
 				map.fitBounds(results[0].geometry.viewport);
 				getLitterBoxes({
 					lat: map.getCenter().lat(),
@@ -140,6 +140,29 @@ waitFor('body.searches-show', function() {
 				});
 			});
 		} else {
+			getGeolocation();
+		}
+	};
+
+	var getGeolocation = function() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				console.log('helo there');
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+
+				geocode({location: pos}, function(results, status){
+					$locationField.val(results[0].formatted_address);
+					$searchForm.submit();
+			  });
+			}, function() {
+				//if we need to handle them saying no this is where it goes
+				$locationField.addClass('animated shake invalid');
+			});
+		} else {
+			// Browser doesn't support Geolocation
 			$locationField.addClass('animated shake invalid');
 		}
 	};
