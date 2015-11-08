@@ -12,7 +12,6 @@ module.exports = [
       './views/search-show',
       './views/litter_boxes-form',
       './views/static_pages-index',
-      './views/litter_boxes-new',
       './views/transactions-new',
       './modules/sidebar',
       './components/sign_out_form',
