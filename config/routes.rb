@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   resources :transactions
   root 'static_pages#index'
-  get 'static_pages/index'
-  get 'static_pages/faq', to: 'static_pages#faq', as: 'FAQ'
+  get '/guest_signin', to: "guest_users#create", as: "guest_signin"  
+  get '/static_pages/index'
+  get '/static_pages/faq', to: 'static_pages#faq', as: 'FAQ'
   get '/search', to: 'searches#show', as: 'search_show'
   post '/search', to: 'searches#create', as: 'search_create'
 
