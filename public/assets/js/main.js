@@ -4413,7 +4413,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<div class="result-count">\n	', escape((2,  count )), ' litter boxes found.\n</div>\n\n');5; singleSearchResults = require('./singleSearchResults.ejs') ; buf.push('\n\n<ul class="results-list">\n	');8; markers.forEach(function(marker) { ; buf.push('\n		', (9,  singleSearchResults({ litterbox: marker.litterbox }) ), '\n	');10; }); ; buf.push('\n</ul>\n\n<button id="load-more">Load More Litterbox Details</button>\n'); })();
+ buf.push('<div class="result-count">\n	', escape((2,  count )), ' litter boxes found.\n</div>\n\n');5; singleSearchResults = require('./singleSearchResults.ejs') ; buf.push('\n\n<ul class="results-list">\n	');8; markers.forEach(function(marker) { ; buf.push('\n		', (9,  singleSearchResults({ litterbox: marker.litterbox }) ), '\n	');10; }); ; buf.push('\n</ul>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
@@ -4430,7 +4430,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<li class="single-result" data-litterbox-id="', escape((1,  litterbox.id )), '" style="background-image: url(', escape((1,  litterbox.photo_url )), ');">\n	<a href="', escape((2,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((4,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((9,  litterbox.name )), '\n			</div>\n\n			<div>\n				', escape((13,  litterbox.city )), ', ', escape((13,  litterbox.state )), ' ', escape((13,  litterbox.zip )), '\n				(', escape((14,  litterbox.distance.toFixed(2) )), ' miles)\n			</div>\n\n			<div class="rating">\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw"></i>\n				<i class="symbol s-paw"></i>\n				<span class="rating-count">(5 ratings)</span>\n			</div>\n		</div>\n	</a>\n</li>\n'); })();
+ buf.push('<li class="single-result" data-litterbox-id="', escape((1,  litterbox.id )), '" style="background-image: url(', escape((1,  litterbox.photo_url )), ');">\n	<a href="', escape((2,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((4,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((9,  litterbox.name )), '\n			</div>\n\n			<div class="distance">\n				', escape((13,  litterbox.distance.toFixed(2) )), ' miles\n			</div>\n\n			<div class="rating">\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw"></i>\n				<i class="symbol s-paw"></i>\n				<span class="rating-count">(5 ratings)</span>\n			</div>\n		</div>\n	</a>\n</li>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
@@ -4593,13 +4593,15 @@ waitFor('body.searches-show', function() {
 			$this = $(this);
 			markers.forEach(function(marker){
 				if(parseInt(marker.litterbox.id) == parseInt($this.data('litterbox-id'))) {
-					setMarkerDetails(markers, marker);
+					setMarkerDetails(markers, marker, false);
 				}
 			})
 		});
 
-		// $searchResults.on('mouseleave', '.single-result', function(){
-		// });
+		$searchResults.on('mouseleave', '.single-result', function(){
+			markers.forEach(function(m){m.setIcon(regularMarker);});
+			// infowindow.close();
+		});
 	};
 
 	var initMap = function() {
@@ -4763,17 +4765,19 @@ waitFor('body.searches-show', function() {
 		markers.push(marker);
 
 		google.maps.event.addListener(marker, 'click', function () {
-			setMarkerDetails(markers, marker);
+			setMarkerDetails(markers, marker, true);
 		});
 
 	};
 
-	var setMarkerDetails = function(markers, marker) {
+	var setMarkerDetails = function(markers, marker, openWindow) {
 		markers.forEach(function(m){m.setIcon(regularMarker);});
 		marker.setIcon(selectedMarker);
 
 		infowindow.setContent(infowindowSearchResults({ litterbox: marker.litterbox }));
-		infowindow.open(map, marker);
+
+		if (openWindow)
+			infowindow.open(map, marker);
 	};
 
 	// Deletes all markers in the array by removing references to them.

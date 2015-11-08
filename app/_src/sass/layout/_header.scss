@@ -33,6 +33,12 @@ header {
 		&.opaque {
 			background-color: setcolor(green);
 			padding: rem(10px 30px);
+			text-shadow: none;
+
+			a,
+			.pure-menu-link {
+				text-shadow: none;
+			}
 		}
 
 		a,
@@ -60,6 +66,20 @@ header {
 	h1 {
 		float: left;
 		width: 50%;
+
+		a:before {
+			display: inline-block;
+			content: '';
+			width: rem(20px);
+			height: rem(20px);
+			margin-right: rem(5px);
+			background-image: url(../images/cat-green.png);
+			background-size: 100% 100%;
+
+			.static_pages-index & {
+				background-image: url(../images/cat-white.png);
+			}
+		}
 	}
 
 	.pure-menu {

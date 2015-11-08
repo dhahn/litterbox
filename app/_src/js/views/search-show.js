@@ -30,13 +30,15 @@ waitFor('body.searches-show', function() {
 			$this = $(this);
 			markers.forEach(function(marker){
 				if(parseInt(marker.litterbox.id) == parseInt($this.data('litterbox-id'))) {
-					setMarkerDetails(markers, marker);
+					setMarkerDetails(markers, marker, false);
 				}
 			})
 		});
 
-		// $searchResults.on('mouseleave', '.single-result', function(){
-		// });
+		$searchResults.on('mouseleave', '.single-result', function(){
+			markers.forEach(function(m){m.setIcon(regularMarker);});
+			// infowindow.close();
+		});
 	};
 
 	var initMap = function() {
@@ -200,17 +202,19 @@ waitFor('body.searches-show', function() {
 		markers.push(marker);
 
 		google.maps.event.addListener(marker, 'click', function () {
-			setMarkerDetails(markers, marker);
+			setMarkerDetails(markers, marker, true);
 		});
 
 	};
 
-	var setMarkerDetails = function(markers, marker) {
+	var setMarkerDetails = function(markers, marker, openWindow) {
 		markers.forEach(function(m){m.setIcon(regularMarker);});
 		marker.setIcon(selectedMarker);
 
 		infowindow.setContent(infowindowSearchResults({ litterbox: marker.litterbox }));
-		infowindow.open(map, marker);
+
+		if (openWindow)
+			infowindow.open(map, marker);
 	};
 
 	// Deletes all markers in the array by removing references to them.

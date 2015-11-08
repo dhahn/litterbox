@@ -16,18 +16,4 @@
 		<div id="search-results"></div>
 	</div>
 
-	<% if current_user.blank? %>
-		<div class="login-helper pure-menu pure-menu-horizontal">
-			If you were logged in, you could find a purrfect spot for your kitty!
-
-			<ul class="pure-menu-list">
-				<li class="pure-menu-item">
-					<%= link_to 'Sign Up', new_user_registration_path, class: 'pure-menu-link sign-up' %>
-				</li>
-				<li class="pure-menu-item">
-					<%= link_to 'Sign In', new_user_session_path, class: 'pure-menu-link sign-in' %>
-				</li>
-			</ul>
-		</div>
-	<% end %>
 </section>

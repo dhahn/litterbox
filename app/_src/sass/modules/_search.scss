@@ -17,25 +17,28 @@ body.searches-show footer {
 
 	.map-view {
 		float: left;
-		width: 70%;
+		width: 60%;
 		height: calc(100% - 78px);
-		border-right: 5px solid rgba(0, 0, 0, 0.1);
+		border-right: rem(10px) solid #eee;
 	}
 
 	.results {
 		float: left;
-		width: 30%;
+		width: 40%;
 		height: calc(100% - 78px);
 		overflow: scroll;
+		background-color: setcolor(white);
 	}
 
 	.filters {
-		background-color: setcolor(white);
-		padding: rem(20px);
+		min-height: rem(150px);
+		padding: rem(20px 30px);
+		background-color: #eee;
 	}
 
 	#search-results {
-		padding: rem(20px);
+		min-height: calc(100% - 150px); // the .filters height
+		padding: rem(30px);
 	}
 
 	.result-count {
@@ -44,18 +47,25 @@ body.searches-show footer {
 	}
 
 	.results-list {
+		@include cf;
 		list-style: none;
 	}
 
 	.single-result {
+		float: left;
+		width: calc(50% - 10px);
 		overflow: hidden;
-		margin-bottom: rem(10px);
+		margin-bottom: rem(20px);
 		background-size: cover;
 		background-position: 50% 50%;
 
+		&:nth-child(even) {
+			margin-left: rem(20px);
+		}
+
 		&:hover {
 			.details {
-				background-color: rgba(255, 255, 255, 0.9);
+				background-color: rgba(255, 255, 255, 0.95);
 			}
 
 			.price {
@@ -66,15 +76,15 @@ body.searches-show footer {
 		a {
 			display: block;
 			position: relative;
-			height: rem(250px);
+			height: rem(200px);
 		}
 
 		.price {
 			position: absolute;
 			left: 0;
-			bottom: 40%;
-			padding: rem(10px);
-			font-size: rem(15px);
+			bottom: 50%;
+			padding: rem(10px 20px);
+			font-size: rem(17px);
 			font-weight: bold;
 			background-color: setcolor(green);
 			color: setcolor(white);
@@ -92,7 +102,7 @@ body.searches-show footer {
 			left: 0;
 			right: 0;
 			bottom: 0;
-			background-color: rgba(255, 255, 255, 0.8);
+			background-color: rgba(255, 255, 255, 0.9);
 			padding: rem(10px 20px);
 			color: setcolor(gray, dark);
 			line-height: 1.25;
@@ -104,8 +114,14 @@ body.searches-show footer {
 			font-size: 125%;
 		}
 
+		.distance,
 		.rating {
+			display: inline-block;
 			padding-top: rem(5px);
+		}
+
+		.distance {
+			margin-right: rem(30px);
 		}
 
 		.rating-count {
@@ -122,19 +138,4 @@ body.searches-show footer {
 		}
 	}
 
-	.login-helper {
-		position: absolute;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		padding: rem(30px 20px);
-		text-align: center;
-		z-index: z('overlay');
-		background-color: rgba(255, 255, 255, 0.75);
-		border-top: 5px solid rgba(0, 0, 0, 0.1);
-
-		.pure-menu-list {
-			margin-left: rem(30px);
-		}
-	}
 }
