@@ -13,14 +13,15 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
+# KITTYNAMES
+gem 'kittynames', '0.0.3'
+#dot env
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 # gem 'therubyracer', platforms: :ruby
 gem 'omniauth'
-gem 'omniauth-twitter'
 gem 'omniauth-facebook'
 gem 'omniauth-instagram'
 gem 'omniauth-github'
-gem 'twitter'
 gem 'instagram'
 gem 'omniauth-google-oauth2'
 gem 'google-api-client', require: 'google/api_client'
