@@ -4593,7 +4593,6 @@ waitFor('body.searches-show', function() {
 				if(flag) {
 					flag = false;
 					paginationPage += 1
-					console.log('hello there');
 
 					markers.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount).forEach(function(marker){
 						$('.results-list').append(singleSearchResults({ litterbox: marker.litterbox }));
