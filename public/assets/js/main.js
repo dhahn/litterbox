@@ -6338,20 +6338,28 @@ module.exports = function(selector, callback) {
 var customMapStyles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#6195a0"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#e6f3d6"},{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#f4d2c5"},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"color":"#4e4e4e"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#f4f4f4"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#787878"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#eaf6f8"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#eaf6f8"}]}]
 module.exports = customMapStyles;
 },{}],8:[function(require,module,exports){
-var Pikaday = require('../lib/pikaday.js');
+var Pikaday = require('../lib/pikaday.js'),
+		moment = require('moment');
 
-var initDatePicker = function(input) {
+var initDatePicker = function(input, unavailable_days) {
 	new Pikaday({
 		field: input[0],
 		format: 'MM/DD/YYYY',
 		position: 'bottom right',
-		firstDay: 0
+		firstDay: 0,
+		disableDayFn: function(day) {
+			if(!!unavailable_days) {
+				return unavailable_days.indexOf(moment(day).format('YYYY-MM-DD')) > -1;
+			}
+
+			return false;
+		}
 	});
 };
 
 module.exports = initDatePicker;
 
-},{"../lib/pikaday.js":5}],9:[function(require,module,exports){
+},{"../lib/pikaday.js":5,"moment":4}],9:[function(require,module,exports){
 var geocodeSearch = function (params, callback) {
 	new google.maps.Geocoder().geocode(params, function(results, status) {
 		callback(results, status);
@@ -6406,8 +6414,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":6}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6423,8 +6430,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{}],12:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6440,8 +6446,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{"./singleSearchResults.ejs":13}],13:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6983,8 +6988,10 @@ var waitFor = require('waitFor'),
     initDatePicker = require('../modules/datepicker');
 
 waitFor('body.transactions-new', function() {
-  initDatePicker($("input#transaction_check_in"));
-  initDatePicker($("input#transaction_check_out"));
+	$.get('/unavailabilities', {litter_box_id: 400}, function(dates) {
+	  initDatePicker($("input#transaction_check_in"), dates);
+	  initDatePicker($("input#transaction_check_out"), dates);
+	});
 });
 
 },{"../modules/datepicker":8,"waitFor":6}]},{},[15,14,16,17,10,2,1]);
