@@ -1,4 +1,6 @@
 <li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">
+	<% console.log(litterbox.photo_file_name) %>
+
 	<a href="<%= '/litter_boxes/' + litterbox.id %>">
 		<div class="price">
 			<%= litterbox.price %>
@@ -6,7 +8,7 @@
 
 		<div class="details">
 			<div class="name">
-				<%= litterbox.address_line_1 %> <!-- FIXME: make this the name -->
+				<%= litterbox.name %>
 			</div>
 
 			<div>
