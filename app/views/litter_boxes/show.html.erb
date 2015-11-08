@@ -3,17 +3,22 @@
 <div class="litterbox-view-container">
 	<div class="details">
 		<section class="centered">
-			<h1>asdfsdf<%= @litter_box.name %></h1>
-			<div class="location">
-				<%= @litter_box.city %>, <%= @litter_box.state %> <%= @litter_box.zip %>
+			<div class="avatar user-avatar">
+				<img src="<%= @litter_box.photo.url %>" alt="My profile" />
 			</div>
-			<div class="rating">
-				<span class="symbol s-paw active"></span>
-				<span class="symbol s-paw active"></span>
-				<span class="symbol s-paw"></span>
-				<span class="symbol s-paw"></span>
-				<span class="symbol s-paw"></span>
-				<span class="rating-count">(5 ratings)</span>
+			<div class="details user-details">
+				<h1>asdfsdf<%= @litter_box.name %></h1>
+				<div class="location">
+					<%= @litter_box.city %>, <%= @litter_box.state %> <%= @litter_box.zip %>
+				</div>
+				<div class="rating">
+					<span class="symbol s-paw active"></span>
+					<span class="symbol s-paw active"></span>
+					<span class="symbol s-paw"></span>
+					<span class="symbol s-paw"></span>
+					<span class="symbol s-paw"></span>
+					<span class="rating-count">(5 ratings)</span>
+				</div>
 			</div>
 		</section>
 	</div>
@@ -69,7 +74,8 @@
 				<% if !current_user.blank? && current_user.litter_box == @litter_box %>
 				  <%= link_to 'Edit', edit_litter_box_path(@litter_box) %> |
 				<% else %>
-					<h1>book right meow</h1>
+					<h1>Book right meow</h1>
+					<%= render :partial => "transactions/form" %>
 				<% end %>
 			</div>
 		</div>
