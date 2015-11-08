@@ -1,0 +1,51 @@
+// ================================
+// Litterbox view
+// ================================
+
+body.litter_boxes-show {
+	.page-content {
+		padding-top: rem(500px);
+	}
+}
+
+.litterbox-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: rem(500px);
+	background-size: cover;
+	background-position: 50% 50%;
+}
+
+.litterbox-view-container {
+	background-color: #eee;
+
+	.details {
+		border: 3px solid blue;
+	}
+}
+
+.sec-litterbox-view {
+	@include cf;
+
+	.left {
+		float: left;
+		width: calc(70% - 20px);
+		margin-right: rem(20px);
+	}
+
+	.right {
+		float: left;
+		width: 30%;
+	}
+
+	.statistics {
+		border: 3px solid red;
+	}
+
+	.book-right-meow {
+		padding: rem(20px);
+		border: 1px solid rgba(0, 0, 0, 0.1);
+	}
+}

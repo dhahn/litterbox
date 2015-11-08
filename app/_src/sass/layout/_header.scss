@@ -3,13 +3,15 @@
 // ================================
 
 header {
+	min-height: rem(70px);
 	padding: rem(15px 30px);
 	color: setcolor(gray, light);
 	animation-delay: 1s;
 
 	.static_pages-index &,
 	.registrations-new &,
-	.sessions-new & {
+	.sessions-new &,
+	.litter_boxes-show & {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -24,7 +26,8 @@ header {
 		}
 	}
 
-	.static_pages-index & {
+	.static_pages-index &,
+	.litter_boxes-show & {
 		padding: rem(30px);
 		color: setcolor(white);
 		text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
