@@ -25,6 +25,8 @@ body.searches-show footer {
 	.results {
 		float: left;
 		width: 30%;
+		height: calc(100% - 78px);
+		overflow: scroll;
 	}
 
 	.filters {
@@ -46,7 +48,28 @@ body.searches-show footer {
 	}
 
 	.single-result {
-		padding: rem(10px 0);
+		margin-bottom: rem(10px);
+		padding-top: rem(200px);
+		background-size: cover;
+		background-position: 50% 50%;
+
+		.details {
+			background-color: rgba(200, 200, 200, 0.5);
+			padding: rem(20px);
+			color: setcolor(white);
+			line-height: 1.25;
+		}
+
+		.paw {
+			display: inline-block;
+			width: 10px;
+			height: 10px;
+			background-color: gray;
+
+			&.active {
+				background-color: red;
+			}
+		}
 	}
 
 	.login-helper {

@@ -4396,7 +4396,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<div class="result-count">\n	', escape((2,  litterboxes.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; litterboxes.forEach(function(litterbox) { ; buf.push('\n		<li class="single-result">\n			', escape((8,  litterbox.name )), '<br />\n			<a target="_blank" href="http://maps.google.com/?q=', escape((9,  litterbox.full_address )), '">\n				Directions (', escape((10,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');13; }) ; buf.push('\n</ul>\n'); })();
+ buf.push('<div class="result-count">\n	', escape((2,  litterboxes.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; litterboxes.forEach(function(litterbox) { ; buf.push('\n		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">\n\n			<div class="details">\n				<div>\n					', escape((11,  litterbox.address_line_1 )), ' <!-- FIXME: make this the name -->\n				</div>\n				<div>\n					', escape((14,  litterbox.city )), ', ', escape((14,  litterbox.state )), ' ', escape((14,  litterbox.zip )), '\n					(', escape((15,  litterbox.distance.toFixed(2) )), ' miles)\n				</div>\n				<div class="rating">\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw active"></span>\n					<span class="paw"></span>\n					<span class="paw"></span>\n					(5 ratings)\n				</div>\n			</div>\n		</li>\n	');27; }) ; buf.push('\n</ul>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
