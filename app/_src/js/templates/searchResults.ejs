@@ -5,6 +5,7 @@
 <ul class="results-list">
 	<% markers.forEach(function(marker) { %>
 		<% litterbox = marker.litterbox %>
+		<a href="<%= '/litter_boxes/' + litterbox.id %>">Click here to check out the litterbox</a>
 		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">
 			<div class="details">
 				<div>
