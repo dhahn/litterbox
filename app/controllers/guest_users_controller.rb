@@ -1,20 +1,21 @@
 class GuestUsersController < ApplicationController
-    require 'securerandom'
-    #modify the shittyness of this
-    def create
-      i = SecureRandom.hex(6)
-      user = User.create(
-        email: "test#{i}@example.com",
-        password: 'password',
-        password_confirmation: 'password',
-        first_name: "first name #{i}",
-        last_name: "last name #{i}",
-        age: rand(18..35),
-        primary_phone: "1231231234",
-        secondary_phone: "1231231234",
-        gender: ['m', 'f'].sample,
-      )
-      sign_in(User, user) 
-      redirect_to search_show_path
-    end
+  def create
+    digits = (1..9).to_a
+    kitty = KittyNames.kitty
+    pw = SecureRandom.hex
+    i = SecureRandom.hex(6)
+    user = User.create(
+      email: kitty.email.sub(/@/, "#{i}@"),
+      password: pw,
+      password_confirmation: pw,
+      first_name: kitty.first_name,
+      last_name: kitty.last_name,
+      age: rand(18..35),
+      primary_phone: digits.sample(10).join,
+      secondary_phone: digits.sample(10).join,
+      gender: kitty.gender.to_s[0] || ['m', 'f'].sample
+    )
+    sign_in(User, user)
+    redirect_to search_show_path
+  end
 end
