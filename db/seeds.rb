@@ -4,7 +4,7 @@
 lat = 37.205340
 lon = -93.289870
 
-15.times do |i|
+4000.times do |i|
 	user = User.create(
 		email: "test#{i}@example.com",
 		password: 'password',
@@ -30,7 +30,7 @@ lon = -93.289870
 		number_of_adults: rand(1..3),
 		number_of_children: rand(0..3),
 		number_of_pets: rand(0..3),
-		latitude: lat += rand(-2.0..2.0),
-		longitude: lon += rand(-2.0..2.0)
+		latitude: lat + rand(-2.0..2.0),
+		longitude: lon + rand(-2.0..2.0)
 	)
 end

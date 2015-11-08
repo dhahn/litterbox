@@ -10,7 +10,7 @@ class LitterBox < ActiveRecord::Base
   def self.search(params)
     within_capacity(params[:number_of_cats])
       .available(convert_date(params[:start_date]), convert_date(params[:end_date]))
-      .within(params[:lat].to_f, params[:lng].to_f, 300)
+      .within(params[:lat].to_f, params[:lng].to_f, 25)
   end
 
   def self.within_capacity(number_of_cats)
@@ -26,7 +26,7 @@ class LitterBox < ActiveRecord::Base
     joins(:unavailabilities).merge(Unavailability.overlaps(start_time, end_time))
   end
 
-  def self.within lat, lng, miles = 150
+  def self.within lat, lng, miles = 100
     lat_range = miles * 0.014492754
     lng_range = miles * 0.016666667
 
