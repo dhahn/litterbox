@@ -5,25 +5,28 @@
 <ul class="results-list">
 	<% markers.forEach(function(marker) { %>
 		<% litterbox = marker.litterbox %>
-		<a href="<%= '/litter_boxes/' + litterbox.id %>">Click here to check out the litterbox</a>
 		<li class="single-result" style="background-image: url(http://www.fillmurray.com/400/300);">
-			<div class="details">
-				<div class="name">
-					<%= litterbox.address_line_1 %> <!-- FIXME: make this the name -->
+			<a href="<%= '/litter_boxes/' + litterbox.id %>">
+				<div class="details">
+					<div class="name">
+						<%= litterbox.address_line_1 %> <!-- FIXME: make this the name -->
+					</div>
+
+					<div>
+						<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %>
+						(<%= litterbox.distance.toFixed(2) %> miles)
+					</div>
+
+					<div class="rating">
+						<span class="paw active"></span>
+						<span class="paw active"></span>
+						<span class="paw active"></span>
+						<span class="paw"></span>
+						<span class="paw"></span>
+						(5 ratings)
+					</div>
 				</div>
-				<div>
-					<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %>
-					(<%= litterbox.distance.toFixed(2) %> miles)
-				</div>
-				<div class="rating">
-					<span class="paw active"></span>
-					<span class="paw active"></span>
-					<span class="paw active"></span>
-					<span class="paw"></span>
-					<span class="paw"></span>
-					(5 ratings)
-				</div>
-			</div>
+			</a>
 		<% }); %>
 	</li>
 </ul>

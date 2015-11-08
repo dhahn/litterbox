@@ -49,16 +49,33 @@ body.searches-show footer {
 
 	.single-result {
 		margin-bottom: rem(10px);
-		padding-top: rem(200px);
 		background-size: cover;
 		background-position: 50% 50%;
 
+		&:hover {
+			.details {
+				padding: rem(30px 20px);
+				background-color: rgba(255, 255, 255, 0.9);
+			}
+		}
+
+		a {
+			display: block;
+			position: relative;
+			height: rem(250px);
+		}
+
 		.details {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
 			background-color: rgba(255, 255, 255, 0.8);
 			padding: rem(20px);
 			color: setcolor(gray, dark);
 			line-height: 1.25;
 			font-size: 80%;
+			transition: all 0.25s ease-in-out;
 		}
 
 		.name {
