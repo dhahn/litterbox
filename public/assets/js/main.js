@@ -4384,8 +4384,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4401,8 +4400,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4418,8 +4416,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{"./singleSearchResults.ejs":12}],12:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
