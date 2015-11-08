@@ -2,14 +2,14 @@
   <div class="field">
     <%= f.label :start_time %>
     <span class="date-wrapper">
-      <%= f.text_field :start_time %>
+      <%= f.text_field :start_time, value: f.object.start_time.try(:strftime, '%m/%d/%Y') %>
     </span>
   </div>
 
   <div class="field">
     <%= f.label :end_time %>
     <span class="date-wrapper">
-      <%= f.text_field :end_time %>
+      <%= f.text_field :end_time, value: f.object.end_time.try(:strftime, '%m/%d/%Y') %>
     </span>
   </div>
 
