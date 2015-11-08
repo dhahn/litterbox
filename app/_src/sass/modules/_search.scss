@@ -34,6 +34,44 @@ body.searches-show footer {
 		min-height: rem(150px);
 		padding: rem(20px 30px);
 		background-color: #eee;
+
+		h3 {
+			margin-bottom: rem(10px);
+		}
+
+		.single-filter {
+			@include cf;
+			padding: rem(10px);
+		}
+
+		label {
+			font-size: rem(15px);
+			color: setcolor(gray);
+		}
+
+		.slider {
+			@include cf;
+			padding: rem(10px);
+
+			.nstSlider  {
+				float: left;
+				width: 80%;
+				background-color: setcolor(green);
+			}
+
+			.leftLabel,
+			.rightLabel {
+				float: left;
+				width: 10%;
+				text-align: center;
+				color: setcolor(gray);
+
+				&:before {
+					content: '$';
+					font-size: rem(10px);
+				}
+			}
+		}
 	}
 
 	#search-results {
