@@ -11,6 +11,7 @@ class LitterBoxesController < ApplicationController
   # GET /litter_boxes/1
   # GET /litter_boxes/1.json
   def show
+    @transaction = @litter_box.transactions.new
   end
 
   # GET /litter_boxes/new
