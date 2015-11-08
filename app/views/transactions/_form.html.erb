@@ -11,23 +11,21 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :litter_box_id %><br>
-    <%= f.text_field :litter_box_id %>
+  <%= f.hidden_field :litter_box_id %>
+
+  <div class="fields">
+    <div class="field add_fields">
+      <%= f.label :check_in %>
+      <%= f.text_field :check_in, class: "start_date date_fields", name: "start_date" %>
+    </div>
+
+    <div class="add_fields">
+      <%= f.label :check_out %>
+      <%= f.text_field :check_out, class: "end_date date_fields", name: "end_date" %>
+    </div>
   </div>
-  <div class="field .add_fields">
-    <%= f.label :check_in %><br>
-    <%= f.text_field :check_in, :html => { :class => "start_date date_fields", :name => "start_date"}%>
-  </div>
-  <div class=" .add_fields">
-    <%= f.label :check_out %><br>
-    <%= f.text_field :check_out, :html => { :class => "end_date date_fields", :name => "end_date"}%>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
+
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Book Meow!", class: "pure-button pure-button-primary" %>
   </div>
 <% end %>

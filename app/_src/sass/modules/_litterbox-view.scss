@@ -176,3 +176,35 @@ body.litter_boxes-show {
 		}
 	}
 }
+
+.book-right-meow {
+	text-align: center;
+
+	.fields {
+		@include cf;
+	}
+
+	label {
+		display: block;
+		text-align: left;
+		font-size: rem(13px);
+		color: setcolor(gray);
+	}
+
+	.add_fields {
+		float: left;
+		width: calc(50% - 5px);
+
+		&:first-child {
+			margin-right: rem(10px);
+		}
+	}
+
+	.date_fields {
+		width: 100%;
+	}
+
+	.pure-button {
+		margin-top: rem(20px);
+	}
+}
