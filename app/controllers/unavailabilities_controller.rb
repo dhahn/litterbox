@@ -11,13 +11,17 @@ class UnavailabilitiesController < ApplicationController
     transaction_dates | unavailability_dates
   end
 
+  def unavail_params
+    params.permit(:litter_box_id)
+  end
+
   def transaction_dates
-    Transaction.where('check_out >= ?', Date.today)
+    Transaction.where(unavail_params).where('check_out >= ?', Date.today)
       .map(&:dates).reduce(:|).select { |d| d >= Date.today }
   end
 
   def unavailability_dates
-    Unavailability.where('end_time >= ?', Date.today)
+    Unavailability.where(unavail_params).where('end_time >= ?', Date.today)
       .map(&:dates).reduce(:|).select { |d| d >= Date.today }
   end
 end
