@@ -13,6 +13,7 @@ module.exports = [
       './views/litter_boxes-form',
       './views/static_pages-index',
       './modules/sidebar',
+      './components/sign_out_form',
       './components/datepicker'
     ]
   },

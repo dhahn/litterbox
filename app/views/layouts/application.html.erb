@@ -36,7 +36,7 @@
 							</li>
 							<li class="pure-menu-item">
 								<%= form_tag(destroy_user_session_path, method: :delete) do %>
-									<%= submit_tag 'Sign Out', class: 'pure-menu-link' %>
+									<%= link_to 'Sign Out', '#', class: 'sign-out-link pure-menu-link' %>
 								<% end %>
 							</li>
 						<% end %>

@@ -8,7 +8,17 @@ waitFor('.date-wrapper', function() {
 	});
 });
 
-},{"../modules/datepicker":6,"waitFor":4}],2:[function(require,module,exports){
+},{"../modules/datepicker":7,"waitFor":5}],2:[function(require,module,exports){
+var waitFor = require('waitFor');
+
+waitFor('.sign-out-link', function() {
+  $('form').on('click', '.sign-out-link', function(event) {
+    event.preventDefault();
+    $(this).closest('form').submit();
+  });
+});
+
+},{"waitFor":5}],3:[function(require,module,exports){
 //! moment.js
 //! version : 2.10.6
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
@@ -3204,7 +3214,7 @@ waitFor('.date-wrapper', function() {
     return _moment;
 
 }));
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /*!
  * Pikaday
  *
@@ -4287,7 +4297,7 @@ waitFor('.date-wrapper', function() {
 
 }));
 
-},{"moment":2}],4:[function(require,module,exports){
+},{"moment":3}],5:[function(require,module,exports){
 /**
  * waitFor
  * @param  {String}   selector DOM element to check for on every page load
@@ -4301,11 +4311,11 @@ module.exports = function(selector, callback) {
     return false;
   }
 };
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 // These are used for the custom map on the locations page
 var customMapStyles = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#6195a0"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"landscape","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#e6f3d6"},{"visibility":"on"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#f4d2c5"},{"visibility":"simplified"}]},{"featureType":"road.highway","elementType":"labels.text","stylers":[{"color":"#4e4e4e"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#f4f4f4"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#787878"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#eaf6f8"},{"visibility":"on"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#eaf6f8"}]}]
 module.exports = customMapStyles;
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 var Pikaday = require('../lib/pikaday.js');
 
 var initDatePicker = function(input) {
@@ -4319,14 +4329,14 @@ var initDatePicker = function(input) {
 
 module.exports = initDatePicker;
 
-},{"../lib/pikaday.js":3}],7:[function(require,module,exports){
+},{"../lib/pikaday.js":4}],8:[function(require,module,exports){
 var geocodeSearch = function (address, callback) {
 	new google.maps.Geocoder().geocode({'address': address}, function(results, status) {
 		callback(results, status);
 	});
 };
 module.exports = geocodeSearch;
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 var waitFor = require('waitFor');
 
 waitFor('.sidebar-container', function() {
@@ -4373,7 +4383,7 @@ waitFor('.sidebar-container', function() {
 
 });
 
-},{"waitFor":4}],9:[function(require,module,exports){
+},{"waitFor":5}],10:[function(require,module,exports){
 module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
 /**/) {
 escape = escape || function (html){
@@ -4390,7 +4400,7 @@ with (locals || {}) { (function(){
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		initDatePicker = require('../modules/datepicker');
 
@@ -4424,7 +4434,7 @@ waitFor('body.litter_boxes-new, body.litter_boxes-edit', function() {
 	init();
 });
 
-},{"../modules/datepicker":6,"waitFor":4}],11:[function(require,module,exports){
+},{"../modules/datepicker":7,"waitFor":5}],12:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
 		geocode = require('../modules/geocode.js');
@@ -4551,7 +4561,7 @@ waitFor('body.searches-show', function() {
 
 	init();
 });
-},{"../modules/customMapStyles":5,"../modules/geocode.js":7,"../templates/searchResults.ejs":9,"waitFor":4}],12:[function(require,module,exports){
+},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"../templates/searchResults.ejs":10,"waitFor":5}],13:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		geocode = require('../modules/geocode');
 
@@ -4579,4 +4589,4 @@ waitFor('body.static_pages-index', function() {
 
 	init();
 });
-},{"../modules/geocode":7,"waitFor":4}]},{},[11,10,12,8,1]);
+},{"../modules/geocode":8,"waitFor":5}]},{},[12,11,13,9,2,1]);
