@@ -107,7 +107,7 @@ waitFor('body.searches-show', function() {
 
 		if(!!location) {
 			geocode(location, function(results, status){
-        map.fitBounds(results[0].geometry.viewport);
+        		map.fitBounds(results[0].geometry.viewport);
 				getLitterBoxes({
 					lat: map.getCenter().lat(),
 					lng: map.getCenter().lng(),
@@ -115,9 +115,9 @@ waitFor('body.searches-show', function() {
 					end_date: $endDateField.val(),
 					radius: $radiusField.val(),
 				});
-			})
+			});
 		} else {
-			alert('Enter a damn location.');
+			$locationField.addClass('animated shake invalid');
 		}
 	};
 
@@ -199,6 +199,10 @@ waitFor('body.searches-show', function() {
 		initFilter();
 		initUpdateEndDate();
 		initPagination();
+
+		$locationField.on('focus', function () {
+			$locationField.removeClass('animated shake invalid');
+		});
 	};
 
 	init();
