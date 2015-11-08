@@ -4384,8 +4384,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4401,8 +4400,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{"./singleSearchResults.ejs":11}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4413,7 +4411,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<li class="single-result" style="background-image: url(', escape((1,  litterbox.photo_url )), ');">\n\n	<a href="', escape((3,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((5,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((10,  litterbox.name )), '\n			</div>\n\n			<div>\n				', escape((14,  litterbox.city )), ', ', escape((14,  litterbox.state )), ' ', escape((14,  litterbox.zip )), '\n				(', escape((15,  litterbox.distance.toFixed(2) )), ' miles)\n			</div>\n\n			<div class="rating">\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw"></i>\n				<i class="symbol s-paw"></i>\n				<span class="rating-count">(5 ratings)</span>\n			</div>\n		</div>\n	</a>\n</li>\n'); })();
+ buf.push('<li class="single-result" data-litterbox-id="', escape((1,  litterbox.id )), '" style="background-image: url(', escape((1,  litterbox.photo_url )), ');">\n	<a href="', escape((2,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((4,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((9,  litterbox.name )), '\n			</div>\n\n			<div>\n				', escape((13,  litterbox.city )), ', ', escape((13,  litterbox.state )), ' ', escape((13,  litterbox.zip )), '\n				(', escape((14,  litterbox.distance.toFixed(2) )), ' miles)\n			</div>\n\n			<div class="rating">\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw"></i>\n				<i class="symbol s-paw"></i>\n				<span class="rating-count">(5 ratings)</span>\n			</div>\n		</div>\n	</a>\n</li>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
@@ -4514,9 +4512,23 @@ waitFor('body.searches-show', function() {
 			$numberOfCatsField = $filterForm.find('#number_of_cats'),
 			$kidFriendlyField = $filterForm.find('#kid_friendly'),
 			regularMarker = '/assets/images/regular-marker.png',
+			selectedMarker = '/assets/images/selected-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs'),
 			singleSearchResults = require('../templates/singleSearchResults.ejs');
 
+	var initHover = function() {
+		$searchResults.on('mouseenter', '.single-result', function(){
+			$this = $(this);
+			markers.forEach(function(marker){
+				if(parseInt(marker.litterbox.id) == parseInt($this.data('litterbox-id'))) {
+					setMarkerDetails(markers, marker);
+				}
+			})
+		});
+
+		// $searchResults.on('mouseleave', '.single-result', function(){
+		// });
+	};
 
 	var initMap = function() {
 		var mapOptions = {
@@ -4661,13 +4673,21 @@ waitFor('body.searches-show', function() {
 			icon: icon,
 		});
 
-		google.maps.event.addListener(marker, 'click', function () {
-			infowindow.setContent('hello world');
-			infowindow.open(map, this);
-		});
-
 		marker.set('litterbox', litterbox);
 		markers.push(marker);
+
+		google.maps.event.addListener(marker, 'click', function () {
+			setMarkerDetails(markers, marker);
+		});
+
+	};
+
+	var setMarkerDetails = function(markers, marker) {
+		markers.forEach(function(m){m.setIcon(regularMarker)});
+		marker.setIcon(selectedMarker);
+
+		infowindow.setContent('hello brandon, suck a dick');
+		infowindow.open(map, marker);
 	};
 
 	// Deletes all markers in the array by removing references to them.
@@ -4693,10 +4713,10 @@ waitFor('body.searches-show', function() {
 		initFilter();
 		initUpdateEndDate();
 		initPagination();
-
 		$locationField.on('focus', function () {
 			$locationField.removeClass('animated shake invalid');
 		});
+		initHover();
 	};
 
 	init();

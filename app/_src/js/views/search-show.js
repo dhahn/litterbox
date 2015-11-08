@@ -20,9 +20,23 @@ waitFor('body.searches-show', function() {
 			$numberOfCatsField = $filterForm.find('#number_of_cats'),
 			$kidFriendlyField = $filterForm.find('#kid_friendly'),
 			regularMarker = '/assets/images/regular-marker.png',
+			selectedMarker = '/assets/images/selected-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs'),
 			singleSearchResults = require('../templates/singleSearchResults.ejs');
 
+	var initHover = function() {
+		$searchResults.on('mouseenter', '.single-result', function(){
+			$this = $(this);
+			markers.forEach(function(marker){
+				if(parseInt(marker.litterbox.id) == parseInt($this.data('litterbox-id'))) {
+					setMarkerDetails(markers, marker);
+				}
+			})
+		});
+
+		// $searchResults.on('mouseleave', '.single-result', function(){
+		// });
+	};
 
 	var initMap = function() {
 		var mapOptions = {
@@ -167,13 +181,21 @@ waitFor('body.searches-show', function() {
 			icon: icon,
 		});
 
-		google.maps.event.addListener(marker, 'click', function () {
-			infowindow.setContent('hello world');
-			infowindow.open(map, this);
-		});
-
 		marker.set('litterbox', litterbox);
 		markers.push(marker);
+
+		google.maps.event.addListener(marker, 'click', function () {
+			setMarkerDetails(markers, marker);
+		});
+
+	};
+
+	var setMarkerDetails = function(markers, marker) {
+		markers.forEach(function(m){m.setIcon(regularMarker)});
+		marker.setIcon(selectedMarker);
+
+		infowindow.setContent('hello brandon, suck a dick');
+		infowindow.open(map, marker);
 	};
 
 	// Deletes all markers in the array by removing references to them.
@@ -199,10 +221,10 @@ waitFor('body.searches-show', function() {
 		initFilter();
 		initUpdateEndDate();
 		initPagination();
-
 		$locationField.on('focus', function () {
 			$locationField.removeClass('animated shake invalid');
 		});
+		initHover();
 	};
 
 	init();

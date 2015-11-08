@@ -1,5 +1,4 @@
-<li class="single-result" style="background-image: url(<%= litterbox.photo_url %>);">
-
+<li class="single-result" data-litterbox-id="<%= litterbox.id %>" style="background-image: url(<%= litterbox.photo_url %>);">
 	<a href="<%= '/litter_boxes/' + litterbox.id %>">
 		<div class="price">
 			<%= litterbox.price %>
