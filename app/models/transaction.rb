@@ -1,6 +1,7 @@
 class Transaction < ActiveRecord::Base
   belongs_to :user
   belongs_to :litter_box
+  has_many :ratings
 
   validates :user_id, :litter_box_id, presence: true
 

@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   has_one :litter_box
   has_many :cats
   has_many :transactions
-  # has_and_belongs_to_many :ratings
+  has_many :ratings
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

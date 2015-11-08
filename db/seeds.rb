@@ -56,12 +56,19 @@ date_range = (Date.today + 1..Date.today + 45).to_a
 	end
 
 	rand(0..4).times do |j|
-		Transaction.create(
+		transaction = Transaction.create(
 			user_id: rand(1...i),
 			litter_box_id: litter_box.id,
 			check_in: t1 = date_range.sample,
 			check_out: t2 = t1 + rand(1..4),
 			price: price * (t2 - t1)
 		)
+
+		Rating.new(
+			user_id: rand(1...i),
+			transaction_id: transaction.id,
+			comment: kitty_text.split('. ').sample(3).join('. '),
+			paws: [1,2,2,3,3,3,4,4,4,4,5,5].sample
+		).save
 	end
 end

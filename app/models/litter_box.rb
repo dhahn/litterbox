@@ -3,6 +3,7 @@ class LitterBox < ActiveRecord::Base
   belongs_to :user
   has_many :transactions
   has_many :unavailabilities, inverse_of: :litter_box
+  has_many :ratings, through: :transactions
   accepts_nested_attributes_for :unavailabilities, allow_destroy: true
 
   validates :user_id, presence: true, uniqueness: true
@@ -13,6 +14,16 @@ class LitterBox < ActiveRecord::Base
   has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
   validates_attachment :photo, size: { in: 0..500.kilobytes }
+
+  def average_rating
+    r = ratings
+
+    unless (r.blank?)
+      return (r.sum(:paws) / r.count.to_f).round
+    end
+
+    0
+  end
 
   def self.search(params)
     available(convert_date(params[:start_date]), convert_date(params[:end_date]))
