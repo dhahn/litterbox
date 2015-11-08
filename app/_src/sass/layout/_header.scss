@@ -3,9 +3,9 @@
 // ================================
 
 header {
+	padding: rem(15px 30px);
 	color: setcolor(gray, light);
 	animation-delay: 1s;
-
 
 	.static_pages-index &,
 	.registrations-new &,
@@ -48,7 +48,7 @@ header {
 	}
 
 	.pure-menu {
-		padding-top: rem(10px);
+		padding-top: rem(5px);
 	}
 
 	button.pure-menu-link,

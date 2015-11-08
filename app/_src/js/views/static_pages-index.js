@@ -7,6 +7,8 @@ waitFor('body.static_pages-index', function() {
 			$hero = $('.sec-hero'),
 			$body = $('body'),
 			$header = $('header'),
+			$faqButton = $('.faq-button'),
+			$faqSection = $('#faq'),
 			heroHeight,
 			scrolledPastHero = false;
 
@@ -19,8 +21,13 @@ waitFor('body.static_pages-index', function() {
 			$locationField.removeClass('animated shake invalid');
 		});
 
-		heroHeight = $hero.height() - 78;
+		heroHeight = $hero.height() - 78; // aw yis, hardcode that mug
 		$(document).on('scroll', scrollListen);
+
+		$faqButton.on('click', function (e) {
+			e.preventDefault();
+			$body.animate({ scrollTop: $faqSection.offset().top }, 1000);
+		});
 	};
 
 	var scrollListen = function () {
