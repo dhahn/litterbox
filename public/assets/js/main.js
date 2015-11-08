@@ -6573,6 +6573,38 @@ waitFor('body.litter_boxes-new, body.litter_boxes-edit', function() {
 });
 
 },{"../modules/customMapStyles":7,"../modules/datepicker":8,"../modules/geocode.js":9,"moment":4,"waitFor":6}],15:[function(require,module,exports){
+var waitFor = require('waitFor');
+
+waitFor('body.litter_boxes-show', function() {
+	var $body = $('body'),
+		$header = $('header'),
+		scrolledPastHero = false;
+
+	var init = function() {
+		$(document).on('scroll', scrollListen);
+	};
+
+	var scrollListen = function () {
+		var scrollTop = $body.scrollTop();
+
+		if (scrollTop < 400) {
+			if (scrolledPastHero)
+				$header.removeClass('opaque');
+
+			scrolledPastHero = false;
+			return;
+		} else {
+			if (scrolledPastHero)
+				return;
+
+			scrolledPastHero = true;
+			$header.addClass('opaque');
+		}
+	};
+
+	init();
+});
+},{"waitFor":6}],16:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
 		geocode = require('../modules/geocode.js'),
@@ -6895,7 +6927,7 @@ waitFor('body.searches-show', function() {
 
 	init();
 });
-},{"../lib/jquery.nstSlider":3,"../modules/customMapStyles":7,"../modules/geocode.js":9,"../templates/infowindowSearchResults.ejs":11,"../templates/searchResults.ejs":12,"../templates/singleSearchResults.ejs":13,"moment":4,"waitFor":6}],16:[function(require,module,exports){
+},{"../lib/jquery.nstSlider":3,"../modules/customMapStyles":7,"../modules/geocode.js":9,"../templates/infowindowSearchResults.ejs":11,"../templates/searchResults.ejs":12,"../templates/singleSearchResults.ejs":13,"moment":4,"waitFor":6}],17:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		geocode = require('../modules/geocode');
 
@@ -6986,7 +7018,7 @@ waitFor('body.static_pages-index', function() {
 
 	init();
 });
-},{"../modules/geocode":9,"waitFor":6}],17:[function(require,module,exports){
+},{"../modules/geocode":9,"waitFor":6}],18:[function(require,module,exports){
 var waitFor = require('waitFor'),
     initDatePicker = require('../modules/datepicker');
 
@@ -6997,4 +7029,4 @@ waitFor('body.transactions-new', function() {
 	});
 });
 
-},{"../modules/datepicker":8,"waitFor":6}]},{},[15,14,16,17,10,2,1]);
+},{"../modules/datepicker":8,"waitFor":6}]},{},[16,14,15,17,18,10,2,1]);

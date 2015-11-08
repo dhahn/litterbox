@@ -11,6 +11,7 @@ module.exports = [
     entries: [
       './views/search-show',
       './views/litter_boxes-form',
+      './views/litter_boxes-show',
       './views/static_pages-index',
       './views/transactions-new',
       './modules/sidebar',

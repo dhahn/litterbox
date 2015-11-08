@@ -8,6 +8,10 @@ header {
 	color: setcolor(gray, light);
 	animation-delay: 1s;
 
+	h1 {
+		margin-bottom: 0 !important;
+	}
+
 	.static_pages-index &,
 	.registrations-new &,
 	.sessions-new &,
@@ -34,6 +38,7 @@ header {
 		transition: all 0.25s ease-in-out;
 
 		&.opaque {
+			min-height: none;
 			background-color: setcolor(green);
 			padding: rem(10px 30px);
 			text-shadow: none;
@@ -79,7 +84,8 @@ header {
 			background-image: url(../images/cat-green.png);
 			background-size: 100% 100%;
 
-			.static_pages-index & {
+			.static_pages-index &,
+			.litter_boxes-show & {
 				background-image: url(../images/cat-white.png);
 			}
 		}
