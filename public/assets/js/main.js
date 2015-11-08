@@ -4437,7 +4437,8 @@ waitFor('body.litter_boxes-new, body.litter_boxes-edit', function() {
 },{"../modules/datepicker":7,"waitFor":5}],12:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
-		geocode = require('../modules/geocode.js');
+		geocode = require('../modules/geocode.js'),
+		moment = require('moment');
 
 waitFor('body.searches-show', function() {
 	var markers = [],
@@ -4471,6 +4472,17 @@ waitFor('body.searches-show', function() {
 		map.setMapTypeId('map_style');
 
 		idleListener = google.maps.event.addListener(map, 'idle', initSearch);
+	};
+
+	var initUpdateEndDate = function() {
+		$startDateField.change(function(){
+			endDate = moment($endDateField.val());
+			startDate = moment(this.value);
+
+			if($endDateField.val() == "" || endDate < startDate) {
+				$endDateField.val(startDate.add(1, 'days').format('L'));
+			}
+		});
 	};
 
 	var initFilter = function() {
@@ -4592,11 +4604,12 @@ waitFor('body.searches-show', function() {
 	var init = function() {
 		initMap();
 		initFilter();
+		initUpdateEndDate();
 	};
 
 	init();
 });
-},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"../templates/searchResults.ejs":10,"waitFor":5}],13:[function(require,module,exports){
+},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"../templates/searchResults.ejs":10,"moment":3,"waitFor":5}],13:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		geocode = require('../modules/geocode');
 
