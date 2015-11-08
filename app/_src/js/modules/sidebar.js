@@ -5,8 +5,8 @@ waitFor('.sidebar-container', function() {
 	var $sidebarContainer = $('.sidebar-container');
 	var $sidebarSignIn = $('.sidebar.new-session');
 	var $sidebarSignUp = $('.sidebar.new-registration');
-	var $linkSignIn = $('header .sign-in');
-	var $linkSignUp = $('header .sign-up');
+	var $linkSignIn = $('a.sign-in');
+	var $linkSignUp = $('a.sign-up');
 
 	$sidebarContainer.click(function (e) {
 		if (!$(e.target).hasClass('sidebar-container'))

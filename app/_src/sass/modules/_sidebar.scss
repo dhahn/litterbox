@@ -23,7 +23,8 @@
 }
 
 .page-content {
-  transition: filter 1s ease-in-out;
+  transition: filter 1.5s ease-in-out;
+  transition-delay: 0.5s;
 
   body.sidebar-open & {
     filter: blur(5px);
