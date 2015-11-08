@@ -1,0 +1,27 @@
+<div class="infowindow-searchresults" style="background-image: url(<%= litterbox.photo_url %>);">
+	<a href="<%= '/litter_boxes/' + litterbox.id %>">
+		<div class="price">
+			<%= litterbox.price %>
+		</div>
+
+		<div class="details">
+			<div class="name">
+				<%= litterbox.name %>
+			</div>
+
+			<div>
+				<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %>
+				(<%= litterbox.distance.toFixed(2) %> miles)
+			</div>
+
+			<div class="rating">
+				<i class="symbol s-paw active"></i>
+				<i class="symbol s-paw active"></i>
+				<i class="symbol s-paw active"></i>
+				<i class="symbol s-paw"></i>
+				<i class="symbol s-paw"></i>
+				<span class="rating-count">(5 ratings)</span>
+			</div>
+		</div>
+	</a>
+</div>

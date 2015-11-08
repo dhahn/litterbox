@@ -4384,7 +4384,25 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":5}],10:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
+/**/) {
+escape = escape || function (html){
+  return String(html)
+    .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/'/g, '&#39;')
+    .replace(/"/g, '&quot;');
+};
+var buf = [];
+with (locals || {}) { (function(){ 
+ buf.push('<div class="infowindow-searchresults" style="background-image: url(', escape((1,  litterbox.photo_url )), ');">\n	<a href="', escape((2,  '/litter_boxes/' + litterbox.id )), '">\n		<div class="price">\n			', escape((4,  litterbox.price )), '\n		</div>\n\n		<div class="details">\n			<div class="name">\n				', escape((9,  litterbox.name )), '\n			</div>\n\n			<div>\n				', escape((13,  litterbox.city )), ', ', escape((13,  litterbox.state )), ' ', escape((13,  litterbox.zip )), '\n				(', escape((14,  litterbox.distance.toFixed(2) )), ' miles)\n			</div>\n\n			<div class="rating">\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw active"></i>\n				<i class="symbol s-paw"></i>\n				<i class="symbol s-paw"></i>\n				<span class="rating-count">(5 ratings)</span>\n			</div>\n		</div>\n	</a>\n</div>\n'); })();
+} 
+return buf.join('');
+}; return function(l) { return t(l) }}())
+},{}],11:[function(require,module,exports){
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
+/**/) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4399,8 +4417,9 @@ with (locals || {}) { (function(){
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
-},{"./singleSearchResults.ejs":11}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
+},{"./singleSearchResults.ejs":12}],12:[function(require,module,exports){
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
+/**/) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -4415,7 +4434,7 @@ with (locals || {}) { (function(){
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		initDatePicker = require('../modules/datepicker');
 
@@ -4449,7 +4468,7 @@ waitFor('body.litter_boxes-new, body.litter_boxes-edit', function() {
 	init();
 });
 
-},{"../modules/datepicker":7,"waitFor":5}],13:[function(require,module,exports){
+},{"../modules/datepicker":7,"waitFor":5}],14:[function(require,module,exports){
 var waitFor = require('waitFor'),
     customMapStyles = require('../modules/customMapStyles'),
     geocode = require('../modules/geocode.js'),
@@ -4489,7 +4508,7 @@ waitFor('body.litter_boxes-new', function() {
   
   init();
 });
-},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"moment":3,"waitFor":5}],14:[function(require,module,exports){
+},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"moment":3,"waitFor":5}],15:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		customMapStyles = require('../modules/customMapStyles'),
 		geocode = require('../modules/geocode.js'),
@@ -4514,7 +4533,8 @@ waitFor('body.searches-show', function() {
 			regularMarker = '/assets/images/regular-marker.png',
 			selectedMarker = '/assets/images/selected-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs'),
-			singleSearchResults = require('../templates/singleSearchResults.ejs');
+			singleSearchResults = require('../templates/singleSearchResults.ejs'),
+			infowindowSearchResults = require('../templates/infowindowSearchResults.ejs');
 
 	var initHover = function() {
 		$searchResults.on('mouseenter', '.single-result', function(){
@@ -4683,10 +4703,10 @@ waitFor('body.searches-show', function() {
 	};
 
 	var setMarkerDetails = function(markers, marker) {
-		markers.forEach(function(m){m.setIcon(regularMarker)});
+		markers.forEach(function(m){m.setIcon(regularMarker);});
 		marker.setIcon(selectedMarker);
 
-		infowindow.setContent('hello brandon, suck a dick');
+		infowindow.setContent(infowindowSearchResults({ litterbox: marker.litterbox }));
 		infowindow.open(map, marker);
 	};
 
@@ -4721,7 +4741,7 @@ waitFor('body.searches-show', function() {
 
 	init();
 });
-},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"../templates/searchResults.ejs":10,"../templates/singleSearchResults.ejs":11,"moment":3,"waitFor":5}],15:[function(require,module,exports){
+},{"../modules/customMapStyles":6,"../modules/geocode.js":8,"../templates/infowindowSearchResults.ejs":10,"../templates/searchResults.ejs":11,"../templates/singleSearchResults.ejs":12,"moment":3,"waitFor":5}],16:[function(require,module,exports){
 var waitFor = require('waitFor'),
 		geocode = require('../modules/geocode');
 
@@ -4752,4 +4772,4 @@ waitFor('body.static_pages-index', function() {
 
 	init();
 });
-},{"../modules/geocode":8,"waitFor":5}]},{},[14,12,15,13,9,2,1]);
+},{"../modules/geocode":8,"waitFor":5}]},{},[15,13,16,14,9,2,1]);

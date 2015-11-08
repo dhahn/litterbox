@@ -22,7 +22,8 @@ waitFor('body.searches-show', function() {
 			regularMarker = '/assets/images/regular-marker.png',
 			selectedMarker = '/assets/images/selected-marker.png',
 			searchResultsTemplate = require('../templates/searchResults.ejs'),
-			singleSearchResults = require('../templates/singleSearchResults.ejs');
+			singleSearchResults = require('../templates/singleSearchResults.ejs'),
+			infowindowSearchResults = require('../templates/infowindowSearchResults.ejs');
 
 	var initHover = function() {
 		$searchResults.on('mouseenter', '.single-result', function(){
@@ -191,10 +192,10 @@ waitFor('body.searches-show', function() {
 	};
 
 	var setMarkerDetails = function(markers, marker) {
-		markers.forEach(function(m){m.setIcon(regularMarker)});
+		markers.forEach(function(m){m.setIcon(regularMarker);});
 		marker.setIcon(selectedMarker);
 
-		infowindow.setContent('hello brandon, suck a dick');
+		infowindow.setContent(infowindowSearchResults({ litterbox: marker.litterbox }));
 		infowindow.open(map, marker);
 	};
 

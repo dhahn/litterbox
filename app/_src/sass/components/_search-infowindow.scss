@@ -1,0 +1,66 @@
+// ================================
+// Search infowindow
+// ================================
+
+.infowindow-searchresults {
+	width: 300px;
+	height: 200px;
+	margin-bottom: rem(10px);
+	background-size: cover;
+	background-position: 50% 50%;
+
+	a {
+		display: block;
+		position: relative;
+		height: rem(200px);
+	}
+
+	.price {
+		position: absolute;
+		left: 0;
+		bottom: 40%;
+		padding: rem(10px);
+		font-size: rem(15px);
+		font-weight: bold;
+		background-color: setcolor(green);
+		color: setcolor(white);
+
+		&:before {
+			content: '$';
+			font-size: rem(10px);
+		}
+	}
+
+	.details {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(255, 255, 255, 0.8);
+		padding: rem(10px 20px);
+		color: setcolor(gray, dark);
+		line-height: 1.25;
+		font-size: 80%;
+	}
+
+	.name {
+		font-size: 125%;
+	}
+
+	.rating {
+		padding-top: rem(5px);
+	}
+
+	.rating-count {
+		display: inline-block;
+		margin-left: rem(5px);
+	}
+
+	.s-paw {
+		color: setcolor(gray);
+
+		&.active {
+			color: setcolor(green);
+		}
+	}
+}
