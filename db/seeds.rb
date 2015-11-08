@@ -14,13 +14,13 @@ street_modifier_array = %w(Street Road Lane Avenue Boulevard)
 date_range = (Date.today + 1..Date.today + 45).to_a
 past_date_range = (Date.today - 400..Date.today - 1).to_a
 
-400.times do |i|
+6000.times do |i|
 	kitty = KittyNames.kitty
 	pw = SecureRandom.hex
 	price = rand(30.0..150.0).round(2)
 	response = HTTParty.get('https://randomuser.me/api/')
 	picture = JSON.parse(response.body)['results'][0]['user']['picture']['thumbnail']
-	
+
 	user = User.create(
 		email: kitty.email.sub(/@/, "#{i}@"),
 		password: pw,
@@ -60,24 +60,7 @@ past_date_range = (Date.today - 400..Date.today - 1).to_a
 		)
 	end
 
-	rand(0..4).times do |j|
-		transaction = Transaction.create(
-			user_id: rand(1...i),
-			litter_box_id: litter_box.id,
-			check_in: t1 = date_range.sample,
-			check_out: t2 = t1 + rand(1..4),
-			price: price * (t2 - t1)
-		)
-
-		Rating.new(
-			user_id: rand(1...i),
-			transaction_id: transaction.id,
-			comment: kitty_text.split('. ').sample(3).join('. '),
-			paws: [1,2,2,3,3,3,4,4,4,4,5,5].sample
-		).save
-	end
-
-	rand(0..50).times do |j|
+	rand(0..30).times do |j|
 		transaction = Transaction.create(
 			user_id: rand(1...i),
 			litter_box_id: litter_box.id,
