@@ -4487,6 +4487,9 @@ waitFor('body.litter_boxes-new', function() {
   var $litterboxNumberAdults = $("#litter_box_numbers_of_adults");
   var $litterboxNumberChildren = $("#litter_box_numbers_of_children");
   var $litterboxNumberPets = $("#litter_box_numbers_of_pets");
+  var $latitude = $("#litter_box_latitude");
+  var $longitude = $("#litter_box_longitude");
+  var myLatLng = function(){ return { lat: $latitude.val(), lng: $longitude.val() }}
   var currentLocation = {
     address: ' ',
     addressTwo: '',
@@ -4496,6 +4499,7 @@ waitFor('body.litter_boxes-new', function() {
     value: function() { return this.address + " " + this.addressTwo+ " " + this.city + ", " + this.state + " " +this.zip }
   };
   var map;
+
   var initMap = function() {
     var mapOptions = {
       zoom: 4,
@@ -4505,7 +4509,10 @@ waitFor('body.litter_boxes-new', function() {
       mapTypeId: google.maps.MapTypeId.ROADMAP,
     };
     map = new google.maps.Map($('#map')[0], mapOptions);
-
+    marker = new google.maps.Marker({
+      position: myLatLng,
+      title: "Hello World!"
+    });
     // set up custom styled map
     styledMap = new google.maps.StyledMapType(customMapStyles, {name: 'Hairbnb Map'});
     map.mapTypes.set('map_style', styledMap);
@@ -4514,9 +4521,14 @@ waitFor('body.litter_boxes-new', function() {
       geocode(currentLocation.value(), function(results, status){
         map.fitBounds(results[0].geometry.viewport);
       });
-      map.getCenter().lat()
-      map.getCenter().lng()
+      $latitude = map.getCenter().lat();
+      $longitude = map.getCenter().lng();
     });
+  };
+
+  var setMarkers = function() {
+    console.log("Hey");
+    marker.setMap(map);
   };
 
   $litterboxCity.on('change', function(){
@@ -4525,6 +4537,7 @@ waitFor('body.litter_boxes-new', function() {
     geocode(currentLocation.value(), function(results, status){
       map.fitBounds(results[0].geometry.viewport);
     });
+    setMarkers();
   });
 
   $litterboxAddressOne.on('change', function(){
@@ -4534,6 +4547,7 @@ waitFor('body.litter_boxes-new', function() {
     geocode(currentLocation.value(), function(results, status){
       map.fitBounds(results[0].geometry.viewport);
     });
+    setMarkers();
   });
 
   $litterboxState.on('change', function(){
@@ -4543,6 +4557,7 @@ waitFor('body.litter_boxes-new', function() {
     geocode(currentLocation.value(), function(results, status){
       map.fitBounds(results[0].geometry.viewport);
     });
+    setMarkers();
   });
 
   $litterboxZip.on('change', function(){
@@ -4552,6 +4567,7 @@ waitFor('body.litter_boxes-new', function() {
     geocode(currentLocation.value(), function(results, status){
       map.fitBounds(results[0].geometry.viewport);
     });
+    setMarkers();
   });
 
   var init = function() {
