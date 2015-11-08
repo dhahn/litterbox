@@ -39,7 +39,7 @@
 							</li>
 						<% else %>
 							<li class="pure-menu-item">
-								<%= link_to 'Become a Crazy Cat Lady', litter_box_link_path(current_user), class: 'pure-menu-link' %>
+								<%= litter_box_link %>
 							</li>
 							<li class="pure-menu-item">
 								<%= form_tag(destroy_user_session_path, method: :delete) do %>

@@ -75,7 +75,7 @@
 		<div class="right">
 			<div class="book-right-meow">
 				<% if !current_user.blank? && current_user.litter_box == @litter_box %>
-				  <%= link_to 'Edit', edit_litter_box_path(@litter_box) %> |
+				  <%= link_to 'Edit', edit_litter_box_path(@litter_box) %>
 				<% else %>
 					<h1>Book right meow</h1>
 					<%= render :partial => "transactions/form" %>
