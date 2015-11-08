@@ -1,0 +1,88 @@
+// ================================
+// Litterbox new
+// ================================
+
+body.litter_boxes-new {
+	.map-view {
+		position: absolute;
+		left: 0;
+		top: rem(150px);
+		bottom: 0;
+		width: 60%;
+	}
+
+	.details {
+		position: absolute;
+		left: 60%;
+		top: rem(150px);
+		right: 0;
+		bottom: 0;
+		overflow: scroll;
+		padding: rem(30px 100px 100px 30px);
+	}
+
+	.field {
+		@include cf;
+		padding: rem(20px 0);
+
+		input,
+		textarea {
+			float: left;
+			width: 60%;
+		}
+	}
+
+	label {
+		float: left;
+		width: 40%;
+		color: setcolor(gray);
+		font-size: rem(15px);
+		&:after {
+			content: ':';
+		}
+	}
+
+	hr {
+		border: 1px solid #eee;
+		border-width: rem(0 0 1px 0);
+	}
+
+	.actions {
+		padding: rem(20px 20px 20px 0);
+		text-align: center;
+	}
+
+	.unavailability {
+		margin-bottom: rem(20px);
+		border: 1px solid #eee;
+		padding: rem(20px);
+	}
+
+	.pure-button.remove_fields {
+		background-color: #ca3c3c;
+	}
+
+	.pure-button {
+		color: setcolor(white);
+		&:hover {
+			color: setcolor(white);
+		}
+	}
+}
+
+.new_litter_box_header {
+	text-align: center;
+	background: #34495e;
+	padding: 30px;
+	font-size: rem(20px);
+	font-weight: bold;
+	color: white;
+}
+
+.new_litter_box .field {
+	margin: 30px;
+}
+
+.new_litter_box a.add_fields {
+	text-align: center;
+}

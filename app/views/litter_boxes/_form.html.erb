@@ -1,79 +1,86 @@
-<div class="map-view pure-u-5-5" id="map" style="height: 400px;"></div>
+<div class="map-view pure-u-5-5" id="map"></div>
 
-<%= form_for(@litter_box) do |f| %>
-  <% if @litter_box.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@litter_box.errors.count, "error") %> prohibited this litter_box from being saved:</h2>
+<div class="details">
+  <%= form_for(@litter_box, :html => { class: "pure-form" }) do |f| %>
+    <% if @litter_box.errors.any? %>
+      <div id="error_explanation">
+	<h2><%= pluralize(@litter_box.errors.count, "error") %> prohibited this litter_box from being saved:</h2>
 
-      <ul>
-      <% @litter_box.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+	<ul>
+	<% @litter_box.errors.full_messages.each do |message| %>
+	  <li><%= message %></li>
+	<% end %>
+	</ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :photo %>
+      <%= f.file_field :photo %>
+    </div>
+
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "pure-input" %>
+    </div>
+    <div class="field">
+      <%= f.label :capacity %>
+      <%= f.number_field :capacity, class: "pure-input" %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description, class: "pure-input" %>
+    </div>
+    <div class="field geo">
+      <%= f.label :city %>
+      <%= f.text_field :city, class: "pure-input" %>
+    </div>
+    <div class="field">
+      <%= f.label :price %>
+      <%= f.text_field :price, class: "pure-input" %>
+    </div>
+    <div class="field geo">
+      <%= f.label :state %>
+      <%= f.text_field :state, class: "pure-input" %>
+    </div>
+    <div class="field geo">
+      <%= f.label :address_line_1 %>
+      <%= f.text_field :address_line_1, class: "pure-input" %>
+    </div>
+    <div class="field geo">
+      <%= f.label :address_line_2 %>
+      <%= f.text_field :address_line_2, class: "pure-input" %>
+    </div>
+    <div class="field geo">
+      <%= f.label :zip %>
+      <%= f.text_field :zip, class: "pure-input" %>
+    </div>
+    <div class="field">
+      <%= f.label :number_of_adults %>
+      <%= f.number_field :number_of_adults, class: "pure-input" %>
+    </div>
+    <div class="field">
+      <%= f.label :number_of_children %>
+      <%= f.number_field :number_of_children, class: "pure-input" %>
+    </div>
+    <div class="field">
+      <%= f.label :number_of_pets %>
+      <%= f.number_field :number_of_pets, class: "pure-input" %>
+    </div>
+
+    <%= f.fields_for(:unavailabilities) do |builder| %>
+      <%= render 'unavailability_fields', f: builder %>
+    <% end %>
+
+    <hr />
+
+    <%= link_to_add_fields '+ Add an unavailable date', f, :unavailabilities %>
+
+    <div class="actions">
+      <%= f.submit "Create Litter!", class: "pure-button pure-button-primary" %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :photo %><br>
-    <%= f.file_field :photo %>
-  </div>
-
-  <%= f.hidden_field :latitude %>
-  <%= f.hidden_field :longitude %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :capacity %><br>
-    <%= f.number_field :capacity %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field geo">
-    <%= f.label :city %><br>
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br>
-    <%= f.text_field :price %>
-  </div>
-  <div class="field geo">
-    <%= f.label :state %><br>
-    <%= f.text_field :state %>
-  </div>
-  <div class="field geo">
-    <%= f.label :address_line_1 %><br>
-    <%= f.text_field :address_line_1 %>
-  </div>
-  <div class="field geo">
-    <%= f.label :address_line_2 %><br>
-    <%= f.text_field :address_line_2 %>
-  </div>
-  <div class="field geo">
-    <%= f.label :zip %><br>
-    <%= f.text_field :zip %>
-  </div>
-  <div class="field">
-    <%= f.label :number_of_adults %><br>
-    <%= f.number_field :number_of_adults %>
-  </div>
-  <div class="field">
-    <%= f.label :number_of_children %><br>
-    <%= f.number_field :number_of_children %>
-  </div>
-  <div class="field">
-    <%= f.label :number_of_pets %><br>
-    <%= f.number_field :number_of_pets %>
-  </div>
-  <%= f.fields_for(:unavailabilities) do |builder| %>
-    <%= render 'unavailability_fields', f: builder %>
-  <% end %>
-  <%= link_to_add_fields 'Add Unavailability', f, :unavailabilities %>
-  <div class="actions">
-    <%= f.submit "Create Litter!", class: "pure-button pure-button-primary" %>
-  </div>
-<% end %>
+</div>
