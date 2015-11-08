@@ -14,12 +14,12 @@
   <%= f.hidden_field :litter_box_id %>
 
   <div class="fields">
-    <div class="field add_fields">
+    <div class="field add_fields date-wrapper">
       <%= f.label :check_in %>
       <%= f.text_field :check_in, class: "start_date date_fields", name: "start_date" %>
     </div>
 
-    <div class="add_fields">
+    <div class="add_fields date-wrapper">
       <%= f.label :check_out %>
       <%= f.text_field :check_out, class: "end_date date_fields", name: "end_date" %>
     </div>
