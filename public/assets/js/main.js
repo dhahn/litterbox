@@ -6414,8 +6414,7 @@ waitFor('.sidebar-container', function() {
 });
 
 },{"waitFor":6}],11:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6431,8 +6430,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{}],12:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6448,8 +6446,7 @@ with (locals || {}) { (function(){
 return buf.join('');
 }; return function(l) { return t(l) }}())
 },{"./singleSearchResults.ejs":13}],13:[function(require,module,exports){
-module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow
-/**/) {
+module.exports=(function() {var t = function anonymous(locals, filters, escape, rethrow) {
 escape = escape || function (html){
   return String(html)
     .replace(/&(?!#?[a-zA-Z0-9]+;)/g, '&amp;')
@@ -6617,6 +6614,7 @@ waitFor('body.searches-show', function() {
 			infowindow,
 			markers = [],
 			returned_litterboxes = [],
+			$nstSlider = $('.nstSlider'),
 			$searchForm = $('.search-bar form'),
 			$locationField = $searchForm.find('.location'),
 			$startDateField = $searchForm.find('.start-date'),
@@ -6651,7 +6649,7 @@ waitFor('body.searches-show', function() {
 	};
 
 	var initPriceSlider = function() {
-		slider = $('.nstSlider').nstSlider({
+		slider = $nstSlider.nstSlider({
 			"crossable_handles": false,
 			"left_grip_selector": ".leftGrip",
 			"right_grip_selector": ".rightGrip",
@@ -6685,8 +6683,7 @@ waitFor('body.searches-show', function() {
 			}
 		})
 
-		$('.nstSlider').nstSlider('set_range', minPrice, maxPrice).nstSlider('refresh');
-
+		$nstSlider.nstSlider('set_range', minPrice, maxPrice).nstSlider('refresh');
 		minPriceRange = minPrice;
 		maxPriceRange = maxPrice;
 	};
@@ -6773,6 +6770,7 @@ waitFor('body.searches-show', function() {
 
 		$searchForm.submit(function(e){
 			e.preventDefault();
+			$searchResultsContainer.animate({ scrollTop: 0 });
 			searchLitterBoxes();
 		});
 
@@ -6851,11 +6849,11 @@ waitFor('body.searches-show', function() {
 		$searchResults.html(
 			searchResultsTemplate({ markers: markers.slice((paginationPage - 1) * paginationPageAmount, paginationPage * paginationPageAmount), count: markers.length })
 		);
-		$searchResultsContainer.animate({ scrollTop: 0 });
 	};
 
 	var showMarkers = function(litterboxes) {
 		deleteMarkers();
+
     litterboxes.forEach(function(litterbox){
     	if(filterLitterBox(litterbox)) {
 	    	addMarker(litterbox);
