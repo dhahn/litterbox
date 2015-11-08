@@ -1,12 +1,11 @@
-<ul>
-	<p><%= litterboxes.length %> litter boxes found.</p>
+<div class="result-count">
+	<%= litterboxes.length %> litter boxes found.
+</div>
 
-	<% litterboxes.forEach(function(litterbox){ %>
-		<li style="margin-bottom: 10px;">
-			<%= litterbox.address_line_1 %><br/>
-			<% if(!!litterbox.address_line_2) { %>
-				<%= litterbox.address_line_2 %><br/>
-			<% } %>
+<ul class="results-list">
+	<% litterboxes.forEach(function(litterbox) { %>
+		<li class="single-result">
+			<%= litterbox.address_line_1 %><br/> <!-- FIXME: make this the name -->
 			<%= litterbox.city %>, <%= litterbox.state %> <%= litterbox.zip %><br/>
 			<a target="_blank" href="http://maps.google.com/?q=<%= litterbox.full_address %>">
 				Directions (<%= litterbox.distance.toFixed(2) %> miles)

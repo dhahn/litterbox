@@ -4396,7 +4396,7 @@ escape = escape || function (html){
 };
 var buf = [];
 with (locals || {}) { (function(){ 
- buf.push('<ul>\n	<p>', escape((2,  litterboxes.length )), ' litter boxes found.</p>\n\n	');4; litterboxes.forEach(function(litterbox){ ; buf.push('\n		<li style="margin-bottom: 10px;">\n			', escape((6,  litterbox.address_line_1 )), '<br/>\n			');7; if(!!litterbox.address_line_2) { ; buf.push('\n				', escape((8,  litterbox.address_line_2 )), '<br/>\n			');9; } ; buf.push('\n			', escape((10,  litterbox.city )), ', ', escape((10,  litterbox.state )), ' ', escape((10,  litterbox.zip )), '<br/>\n			<a target="_blank" href="http://maps.google.com/?q=', escape((11,  litterbox.full_address )), '">\n				Directions (', escape((12,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');15; }) ; buf.push('\n</ul>'); })();
+ buf.push('<div class="result-count">\n	', escape((2,  litterboxes.length )), ' litter boxes found.\n</div>\n\n<ul class="results-list">\n	');6; litterboxes.forEach(function(litterbox) { ; buf.push('\n		<li class="single-result">\n			', escape((8,  litterbox.address_line_1 )), '<br/> <!-- FIXME: make this the name -->\n			', escape((9,  litterbox.city )), ', ', escape((9,  litterbox.state )), ' ', escape((9,  litterbox.zip )), '<br/>\n			<a target="_blank" href="http://maps.google.com/?q=', escape((10,  litterbox.full_address )), '">\n				Directions (', escape((11,  litterbox.distance.toFixed(2) )), ' miles)\n			</a>\n		</li>\n	');14; }) ; buf.push('\n</ul>\n'); })();
 } 
 return buf.join('');
 }; return function(l) { return t(l) }}())

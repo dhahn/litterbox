@@ -36,6 +36,19 @@ body.searches-show footer {
 		padding: rem(20px);
 	}
 
+	.result-count {
+		font-weight: bold;
+		margin-bottom: rem(20px);
+	}
+
+	.results-list {
+		list-style: none;
+	}
+
+	.single-result {
+		padding: rem(10px 0);
+	}
+
 	.login-helper {
 		position: absolute;
 		left: 0;
