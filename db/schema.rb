@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108041501) do
+ActiveRecord::Schema.define(version: 20151108042846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,10 @@ ActiveRecord::Schema.define(version: 20151108041501) do
     t.float    "longitude"
     t.string   "name"
     t.integer  "price",              default: 99, null: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   add_index "litter_boxes", ["user_id"], name: "index_litter_boxes_on_user_id", using: :btree

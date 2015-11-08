@@ -18,6 +18,7 @@ gem 'kittynames', '0.0.3'
 #dot env
 gem 'dotenv-rails', :require => 'dotenv/rails-now'
 # gem 'therubyracer', platforms: :ruby
+gem "paperclip", "~> 4.3"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-instagram'

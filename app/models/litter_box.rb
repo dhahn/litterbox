@@ -7,6 +7,10 @@ class LitterBox < ActiveRecord::Base
 
   validates :user_id, presence: true, uniqueness: true
 
+  has_attached_file :photo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :photo, content_type: /\Aimage\/.*\Z/
+  validates_attachment :photo, size: { in: 0..500.kilobytes }
+
   def self.search(params)
     available(convert_date(params[:start_date]), convert_date(params[:end_date]))
       .within(params[:lat].to_f, params[:lng].to_f, params[:radius].to_i)
