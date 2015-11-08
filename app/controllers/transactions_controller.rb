@@ -20,13 +20,17 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = current_user.transactions.new(transaction_params)
+    @transaction.check_in = Date.strptime(transaction_params[:check_in], '%m/%d/%Y')
+    @transaction.check_out = Date.strptime(transaction_params[:check_out], '%m/%d/%Y')
+    @transaction.price = @transaction.litter_box.price * @transaction.dates.length
 
     respond_to do |format|
       if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+        format.html { redirect_to @transaction.litter_box, notice: 'Successful request. Waiting on purrmission from owner.' }
         format.json { render :show, status: :created, location: @transaction }
       else
-        format.html { render :new }
+        raise @transaction.errors.inspect
+        format.html { redirect_to @transaction.litter_box, notice: "You've cat to be kitten me. Those dates are unavailable." }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
       end
     end
