@@ -123,6 +123,39 @@ body.litter_boxes-show {
 	}
 
 	.review {
-		margin-bottom: rem(20px);
+		@include cf;
+		margin-bottom: rem(50px);
+		border-bottom: 1px solid #eee;
+
+		.user-info {
+			float: left;
+			width: rem(160px);
+			padding: rem(30px);
+			text-align: center;
+		}
+
+		.avatar {
+			width: rem(100px);
+			height: rem(100px);
+			border-radius: 100%;
+			overflow: hidden;
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+		}
+
+		.name {
+			margin-top: rem(20px);
+			color: setcolor(gray);
+			font-size: rem(14px);
+		}
+
+		.the-content {
+			float: left;
+			width: calc(100% - 160px);
+			padding: rem(20px);
+		}
 	}
 }
