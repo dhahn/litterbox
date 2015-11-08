@@ -1,4 +1,4 @@
-<div class="map-view" id="map" style="height: 400px; width: 500px;"></div>
+<div class="map-view pure-u-5-5" id="map" style="height: 400px;"></div>
 
 <%= form_for(@litter_box) do |f| %>
   <% if @litter_box.errors.any? %>
@@ -74,6 +74,6 @@
   <% end %>
   <%= link_to_add_fields 'Add Unavailability', f, :unavailabilities %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Create Litter!", class: "pure-button pure-button-primary" %>
   </div>
 <% end %>

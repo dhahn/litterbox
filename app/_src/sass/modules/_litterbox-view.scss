@@ -208,3 +208,25 @@ body.litter_boxes-show {
 		margin-top: rem(20px);
 	}
 }
+
+.new_litter_box_header {
+	text-align: center;
+	background: #34495e;
+	padding: 30px;
+	font-size: rem(20px);
+	font-weight: bold;
+	color: white;
+}
+
+.new_litter_box {
+	background: white;
+	font-weight: bold;
+}
+.new_litter_box .field {
+	margin: 30px;
+}
+
+.new_litter_box a.add_fields {
+	text-align: center;
+}
+
